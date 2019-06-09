@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ee28f8fe-7afd-4be5-b483-3f5856931f34" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/shaders/PBRShader300.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/shaders/ShadowShader.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/shaders/shader.glsl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/cometPBR/comet2_DefaultMaterial_BaseColor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/cometPBR/comet2_DefaultMaterial_Emissive.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/cometPBR/comet2_DefaultMaterial_Normal.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/cometPBR/comet2_DefaultMaterial_OcclusionRoughnessMetallic.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/cometPBR/mesh.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/webgl/world.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/webgl/world.js" afterDir="false" />
@@ -31,8 +33,10 @@
           <entry key="css" value="2" />
           <entry key="glsl" value="1" />
           <entry key="html" value="3" />
+          <entry key="jpg" value="4" />
           <entry key="js" value="15" />
-          <entry key="json" value="4" />
+          <entry key="json" value="7" />
+          <entry key="obj" value="4" />
           <entry key="vue" value="2" />
         </counts>
       </usages-collector>
@@ -41,8 +45,10 @@
           <entry key="CSS" value="2" />
           <entry key="GLSL shader file" value="1" />
           <entry key="HTML" value="3" />
-          <entry key="JSON" value="4" />
+          <entry key="Image" value="4" />
+          <entry key="JSON" value="7" />
           <entry key="JavaScript" value="15" />
+          <entry key="PLAIN_TEXT" value="4" />
           <entry key="Vue.js" value="2" />
         </counts>
       </usages-collector>
@@ -51,8 +57,8 @@
           <entry key="css" value="46" />
           <entry key="glsl" value="5" />
           <entry key="html" value="39" />
-          <entry key="js" value="886" />
-          <entry key="json" value="72" />
+          <entry key="js" value="996" />
+          <entry key="json" value="94" />
           <entry key="vue" value="265" />
         </counts>
       </usages-collector>
@@ -61,8 +67,8 @@
           <entry key="CSS" value="46" />
           <entry key="GLSL shader file" value="5" />
           <entry key="HTML" value="39" />
-          <entry key="JSON" value="72" />
-          <entry key="JavaScript" value="886" />
+          <entry key="JSON" value="94" />
+          <entry key="JavaScript" value="996" />
           <entry key="Vue.js" value="265" />
         </counts>
       </usages-collector>
@@ -100,8 +106,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/webgl/world.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="60" column="43" lean-forward="true" selection-start-line="60" selection-start-column="43" selection-end-line="60" selection-end-column="43" />
+            <state relative-caret-position="694">
+              <caret line="78" column="51" selection-start-line="78" selection-start-column="51" selection-end-line="78" selection-end-column="51" />
               <folding>
                 <element signature="e#0#107#0" expanded="true" />
               </folding>
@@ -110,10 +116,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/shaders/PBRShader300.js">
+        <entry file="file://$PROJECT_DIR$/../Website/comet_final.obj">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="21" column="55" lean-forward="true" selection-end-line="5098" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dist/assets/cometPBR/mesh.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="623135" selection-start-column="623135" selection-end-column="623135" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dist/assets/pbr/car-ext.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="281">
-              <caret line="39" selection-start-line="39" selection-end-line="39" />
+              <caret line="3" column="9" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -144,6 +168,7 @@
       <find>specContrib</find>
       <find>tOpacity</find>
       <find>tLUT</find>
+      <find>:</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -171,6 +196,7 @@
         <option value="$PROJECT_DIR$/src/shaders/shader.glsl" />
         <option value="$PROJECT_DIR$/src/shaders/PBRShader100.js" />
         <option value="$PROJECT_DIR$/src/shaders/PBRShader300.js" />
+        <option value="$PROJECT_DIR$/dist/assets/cometPBR/mesh.json" />
         <option value="$PROJECT_DIR$/src/webgl/world.js" />
       </list>
     </option>
@@ -537,13 +563,32 @@
             <path>
               <item name="web" type="b2602c69:ProjectViewProjectNode" />
               <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="cometPBR" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="pbr" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="web" type="b2602c69:ProjectViewProjectNode" />
               <item name="web" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="shaders" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="web" type="b2602c69:ProjectViewProjectNode" />
@@ -570,6 +615,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\PROJECTS\2019\web\dist\assets\cometPBR" />
       <recent name="D:\PROJECTS\2019\web" />
       <recent name="D:\PROJECTS\2019\web\dist" />
     </key>
@@ -596,26 +642,26 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1560076500938</updated>
-      <workItem from="1560076502267" duration="9896000" />
+      <workItem from="1560076502267" duration="12602000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9896000" />
+    <option name="totallyTimeSpent" value="12602000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.1923077" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.22128557" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="0" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="2" show_stripe_button="false" />
       <window_info anchor="bottom" id="Docker" order="3" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="4" />
-      <window_info anchor="bottom" id="Find" order="5" />
+      <window_info anchor="bottom" id="Find" order="5" weight="0.329718" />
       <window_info anchor="bottom" id="Run" order="6" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
@@ -710,13 +756,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/styling/app.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="5" lean-forward="true" selection-start-column="5" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/shaders/ShadowShader.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -745,6 +784,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dist/assets/pbr/car-ext-normal.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/assets/pbr/car-ext-rmo.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/assets/pbr/car-ext-emissive.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/assets/pbr/car-ext-color.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/shaders/PBRShader300.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
@@ -752,10 +803,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../Website/comet2.obj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="28" lean-forward="true" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styling/app.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="5" lean-forward="true" selection-start-column="5" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/assets/pbr/car-ext.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="3" column="9" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Website/comet_final.obj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="55" lean-forward="true" selection-end-line="5098" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/assets/cometPBR/mesh.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="623135" selection-start-column="623135" selection-end-column="623135" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/webgl/world.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="60" column="43" lean-forward="true" selection-start-line="60" selection-start-column="43" selection-end-line="60" selection-end-column="43" />
+        <state relative-caret-position="694">
+          <caret line="78" column="51" selection-start-line="78" selection-start-column="51" selection-end-line="78" selection-end-column="51" />
           <folding>
             <element signature="e#0#107#0" expanded="true" />
           </folding>

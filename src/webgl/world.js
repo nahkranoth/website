@@ -18,7 +18,7 @@ export default class World{
         window.addEventListener('resize', resize, false);
         resize();
         const scene = new Transform();
-        scene.position.y = -0.4;
+        scene.position.y = -0;
         const textureCache = {};
         function getTexture(src, generateMipmaps = true) {
             if (textureCache[src]) return textureCache[src];
@@ -35,7 +35,7 @@ export default class World{
         const Shader = PBRShader300;
         loadExterior();
         async function loadExterior() {
-            const data = await (await fetch(`assets/pbr/car-ext.json`)).json();
+            const data = await (await fetch(`assets/cometPBR/mesh.json`)).json();
 
             const geometry = new Geometry(gl, {
                 position: {size: 3, data: new Float32Array(data.position)},
@@ -49,24 +49,24 @@ export default class World{
                 fragment: Shader.fragment,
                 uniforms: {
                     // Base color / albedo. This is used to determine both the diffuse and specular colors.
-                    tBaseColor: {value: getTexture('assets/pbr/car-ext-color.jpg')},
+                    tBaseColor: {value: getTexture('assets/cometPBR/comet2_DefaultMaterial_BaseColor.png')},
                     // This works as a multiplier for each channel in the texture above.
                     uBaseColor: {value: new Color(1, 1, 1)},
 
                     // 'Roughness', 'Metalness' and 'Occlusion', each packed into their own channel (R, G, B)
-                    tRMO: {value: getTexture('assets/pbr/car-ext-rmo.jpg')},
+                    tRMO: {value: getTexture('assets/cometPBR/comet2_DefaultMaterial_OcclusionRoughnessMetallic.png')},
                     // The following are multipliers to the above values
                     uRoughness: {value: 1},
                     uMetallic: {value: 1},
                     uOcclusion: {value: 1},
 
                     // Just a regular normal map
-                    tNormal: {value: getTexture('assets/pbr/car-ext-normal.jpg')},
+                    tNormal: {value: getTexture('assets/cometPBR/comet2_DefaultMaterial_Normal.png')},
                     uNormalScale: {value: 0.5},
                     uNormalUVScale: {value: 1},
 
                     // Emissive color is added at the very end to simulate light sources.
-                    tEmissive: {value: getTexture('assets/pbr/car-ext-emissive.jpg')},
+                    tEmissive: {value: getTexture('assets/cometPBR/comet2_DefaultMaterial_Emissive.png')},
                     uEmissive: {value: 1},
 
                     // uAlpha is an overall alpha control. It is applied right at the end to hide the geometry.
@@ -76,7 +76,7 @@ export default class World{
                     // One light is included, ideally to simulate the sun, and both specular and diffuse are calculated.
                     uLightDirection: {value: new Vec3(0, 1, 1)},
                     // Here I've pushed the white light beyond 1 to increase its effect.
-                    uLightColor: {value: new Vec3(7)},
+                    uLightColor: {value: new Vec3(1)},
                 },
                 transparent: true,
             });
