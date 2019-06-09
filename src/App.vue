@@ -1,14 +1,14 @@
 <template>
     <div id="app">
-       <HelloWorld></HelloWorld>
+       <BackgroundCanvas></BackgroundCanvas>
     </div>
 </template>
 
 <script>
-    import HelloWorld from './components/HelloWorld.vue'
+    import BackgroundCanvas from './components/BackgroundCanvas.vue'
 
     export default {
         name: 'App',
-        components: {HelloWorld}
+        components: {BackgroundCanvas}
     }
 </script>
