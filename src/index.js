@@ -1,9 +1,15 @@
-import Vue from "vue"
+import Vue from "vue/dist/vue"
+import router from './router'
 import App from "./App.vue"
 import './assets/app.css'
 
-new Vue({
+Vue.config.productionTip = false;
+
+var instance = new Vue({
     el: '#app',
-    component: {App},
+    components: {App},
     template: '<App/>'
 });
+
+console.log("Init!");
+console.log(instance);
