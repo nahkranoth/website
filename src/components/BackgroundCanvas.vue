@@ -1,4 +1,5 @@
 <template>
+    <canvas ref="webglContext" id="webglContext"></canvas>
 </template>
 
 <script>
@@ -6,7 +7,7 @@
     export default {
         name: 'BackgroundCanvas',
         mounted(){
-            var world = new World();
+            var world = new World(this.$refs.webglContext);
         }
     }
 </script>

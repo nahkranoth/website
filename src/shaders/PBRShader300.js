@@ -67,7 +67,7 @@ vec3 getNormal() {
     vec3 t = normalize(pos_dx * tex_dy.t - pos_dy * tex_dx.t);
     vec3 b = normalize(-pos_dx * tex_dy.s + pos_dy * tex_dx.s);
     mat3 tbn = mat3(t, b, normalize(vNormal));
-    vec3 n = texture(tNormal, vUv * uNormalUVScale).rgb * 2.0 - 1.0;
+    vec3 n = (texture(tNormal, vUv * uNormalUVScale).rgb * 2.0 - 1.0);
     n.xy *= uNormalScale;
     vec3 normal = normalize(tbn * n);
     // Get world normal from view normal (normalMatrix * normal)

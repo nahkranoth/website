@@ -1,4 +1,4 @@
-const vertex = `
+const vertex = `#version 300 es
 precision highp float;
 attribute vec2 uv;
 attribute vec3 position;
@@ -7,20 +7,15 @@ uniform mat4 projectionMatrix;
 varying vec2 vUv;
 void main() {
     vUv = uv;
-    
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 }
 `;
 
-const fragment = `
+const fragment = `#version 300 es
 precision highp float;
-uniform sampler2D tMap;
 varying vec2 vUv;
 void main() {
-    float shadow = texture2D(tMap, vUv).g;
-    
-    gl_FragColor.rgb = vec3(0.0);
-    gl_FragColor.a = shadow;
+    gl_FragColor = vec4(0.0);
 }
 `;
 

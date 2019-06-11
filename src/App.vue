@@ -1,7 +1,5 @@
 <template>
-    <div id="app">
-       <BackgroundCanvas></BackgroundCanvas>
-    </div>
+    <BackgroundCanvas></BackgroundCanvas>
 </template>
 
 <script>
