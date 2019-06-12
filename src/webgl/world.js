@@ -102,7 +102,7 @@ export default class World{
                     // One light is included, ideally to simulate the sun, and both specular and diffuse are calculated.
                     uLightDirection: {value: new Vec3(0, 1, 1)},
                     // Here I've pushed the white light beyond 1 to increase its effect.
-                    uLightColor: {value: new Vec3(0.4)},
+                    uLightColor: {value: new Vec3(0.6)},
                 },
                 transparent: true,
             });
