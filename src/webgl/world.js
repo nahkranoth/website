@@ -11,7 +11,7 @@ export default class World{
         gl.clearColor(0., 0., 0., 1);
         const camera = new Camera(gl, {fov: 35});
         camera.position.set(2, 0.5, 3);
-        const controls = new Orbit(camera);
+        const controls = new Orbit(camera, {minDistance:2, maxDistance:30, enablePan:false});
         function resize() {
             renderer.setSize(document.body.clientWidth, document.body.clientHeight);
             camera.perspective({aspect: gl.canvas.width / gl.canvas.height});

@@ -7,11 +7,27 @@ canvas { display:block; } /* To remove the scrollbars */
 body{
     background-color: #000;
 }
+
+a {
+    color: #fff;
+}
+
 #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    font-family: 'Dosis', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #fff;
     background-color: #000;
+}
+
+#link-widget{
+    position:absolute;
+    right:30px;
+    bottom:30px;
+}
+
+.link-widget-item{
+    color:#fff;
+    display:inline;
 }
