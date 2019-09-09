@@ -26,7 +26,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     #webglContext{
         opacity:0;
         transition: opacity 2.6s;

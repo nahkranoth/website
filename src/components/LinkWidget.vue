@@ -15,8 +15,18 @@
     }
 </script>
 
-<style>
+<style scoped>
+
     #link-widget{
+        position:absolute;
+        right:30px;
+        bottom:30px;
         z-index:2;
     }
+
+    .link-widget-item{
+        color:#fff;
+        display:inline;
+    }
+
 </style>

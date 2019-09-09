@@ -20,14 +20,3 @@ a {
     color: #fff;
     background-color: #000;
 }
-
-#link-widget{
-    position:absolute;
-    right:30px;
-    bottom:30px;
-}
-
-.link-widget-item{
-    color:#fff;
-    display:inline;
-}
