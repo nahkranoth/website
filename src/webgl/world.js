@@ -4,7 +4,10 @@ import PBRShader300 from '../shaders/PBRShader300.js';
 import SkydomeShader from '../shaders/SkyDomeShader.js';
 
 export default class World{
-    constructor(context){
+
+
+
+    constructor(context, loadedCallback){
         const renderer = new Renderer({dpr: 2, canvas:context});
         const gl = renderer.gl;
         document.body.appendChild(gl.canvas);
@@ -21,6 +24,9 @@ export default class World{
         const scene = new Transform();
         scene.position.y = -0;
         const textureCache = {};
+        var texturesLoaded = 0;
+        var textureAmount = 5;
+
         function getTexture(src, generateMipmaps = true) {
             if (textureCache[src]) return textureCache[src];
             const texture = new Texture(gl, {generateMipmaps});
@@ -28,6 +34,10 @@ export default class World{
             textureCache[src] = texture;
             image.onload = () => {
                 texture.image = image;
+                texturesLoaded++;
+                if(texturesLoaded >= textureAmount){
+                    loadedCallback();
+                }
             };
             image.src = src;
             return texture;
@@ -35,8 +45,10 @@ export default class World{
 
         // Get fallback shader for WebGL1 - needed for OES_standard_derivatives ext
         const Shader = PBRShader300;
+
         loadComet();
         loadSkydome();
+
         async function loadSkydome() {
             const program = new Program(gl, {
                 vertex: SkydomeShader.vertex,
