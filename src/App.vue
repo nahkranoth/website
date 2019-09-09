@@ -6,11 +6,11 @@
 </template>
 
 <script>
-    import BackgroundCanvas from './components/BackgroundCanvas.vue'
+    import BackgroundCanvas from './components/SpaceWorld.vue'
     import LinkWidget from './components/LinkWidget.vue'
 
     export default {
         name: 'App',
-        components: {BackgroundCanvas, LinkWidget}
+        components: {LinkWidget, BackgroundCanvas}
     }
 </script>

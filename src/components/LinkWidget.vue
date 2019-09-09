@@ -14,3 +14,9 @@
         }
     }
 </script>
+
+<style>
+    #link-widget{
+        z-index:2;
+    }
+</style>
