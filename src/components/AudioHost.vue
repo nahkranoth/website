@@ -22,7 +22,7 @@
                 this.audioActive = false;
                 this.fftSize = 4096; // we need to fill the eventual verts up untill 5982
                 this.prevScrollDist = 0.7;
-                this.frameStepSize = ;
+                this.frameStepSize = 10;
                 this.elapsedFrames = 0;
 
                 this.cometSynth = new CometSynth(this.fftSize);

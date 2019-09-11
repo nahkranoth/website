@@ -5,7 +5,6 @@ precision highp int;
 in vec3 position;
 in vec2 uv;
 in vec3 normal;
-in float fft;
 uniform mat3 normalMatrix;
 uniform mat4 modelMatrix;
 uniform mat4 modelViewMatrix;
@@ -17,7 +16,7 @@ out vec3 vMPos;
 void main() {
     vUv = uv;
     vNormal = normalize(normalMatrix * normal);
-    vec3 pos = position + (vec3(fft,fft,fft) * vNormal);
+    vec3 pos = position;
     vec4 mPos = modelMatrix * vec4(position, 1.0);
     vMPos = mPos.xyz / mPos.w;
     gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);

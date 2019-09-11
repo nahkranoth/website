@@ -31,64 +31,69 @@ function isTypeChar(line){
 }
 
 function make(){
-    var data = {verts:[],indices:[],texcoords:[],normals:[]};
-
-    readFiles("./comet.obj", (file, content) => {
-
-
-        var lines = content.split('\n');
-
-        var indices = [];
-        var verts = [];
-        var normals = [];
-        var texcoords = [];
-
-        for(var i=0;i<lines.length;i++){
-            var line = lines[i];
-            line = line.replace(/(\r\n|\n|\r)/gm, ""); //sanatize strings
-            if(!isTypeChar(line)){
-                console.log("not recognized, continue");
-                continue;
-            }
-            if(line.charAt(0) == "vn"){
-                console.log("??");
-            }
-            switch(line.charAt(0)){
-                case "f"://size 1
-                    indices = indices.concat(spiltOnTilde(line));
-                    break;
-                case "v"://size 3
-                    switch(line.charAt(1)){
-                        case " ":
-                            verts = verts.concat(splitOnSpace(line));
-                            break;
-                        case "n":
-                            normals = normals.concat(splitOnSpace(line));
-                            break;
-                        case "t"://size 2
-                            texcoords = texcoords.concat(splitOnSpace(line));
-                            break;
-                    }
-                    break;
-                default:
-                    console.log("error no type, this should not happen do to earlier sanitation");
-                    break;
-            }
-
-        }
-
-        data.indices = indices;
-        data.normals = normals;
-        data.texcoords = texcoords;
-        data.verts = verts;
-
-        
-
-
-    }, (error) => {console.log(error);})
+    readFile("./comet.obj", onFileContent , (error) => {console.log(error);})
 }
 
-function readFiles(filepath, onFileContent, onError) {
+function onFileContent(file, content) {
+    var lines = content.split('\n');
+    var data = {verts:[],indices:[],texcoords:[],normals:[]};
+
+    var indices = [];
+    var verts = [];
+    var normals = [];
+    var texcoords = [];
+
+    for(var i=0;i<lines.length;i++){
+        var line = lines[i];
+        line = line.replace(/(\r\n|\n|\r)/gm, ""); //sanatize strings
+        if(!isTypeChar(line)){
+            console.log("not recognized, continue");
+            continue;
+        }
+
+        switch(line.charAt(0)){
+            case "f"://size 1
+                indices = indices.concat(spiltOnTilde(line));
+                break;
+            case "v"://size 3
+                switch(line.charAt(1)){
+                    case " ":
+                        verts = verts.concat(splitOnSpace(line));
+                        break;
+                    case "n":
+                        normals = normals.concat(splitOnSpace(line));
+                        break;
+                    case "t"://size 2
+                        texcoords = texcoords.concat(splitOnSpace(line));
+                        break;
+                }
+                break;
+            default:
+                console.log("error no type, this should not happen do to earlier sanitation");
+                break;
+        }
+
+    }
+
+    data.indices = indices;
+    data.normals = normals;
+    data.texcoords = texcoords;
+    data.verts = verts;
+    console.log(data);
+    writeFile("./result.json", JSON.stringify(data));
+
+}
+
+function writeFile(filepath, json){
+    fs.writeFile(filepath, json, function(err) {
+        if(err) {
+            return console.log(err);
+        }
+        console.log("The file was saved!");
+    });
+}
+
+function readFile(filepath, onFileContent, onError) {
     fs.readFile(filepath, 'utf-8', function(err, content) {
         if (err) {
             onError(err);

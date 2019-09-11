@@ -75,7 +75,7 @@ export default class World{
     }
 
     async loadComet() {
-        const data = await (await fetch(`assets/cometPBR/mesh.json`)).json();
+        const data = await (await fetch(`assets/cometPBR/result.json`)).json();
 
         for(var i=0;i<5982;i++){
             this.fftData[i] = 0;
@@ -83,13 +83,10 @@ export default class World{
 
         this.geometry = new Geometry(this.gl, {
             position: {size: 3, data: new Float32Array(data.verts)},
-            index: {data: new Int16Array(data.indices)},
+            index: {size:3, data: new Int16Array(data.indices)},
             uv: {size: 2, data: new Float32Array(data.texcoords)},
-            normal: {size: 3, data: new Float32Array(data.normals)},
-            fft: {size: 1, data:new Float32Array(this.fftData)}
+            normal: {size: 3, data: new Float32Array(data.normals)}
         });
-
-        console.log(data.verts.length/3);
 
         //NOTES:
         /*
