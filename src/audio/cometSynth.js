@@ -62,7 +62,5 @@ export default class CometSynth{
         this.fmGain.connect(filter);
 
         filter.fan(this.fft);
-
-        this.prevGain = this.fmGain.gain.value;
     }
 }

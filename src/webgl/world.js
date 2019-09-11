@@ -5,137 +5,141 @@ import SkydomeShader from '../shaders/SkyDomeShader.js';
 
 export default class World{
 
-    constructor(context, loadedCallback){
-        const renderer = new Renderer({dpr: 2, canvas:context});
-        const gl = renderer.gl;
-        document.body.appendChild(gl.canvas);
-        gl.clearColor(0., 0., 0., 1);
+    constructor(context, loadedCallback) {
+        this.loadedCallback = loadedCallback
 
-        const camera = new Camera(gl, {fov: 35});
-        camera.position.set(2, 0.5, 3);
+        this.renderer = new Renderer({dpr: 2, canvas: context});
+        this.gl = this.renderer.gl;
+        document.body.appendChild(this.gl.canvas);
+        this.gl.clearColor(0., 0., 0., 1);
 
-        const controls = new Orbit(camera, {minDistance:2, maxDistance:30, enablePan:false});
-        function resize() {
-            renderer.setSize(document.body.clientWidth, document.body.clientHeight);
-            camera.perspective({aspect: gl.canvas.width / gl.canvas.height});
-        }
-        window.addEventListener('resize', resize, false);
-        resize();
-        const scene = new Transform();
-        scene.position.y = -0;
-        const textureCache = {};
-        var texturesLoaded = 0;
-        var textureAmount = 5;
+        this.camera = new Camera(this.gl, {fov: 35});
+        this.camera.position.set(2, 0.5, 3);
 
-        var fftData = [];
+        this.controls = new Orbit(this.camera, {minDistance: 2, maxDistance: 30, enablePan: false});
 
-        function getTexture(src, generateMipmaps = true) {
-            if (textureCache[src]) return textureCache[src];
-            const texture = new Texture(gl, {generateMipmaps});
-            const image = new Image();
-            textureCache[src] = texture;
-            image.onload = () => {
-                texture.image = image;
-                texturesLoaded++;
-                if(texturesLoaded >= textureAmount){
-                    loadedCallback();
-                }
-            };
-            image.src = src;
-            return texture;
-        }
+        window.addEventListener('resize', this.resize, false);
+        this.resize();
 
-        // Get fallback shader for WebGL1 - needed for OES_standard_derivatives ext
-        const Shader = PBRShader300;
+        this.scene = new Transform();
+        this.scene.position.y = -0;
+        this.textureCache = {};
+        this.texturesLoaded = 0;
+        this.textureAmount = 5;
 
-        loadComet();
-        loadSkydome();
+        this.fftData = [];
 
-        async function loadSkydome() {
-            const program = new Program(gl, {
-                vertex: SkydomeShader.vertex,
-                fragment: SkydomeShader.fragment,
-                cullFace: null,
-                uniforms: {
-                    tMap: {value: getTexture('assets/skybox/skybox.png')},
-                },
+        this.Shader = PBRShader300;
+        
+        this.loadComet();
+        this.loadSkydome();
+        requestAnimationFrame(() => {this.updateLoop()});
+    }
 
-            });
-            const sphereGeometry = new Sphere(gl, {radius: 1, widthSegments: 64});
-            const cube = new Mesh(gl, {geometry: sphereGeometry, program});
-            cube.position.set(0, 0, 0);
-            cube.scale.set(30, 30, 30);
-            cube.setParent(scene);
-        }
+    resize() {
+        this.renderer.setSize(document.body.clientWidth, document.body.clientHeight);
+        this.camera.perspective({aspect: this.gl.canvas.width / this.gl.canvas.height});
+    }
+    
+    getTexture(src, generateMipmaps = true) {
+        if (this.textureCache[src]) return this.textureCache[src];
+        const texture = new Texture(this.gl, {generateMipmaps});
+        const image = new Image();
+        this.textureCache[src] = texture;
+        image.onload = () => {
+            texture.image = image;
+            this.texturesLoaded++;
+            if(this.texturesLoaded >= this.textureAmount){
+                this.loadedCallback();
+            }
+        };
+        image.src = src;
+        return texture;
+    }
 
-        async function loadComet() {
-            const data = await (await fetch(`assets/cometPBR/mesh.json`)).json();
+    async loadSkydome() {
+        const program = new Program(this.gl, {
+            vertex: SkydomeShader.vertex,
+            fragment: SkydomeShader.fragment,
+            cullFace: null,
+            uniforms: {
+                tMap: {value: this.getTexture('assets/skybox/skybox.png')},
+            },
 
-            console.log(fftData);
+        });
+        const sphereGeometry = new Sphere(this.gl, {radius: 1, widthSegments: 64});
+        const cube = new Mesh(this.gl, {geometry: sphereGeometry, program});
+        cube.position.set(0, 0, 0);
+        cube.scale.set(30, 30, 30);
+        cube.setParent(this.scene);
+    }
 
-            const geometry = new Geometry(gl, {
-                position: {size: 3, data: new Float32Array(data.verts)},
-                uv: {size: 2, data: new Float32Array(data.texcoords)},
-                normal: {size: 3, data: new Float32Array(data.normals)},
-                fft: {size: 1, data:new Float32Array(fftData)}
-            });
+    async loadComet() {
+        const data = await (await fetch(`assets/cometPBR/mesh.json`)).json();
 
-            console.log(data.verts.length/3);
+        console.log(this.fftData);
 
-            //NOTES:
-            /*
-                I needed to flip all the maps in photoshop to make them allign with the model in the end.
-             */
+        const geometry = new Geometry(this.gl, {
+            position: {size: 3, data: new Float32Array(data.verts)},
+            uv: {size: 2, data: new Float32Array(data.texcoords)},
+            normal: {size: 3, data: new Float32Array(data.normals)},
+            fft: {size: 1, data:new Float32Array(this.fftData)}
+        });
 
-            // This whole effect lives in the fairly epic shader.
-            const program = new Program(gl, {
-                vertex: Shader.vertex,
-                fragment: Shader.fragment,
-                uniforms: {
-                    // Base color / albedo. This is used to determine both the diffuse and specular colors.
-                    tBaseColor: {value: getTexture('assets/cometPBR/comet2_DefaultMaterial_BaseColor2.png')},
-                    // This works as a multiplier for each channel in the texture above.
-                    uBaseColor: {value: new Color(1, 1, 1)},
+        console.log(data.verts.length/3);
 
-                    // 'Roughness', 'Metalness' and 'Occlusion', each packed into their own channel (R, G, B)
-                    tRMO: {value: getTexture('assets/cometPBR/comet2_DefaultMaterial_OcclusionRoughnessMetallic2.png')},
-                    // The following are multipliers to the above values
-                    uRoughness: {value: 0.3},
-                    uMetallic: {value: 0.1},
-                    uOcclusion: {value: 1},
+        //NOTES:
+        /*
+            I needed to flip all the maps in photoshop to make them allign with the model in the end.
+         */
 
-                    // Just a regular normal map
-                    tNormal: {value: getTexture('assets/cometPBR/comet2_DefaultMaterial_Normal2.png')},
-                    uNormalScale: {value: 1},
-                    uNormalUVScale: {value: 1},
+        // This whole effect lives in the fairly epic shader.
+        const program = new Program(this.gl, {
+            vertex: this.Shader.vertex,
+            fragment: this.Shader.fragment,
+            uniforms: {
+                // Base color / albedo. This is used to determine both the diffuse and specular colors.
+                tBaseColor: {value: this.getTexture('assets/cometPBR/comet2_DefaultMaterial_BaseColor2.png')},
+                // This works as a multiplier for each channel in the texture above.
+                uBaseColor: {value: new Color(1, 1, 1)},
 
-                    // Emissive color is added at the very end to simulate light sources.
-                    tEmissive: {value: getTexture('assets/cometPBR/comet2_DefaultMaterial_Emissive2.png')},
-                    uEmissive: {value: 6},
+                // 'Roughness', 'Metalness' and 'Occlusion', each packed into their own channel (R, G, B)
+                tRMO: {value: this.getTexture('assets/cometPBR/comet2_DefaultMaterial_OcclusionRoughnessMetallic2.png')},
+                // The following are multipliers to the above values
+                uRoughness: {value: 0.3},
+                uMetallic: {value: 0.1},
+                uOcclusion: {value: 1},
 
-                    // uAlpha is an overall alpha control. It is applied right at the end to hide the geometry.
-                    // Specular reflections will not affect this value, unlike above.
-                    uAlpha: {value: 1},
+                // Just a regular normal map
+                tNormal: {value: this.getTexture('assets/cometPBR/comet2_DefaultMaterial_Normal2.png')},
+                uNormalScale: {value: 1},
+                uNormalUVScale: {value: 1},
 
-                    // One light is included, ideally to simulate the sun, and both specular and diffuse are calculated.
-                    uLightDirection: {value: new Vec3(0, 1, 1)},
-                    // Here I've pushed the white light beyond 1 to increase its effect.
-                    uLightColor: {value: new Vec3(0.6)},
-                },
-                transparent: true,
-            });
-            const mesh = new Mesh(gl, {geometry, program});
-            mesh.setParent(scene);
-        }
+                // Emissive color is added at the very end to simulate light sources.
+                tEmissive: {value: this.getTexture('assets/cometPBR/comet2_DefaultMaterial_Emissive2.png')},
+                uEmissive: {value: 6},
 
-        requestAnimationFrame(update);
-        function update() {
-            requestAnimationFrame(update);
-            scene.rotation.z += 0.0005;
-            scene.rotation.y += 0.0003;
-            controls.update();
-            renderer.render({scene, camera});
-        }
+                // uAlpha is an overall alpha control. It is applied right at the end to hide the geometry.
+                // Specular reflections will not affect this value, unlike above.
+                uAlpha: {value: 1},
+
+                // One light is included, ideally to simulate the sun, and both specular and diffuse are calculated.
+                uLightDirection: {value: new Vec3(0, 1, 1)},
+                // Here I've pushed the white light beyond 1 to increase its effect.
+                uLightColor: {value: new Vec3(0.6)},
+            },
+            transparent: true,
+        });
+        const mesh = new Mesh(this.gl, {geometry, program});
+        mesh.setParent(this.scene);
+    }
+
+    updateLoop() {
+        requestAnimationFrame(() => {this.updateLoop()});
+        this.scene.rotation.z += 0.0005;
+        this.scene.rotation.y += 0.0003;
+        this.controls.update();
+        this.renderer.render({scene:this.scene, camera:this.camera});
     }
 
     setFFT(fft){

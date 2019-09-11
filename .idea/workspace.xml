@@ -4,12 +4,7 @@
     <list default="true" id="ee28f8fe-7afd-4be5-b483-3f5856931f34" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/audio/cometSynth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/audio/cometSynth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AudioHost.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AudioHost.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SpaceWorld.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CometWorld.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shaders/PBRShader300.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/shaders/PBRShader300.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/webgl/world.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/webgl/world.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -41,7 +36,7 @@
           <entry key="glsl" value="1" />
           <entry key="html" value="4" />
           <entry key="jpg" value="4" />
-          <entry key="js" value="39" />
+          <entry key="js" value="42" />
           <entry key="json" value="10" />
           <entry key="obj" value="4" />
           <entry key="png" value="1" />
@@ -57,7 +52,7 @@
           <entry key="HTML" value="4" />
           <entry key="Image" value="5" />
           <entry key="JSON" value="10" />
-          <entry key="JavaScript" value="39" />
+          <entry key="JavaScript" value="42" />
           <entry key="PLAIN_TEXT" value="5" />
           <entry key="TypeScript" value="1" />
           <entry key="Vue.js" value="9" />
@@ -68,7 +63,7 @@
           <entry key="css" value="203" />
           <entry key="glsl" value="5" />
           <entry key="html" value="43" />
-          <entry key="js" value="2698" />
+          <entry key="js" value="2934" />
           <entry key="json" value="94" />
           <entry key="vue" value="3447" />
         </counts>
@@ -79,7 +74,7 @@
           <entry key="GLSL shader file" value="5" />
           <entry key="HTML" value="43" />
           <entry key="JSON" value="94" />
-          <entry key="JavaScript" value="2698" />
+          <entry key="JavaScript" value="2934" />
           <entry key="Vue.js" value="3447" />
         </counts>
       </usages-collector>
@@ -114,8 +109,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/AudioHost.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="22" column="35" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="35" />
+            <state relative-caret-position="645">
+              <caret line="50" column="70" selection-start-line="50" selection-start-column="45" selection-end-line="50" selection-end-column="70" />
             </state>
           </provider>
         </entry>
@@ -123,11 +118,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/webgl/world.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="814">
-              <caret line="142" column="10" selection-start-line="142" selection-start-column="10" selection-end-line="142" selection-end-column="10" />
+            <state relative-caret-position="570">
+              <caret line="47" column="41" lean-forward="true" selection-start-line="47" selection-start-column="41" selection-end-line="47" selection-end-column="41" />
               <folding>
-                <element signature="e#0#107#0" expanded="true" />
+                <element signature="e#0#105#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/ogl/src/core/Renderer.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="132">
+              <caret line="295" column="11" selection-start-line="295" selection-start-column="11" selection-end-line="295" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -181,8 +185,27 @@
       <find>context</find>
       <find>tNormal</find>
       <find>position</find>
+      <find>textureCache</find>
+      <find>texturesLoaded</find>
+      <find>textureAmount</find>
+      <find>getTexturegetTexture</find>
       <find>getTexture</find>
+      <find>fftData</find>
+      <find>scene</find>
+      <find>renderer</find>
+      <find>resize</find>
+      <find>camera</find>
+      <find>gl</find>
+      <find>controls</find>
     </findStrings>
+    <replaceStrings>
+      <replace>this.getTexture</replace>
+      <replace>this.scene</replace>
+      <replace>this.renderer</replace>
+      <replace>this.camera</replace>
+      <replace>this.gl</replace>
+      <replace>this.controls</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -213,11 +236,11 @@
         <option value="$PROJECT_DIR$/src/styling/app.css" />
         <option value="$PROJECT_DIR$/src/components/LinkWidget.vue" />
         <option value="$PROJECT_DIR$/src/App.vue" />
-        <option value="$PROJECT_DIR$/src/audio/cometSynth.js" />
         <option value="$PROJECT_DIR$/src/components/SpaceWorld.vue" />
         <option value="$PROJECT_DIR$/src/components/AudioHost.vue" />
         <option value="$PROJECT_DIR$/src/components/CometWorld.vue" />
         <option value="$PROJECT_DIR$/src/shaders/PBRShader300.js" />
+        <option value="$PROJECT_DIR$/src/audio/cometSynth.js" />
         <option value="$PROJECT_DIR$/src/webgl/world.js" />
       </list>
     </option>
@@ -344,12 +367,12 @@
       <workItem from="1560275384666" duration="955000" />
       <workItem from="1560547372986" duration="27000" />
       <workItem from="1568063504436" duration="2471000" />
-      <workItem from="1568217904337" duration="9443000" />
+      <workItem from="1568217904337" duration="10304000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41823000" />
+    <option name="totallyTimeSpent" value="42684000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -468,13 +491,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/ogl/src/core/Renderer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
-          <caret line="18" column="14" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/ogl/src/Extras.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -573,13 +589,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/audio/cometSynth.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="5" lean-forward="true" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/App.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -587,13 +596,6 @@
           <folding>
             <element signature="e#285#343#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/AudioHost.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="22" column="35" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="35" />
         </state>
       </provider>
     </entry>
@@ -614,12 +616,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/audio/cometSynth.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="769">
+          <caret line="64" selection-start-line="64" selection-end-line="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/AudioHost.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="50" column="70" selection-start-line="50" selection-start-column="45" selection-end-line="50" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/ogl/src/core/Renderer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="295" column="11" selection-start-line="295" selection-start-column="11" selection-end-line="295" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/webgl/world.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="814">
-          <caret line="142" column="10" selection-start-line="142" selection-start-column="10" selection-end-line="142" selection-end-column="10" />
+        <state relative-caret-position="570">
+          <caret line="47" column="41" lean-forward="true" selection-start-line="47" selection-start-column="41" selection-end-line="47" selection-end-column="41" />
           <folding>
-            <element signature="e#0#107#0" expanded="true" />
+            <element signature="e#0#105#0" expanded="true" />
           </folding>
         </state>
       </provider>
