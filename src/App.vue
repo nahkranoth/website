@@ -1,7 +1,6 @@
 <template>
     <div id="app">
         <LinkWidget></LinkWidget>
-        <AudioHost></AudioHost>
         <BackgroundCanvas></BackgroundCanvas>
     </div>
 </template>

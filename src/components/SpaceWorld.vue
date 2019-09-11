@@ -1,27 +1,38 @@
 <template>
-    <canvas v-bind:class="{ active }" ref="webglContext" id="webglContext"></canvas>
+    <div>
+        <AudioHost v-on:onFFT="onFFT"></AudioHost>
+        <canvas v-bind:class="{ active }" ref="webglContext" id="webglContext"></canvas>
+    </div>
 </template>
 
 <script>
     import World from '../webgl/world.js'
     import LinkWidget from './LinkWidget.vue'
+    import AudioHost from './AudioHost.vue'
 
     export default {
         name: 'SpaceWorld',
-        components: {LinkWidget},
+        components: {LinkWidget, AudioHost},
         data() {
             return {
                 active : false
             }
         },
         mounted(){
-
-            var world = new World(this.$refs.webglContext,
-                () => {
-                    this.$refs.webglContext.opacity = 0;
-                    this.active = true;
-                }
-            );
+            this.onStart();
+        },
+        methods:{
+            onStart(){
+                this.world = new World(this.$refs.webglContext,
+                    () => {
+                        this.$refs.webglContext.opacity = 0;
+                        this.active = true;
+                    }
+                );
+            },
+            onFFT(fft){
+                console.log(fft);
+            }
         }
     }
 </script>

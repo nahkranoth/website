@@ -3,71 +3,57 @@
 </template>
 
 <script>
-    import Tone from 'tone'
+    import CometSynth from '../audio/cometSynth.js'
 
     export default {
         name: "audio-host",
 
         created () {
-            window.addEventListener('wheel', this.onScroll);
-            window.addEventListener('mousedown', this.onMouseClick);
-
-            this.audioActive = false;
-
+            this.onStart();
         },
         destroyed () {
 
         },
 
         methods :{
+            onStart(){
+                window.addEventListener('wheel', this.onScroll);
+                window.addEventListener('mousedown', this.onMouseClick);
+                this.audioActive = false;
+                this.fftSize = 128;
+                this.prevScrollDist = 0.7;
+                this.frameStepSize = 10;
+                this.elapsedFrames = 0;
+
+                this.cometSynth = new CometSynth(this.fftSize);
+            },
             onScroll(event){
+                if(!this.audioActive) return;
                 //Control Humm gain with scrollwheel
                 var scrollVal = Math.sign(event.deltaY) * 0.1;
-                var newGain =  this.prevGain - scrollVal;
-                this.prevGain = newGain;
-                this.fmGain.gain.value = Math.max(0, Math.min(2,newGain));
+                var newScroll =  this.prevScrollDist - scrollVal;
+                this.prevScrollDist = newScroll;
+                this.cometSynth.setGain(newScroll);
             },
             onMouseClick(){
-                if(!this.audioActive) this.startAudioContext();
+                if(!this.audioActive) {
+                    this.cometSynth.startAudioContext();
+                }
                 this.audioActive = true;
             },
-            startAudioContext(){
-                var noise = new Tone.Noise("pink").start();
-                noise.volume.value = 0.1;
-                var filter = new Tone.Filter(100, "lowpass");
-                noise.connect(filter);
+            updateLoop(){
+                this.elapsedFrames++;
+                if(this.elapsedFrames >= this.frameStepSize && this.audioActive){
+                    this.$emit('onFFT', this.cometSynth.getFFT());
+                    this.elapsedFrames = 0 ;
+                }
 
-                var pingPong = new Tone.Chorus(0.001, 2.5, 0.7);
-                filter.connect(pingPong);
-
-                var gain = new Tone.Gain(0.3).toMaster();
-                pingPong.connect(gain);
-
-                //FM hummmm synth
-                var fmSynth = new Tone.FMSynth();
-                fmSynth.envelope.release = 1;
-                this.fmGain = new Tone.Gain(0.7);
-
-                fmSynth.connect(this.fmGain);
-                fmSynth.triggerAttack("C2");
-
-                var filter = new Tone.Filter(80, "lowpass").toMaster();
-                this.fmGain.connect(filter);
-
-                this.prevGain = this.fmGain.gain.value;
-
-                //Occasional beep synth
-
-
-
-
+                window.requestAnimationFrame(() => {this.updateLoop()})
             }
         },
 
         mounted(){
-
-
-
+            window.requestAnimationFrame(() => {this.updateLoop()})
         }
 
     }
