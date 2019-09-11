@@ -7,7 +7,7 @@
 
 <script>
     import Vue from "vue" // you can nest components by registering them here and adding to the parent components in the component object
-    import BackgroundCanvas from './components/SpaceWorld.vue'
+    import BackgroundCanvas from './components/CometWorld.vue'
     import LinkWidget from './components/LinkWidget.vue'
     import AudioHost from './components/AudioHost.vue'
 

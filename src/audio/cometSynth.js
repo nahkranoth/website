@@ -5,7 +5,7 @@ export default class CometSynth{
         this.fft = new Tone.FFT(fftSize);
     }
 
-    setGain(gain){
+    setHummGain(gain){
         this.fmGain.gain.value = Math.max(0, Math.min(2, gain));
     }
 

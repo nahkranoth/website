@@ -2,12 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ee28f8fe-7afd-4be5-b483-3f5856931f34" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/audio/cometSynth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/audio/cometSynth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/audio/cometSynth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/AudioHost.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AudioHost.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SpaceWorld.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SpaceWorld.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SpaceWorld.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CometWorld.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shaders/PBRShader300.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/shaders/PBRShader300.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/webgl/world.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/webgl/world.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -38,13 +41,13 @@
           <entry key="glsl" value="1" />
           <entry key="html" value="4" />
           <entry key="jpg" value="4" />
-          <entry key="js" value="38" />
+          <entry key="js" value="39" />
           <entry key="json" value="10" />
           <entry key="obj" value="4" />
           <entry key="png" value="1" />
           <entry key="py" value="1" />
           <entry key="ts" value="1" />
-          <entry key="vue" value="8" />
+          <entry key="vue" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -54,10 +57,10 @@
           <entry key="HTML" value="4" />
           <entry key="Image" value="5" />
           <entry key="JSON" value="10" />
-          <entry key="JavaScript" value="38" />
+          <entry key="JavaScript" value="39" />
           <entry key="PLAIN_TEXT" value="5" />
           <entry key="TypeScript" value="1" />
-          <entry key="Vue.js" value="8" />
+          <entry key="Vue.js" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -65,9 +68,9 @@
           <entry key="css" value="203" />
           <entry key="glsl" value="5" />
           <entry key="html" value="43" />
-          <entry key="js" value="2280" />
+          <entry key="js" value="2698" />
           <entry key="json" value="94" />
-          <entry key="vue" value="3325" />
+          <entry key="vue" value="3447" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -76,8 +79,8 @@
           <entry key="GLSL shader file" value="5" />
           <entry key="HTML" value="43" />
           <entry key="JSON" value="94" />
-          <entry key="JavaScript" value="2280" />
-          <entry key="Vue.js" value="3325" />
+          <entry key="JavaScript" value="2698" />
+          <entry key="Vue.js" value="3447" />
         </counts>
       </usages-collector>
     </session>
@@ -96,20 +99,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/AudioHost.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="45" column="63" selection-start-line="45" selection-start-column="63" selection-end-line="45" selection-end-column="63" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/SpaceWorld.vue">
+        <entry file="file://$PROJECT_DIR$/src/components/CometWorld.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="33" column="33" lean-forward="true" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
+            <state relative-caret-position="540">
+              <caret line="36" column="35" lean-forward="true" selection-start-line="36" selection-start-column="35" selection-end-line="36" selection-end-column="35" />
               <folding>
                 <element signature="e#150#187#0" expanded="true" />
               </folding>
@@ -118,22 +112,31 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/audio/cometSynth.js">
+        <entry file="file://$PROJECT_DIR$/src/components/AudioHost.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="41" lean-forward="true" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="41" />
+            <state relative-caret-position="225">
+              <caret line="22" column="35" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/webgl/world.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="814">
+              <caret line="142" column="10" selection-start-line="142" selection-start-column="10" selection-end-line="142" selection-end-column="10" />
+              <folding>
+                <element signature="e#0#107#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/webgl/world.js">
+        <entry file="file://$PROJECT_DIR$/src/shaders/PBRShader300.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="585">
-              <caret line="42" column="27" selection-start-line="42" selection-start-column="27" selection-end-line="42" selection-end-column="27" />
-              <folding>
-                <element signature="e#0#107#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="90">
+              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -201,20 +204,21 @@
         <option value="$PROJECT_DIR$/src/shaders/PBRShader100.js" />
         <option value="$PROJECT_DIR$/tools/objToJson.py" />
         <option value="$PROJECT_DIR$/dist/assets/cometPBR/mesh.json" />
-        <option value="$PROJECT_DIR$/src/shaders/PBRShader300.js" />
         <option value="$PROJECT_DIR$/src/shaders/skyboxShader.js" />
         <option value="$PROJECT_DIR$/src/shaders/SkyDomeShader.js" />
         <option value="$PROJECT_DIR$/src/shaders/ShadowShader.js" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/src/webgl/world.js" />
         <option value="$PROJECT_DIR$/src/components/BackgroundCanvas.vue" />
         <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/src/styling/app.css" />
         <option value="$PROJECT_DIR$/src/components/LinkWidget.vue" />
-        <option value="$PROJECT_DIR$/src/audio/cometSynth.js" />
         <option value="$PROJECT_DIR$/src/App.vue" />
+        <option value="$PROJECT_DIR$/src/audio/cometSynth.js" />
         <option value="$PROJECT_DIR$/src/components/SpaceWorld.vue" />
         <option value="$PROJECT_DIR$/src/components/AudioHost.vue" />
+        <option value="$PROJECT_DIR$/src/components/CometWorld.vue" />
+        <option value="$PROJECT_DIR$/src/shaders/PBRShader300.js" />
+        <option value="$PROJECT_DIR$/src/webgl/world.js" />
       </list>
     </option>
   </component>
@@ -279,6 +283,12 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="shaders" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -334,12 +344,12 @@
       <workItem from="1560275384666" duration="955000" />
       <workItem from="1560547372986" duration="27000" />
       <workItem from="1568063504436" duration="2471000" />
-      <workItem from="1568217904337" duration="7300000" />
+      <workItem from="1568217904337" duration="9443000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39680000" />
+    <option name="totallyTimeSpent" value="41823000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -479,13 +489,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/shaders/PBRShader300.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="22" column="18" lean-forward="true" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/ogl/src/core/Transform.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -556,16 +559,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/webgl/world.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="42" column="27" selection-start-line="42" selection-start-column="27" selection-end-line="42" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#107#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/LinkWidget.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
@@ -582,8 +575,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/audio/cometSynth.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="41" lean-forward="true" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="41" />
+        <state relative-caret-position="135">
+          <caret line="9" column="5" lean-forward="true" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -597,20 +590,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/SpaceWorld.vue">
+    <entry file="file://$PROJECT_DIR$/src/components/AudioHost.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="33" lean-forward="true" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
+        <state relative-caret-position="225">
+          <caret line="22" column="35" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/CometWorld.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="35" lean-forward="true" selection-start-line="36" selection-start-column="35" selection-end-line="36" selection-end-column="35" />
           <folding>
             <element signature="e#150#187#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/AudioHost.vue">
+    <entry file="file://$PROJECT_DIR$/src/shaders/PBRShader300.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="45" column="63" selection-start-line="45" selection-start-column="63" selection-end-line="45" selection-end-column="63" />
+        <state relative-caret-position="90">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/webgl/world.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="814">
+          <caret line="142" column="10" selection-start-line="142" selection-start-column="10" selection-end-line="142" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#107#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

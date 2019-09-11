@@ -5,15 +5,15 @@ import SkydomeShader from '../shaders/SkyDomeShader.js';
 
 export default class World{
 
-
-
     constructor(context, loadedCallback){
         const renderer = new Renderer({dpr: 2, canvas:context});
         const gl = renderer.gl;
         document.body.appendChild(gl.canvas);
         gl.clearColor(0., 0., 0., 1);
+
         const camera = new Camera(gl, {fov: 35});
         camera.position.set(2, 0.5, 3);
+
         const controls = new Orbit(camera, {minDistance:2, maxDistance:30, enablePan:false});
         function resize() {
             renderer.setSize(document.body.clientWidth, document.body.clientHeight);
@@ -26,6 +26,8 @@ export default class World{
         const textureCache = {};
         var texturesLoaded = 0;
         var textureAmount = 5;
+
+        var fftData = [];
 
         function getTexture(src, generateMipmaps = true) {
             if (textureCache[src]) return textureCache[src];
@@ -69,12 +71,16 @@ export default class World{
         async function loadComet() {
             const data = await (await fetch(`assets/cometPBR/mesh.json`)).json();
 
+            console.log(fftData);
+
             const geometry = new Geometry(gl, {
                 position: {size: 3, data: new Float32Array(data.verts)},
                 uv: {size: 2, data: new Float32Array(data.texcoords)},
                 normal: {size: 3, data: new Float32Array(data.normals)},
+                fft: {size: 1, data:new Float32Array(fftData)}
             });
 
+            console.log(data.verts.length/3);
 
             //NOTES:
             /*
@@ -130,5 +136,10 @@ export default class World{
             controls.update();
             renderer.render({scene, camera});
         }
+    }
+
+    setFFT(fft){
+        this.fftData = fft;
+        //console.log(this.fftData);
     }
 }

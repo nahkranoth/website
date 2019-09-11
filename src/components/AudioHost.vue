@@ -20,7 +20,7 @@
                 window.addEventListener('wheel', this.onScroll);
                 window.addEventListener('mousedown', this.onMouseClick);
                 this.audioActive = false;
-                this.fftSize = 128;
+                this.fftSize = 4096; // we need to fill the eventual verts up untill 5982
                 this.prevScrollDist = 0.7;
                 this.frameStepSize = 10;
                 this.elapsedFrames = 0;
@@ -29,11 +29,11 @@
             },
             onScroll(event){
                 if(!this.audioActive) return;
-                //Control Humm gain with scrollwheel
                 var scrollVal = Math.sign(event.deltaY) * 0.1;
                 var newScroll =  this.prevScrollDist - scrollVal;
                 this.prevScrollDist = newScroll;
-                this.cometSynth.setGain(newScroll);
+                //Control Humm gain with scrollwheel
+                this.cometSynth.setHummGain(newScroll);
             },
             onMouseClick(){
                 if(!this.audioActive) {

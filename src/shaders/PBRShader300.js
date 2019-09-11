@@ -4,6 +4,7 @@ precision highp int;
 in vec3 position;
 in vec2 uv;
 in vec3 normal;
+in float fft;
 uniform mat3 normalMatrix;
 uniform mat4 modelMatrix;
 uniform mat4 modelViewMatrix;

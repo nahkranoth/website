@@ -11,7 +11,7 @@
     import AudioHost from './AudioHost.vue'
 
     export default {
-        name: 'SpaceWorld',
+        name: 'CometWorld',
         components: {LinkWidget, AudioHost},
         data() {
             return {
@@ -30,8 +30,11 @@
                     }
                 );
             },
+
+            //fft is an array with the size of 4096
             onFFT(fft){
-                console.log(fft);
+                this.world.setFFT(fft);
+                //console.log(fft);
             }
         }
     }
