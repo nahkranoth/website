@@ -83,7 +83,6 @@ export default class World{
 
         this.geometry = new Geometry(this.gl, {
             position: {size: 3, data: new Float32Array(data.verts)},
-            index: {data: new Int16Array(data.indices)},
             uv: {size: 2, data: new Float32Array(data.texcoords)},
             normal: {size: 3, data: new Float32Array(data.normals)},
             fft: {size: 1, data:new Float32Array(this.fftData)}

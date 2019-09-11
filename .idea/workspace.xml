@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ee28f8fe-7afd-4be5-b483-3f5856931f34" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tools/comet.obj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tools/objTojson.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/audio/cometSynth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/audio/cometSynth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/AudioHost.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AudioHost.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shaders/PBRShader300.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/shaders/PBRShader300.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/webgl/world.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/webgl/world.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -68,7 +63,7 @@
           <entry key="css" value="203" />
           <entry key="glsl" value="5" />
           <entry key="html" value="43" />
-          <entry key="js" value="5896" />
+          <entry key="js" value="5897" />
           <entry key="json" value="94" />
           <entry key="vue" value="3449" />
         </counts>
@@ -79,7 +74,7 @@
           <entry key="GLSL shader file" value="5" />
           <entry key="HTML" value="43" />
           <entry key="JSON" value="94" />
-          <entry key="JavaScript" value="5896" />
+          <entry key="JavaScript" value="5897" />
           <entry key="Vue.js" value="3449" />
         </counts>
       </usages-collector>
@@ -90,38 +85,38 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/AudioHost.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="37" lean-forward="true" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="37" />
+            <state relative-caret-position="240">
+              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/tools/objTojson.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="78" column="8" selection-start-line="78" selection-start-column="8" selection-end-line="78" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tools/comet.obj">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="1002" column="30" selection-start-line="1002" selection-start-column="30" selection-end-line="1002" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/webgl/world.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="87" column="65" selection-start-line="87" selection-start-column="58" selection-end-line="87" selection-end-column="65" />
+            <state relative-caret-position="228">
+              <caret line="85" selection-start-line="85" selection-end-line="85" />
               <folding>
                 <element signature="e#0#105#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tools/objTojson.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="765">
+              <caret line="77" column="9" lean-forward="true" selection-start-line="77" selection-start-column="9" selection-end-line="77" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/shaders/PBRShader300.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="19" column="55" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
             </state>
           </provider>
         </entry>
@@ -140,15 +135,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
               <caret line="2" column="40" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/shaders/PBRShader300.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" selection-start-line="15" selection-end-line="15" />
             </state>
           </provider>
         </entry>
@@ -259,12 +245,12 @@
         <option value="$PROJECT_DIR$/src/components/CometWorld.vue" />
         <option value="$PROJECT_DIR$/src/audio/cometSynth.js" />
         <option value="$PROJECT_DIR$/src/shaders/PBRShader300.js" />
-        <option value="$PROJECT_DIR$/src/webgl/world.js" />
         <option value="$PROJECT_DIR$/../Website/comet_final3.obj" />
         <option value="$PROJECT_DIR$/../Website/wtf" />
         <option value="$PROJECT_DIR$/tools/comet.obj" />
-        <option value="$PROJECT_DIR$/src/components/AudioHost.vue" />
         <option value="$PROJECT_DIR$/tools/objTojson.js" />
+        <option value="$PROJECT_DIR$/src/components/AudioHost.vue" />
+        <option value="$PROJECT_DIR$/src/webgl/world.js" />
       </list>
     </option>
   </component>
@@ -304,6 +290,24 @@
             <path>
               <item name="web" type="b2602c69:ProjectViewProjectNode" />
               <item name="web" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="cometPBR" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
               <item name="tools" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -326,13 +330,13 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\PROJECTS\2019\web\dist\assets\skybox" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\PROJECTS\2019\web\dist\assets\cometPBR" />
       <recent name="D:\PROJECTS\2019\web" />
       <recent name="D:\PROJECTS\2019\web\dist" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\PROJECTS\2019\web\dist\assets\skybox" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -397,14 +401,14 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56045000" />
+    <option name="totallyTimeSpent" value="56087000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.22128557" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.22128557" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="0" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
@@ -412,7 +416,7 @@
       <window_info anchor="bottom" id="Docker" order="3" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="4" />
       <window_info anchor="bottom" id="Find" order="5" weight="0.329718" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.329718" />
+      <window_info anchor="bottom" id="Run" order="6" visible="true" weight="0.329718" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.36876357" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -661,8 +665,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/shaders/PBRShader300.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="285">
+          <caret line="19" column="55" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -676,34 +680,11 @@
     <entry file="file://$PROJECT_DIR$/dist/assets/cometPBR/mesh.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/../Website/comet_final3.obj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="975" column="21" lean-forward="true" selection-end-line="5096" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/AudioHost.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="37" lean-forward="true" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../Website/comet_final3.obj" />
     <entry file="file://$PROJECT_DIR$/src/audio/cometSynth.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="55" selection-start-line="8" selection-start-column="55" selection-end-line="8" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/webgl/world.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="87" column="65" selection-start-line="87" selection-start-column="58" selection-end-line="87" selection-end-column="65" />
-          <folding>
-            <element signature="e#0#105#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -714,10 +695,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/AudioHost.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tools/objTojson.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="78" column="8" selection-start-line="78" selection-start-column="8" selection-end-line="78" selection-end-column="8" />
+        <state relative-caret-position="765">
+          <caret line="77" column="9" lean-forward="true" selection-start-line="77" selection-start-column="9" selection-end-line="77" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/webgl/world.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="85" selection-start-line="85" selection-end-line="85" />
+          <folding>
+            <element signature="e#0#105#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
