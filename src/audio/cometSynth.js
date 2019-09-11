@@ -2,21 +2,29 @@ import Tone from 'tone'
 
 export default class CometSynth{
     constructor(fftSize){
-        this.fft = new Tone.FFT(fftSize);
+        this.fft = new Tone.Waveform(fftSize);
     }
 
     setHummGain(gain){
-        this.fmGain.gain.value = Math.max(0, Math.min(2, gain));
+        this.fmGain.gain.value = Math.max(0, Math.min(4, gain));
     }
 
     getFFT(){
-        return this.fft.getValue();
+        return this.fftNormalize(this.fft.getValue());
+    }
+
+    fftNormalize(fft){
+        var result = [];
+        for(var i=0;i<fft.length;i++){
+            result[i] = fft[i]/8;
+        }
+        return result;
     }
 
     startAudioContext(){
         var noise = new Tone.Noise("pink").start();
         noise.volume.value = 0.1;
-        var filter = new Tone.Filter(100, "lowpass");
+        var filter = new Tone.Filter(300, "lowpass");
         noise.connect(filter);
 
         var pingPong = new Tone.Chorus(0.001, 2.5, 0.7);
@@ -24,6 +32,9 @@ export default class CometSynth{
 
         var gain = new Tone.Gain(0.3).toMaster();
         pingPong.connect(gain);
+
+        gain.fan(this.fft);
+
 
         //FM hummmm synth
 

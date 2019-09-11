@@ -1,6 +1,7 @@
 const vertex = `#version 300 es
 precision highp float;
 precision highp int;
+
 in vec3 position;
 in vec2 uv;
 in vec3 normal;
@@ -12,12 +13,14 @@ uniform mat4 projectionMatrix;
 out vec2 vUv;
 out vec3 vNormal;
 out vec3 vMPos;
+
 void main() {
     vUv = uv;
     vNormal = normalize(normalMatrix * normal);
+    vec3 pos = position + (vec3(fft,fft,fft) * vNormal);
     vec4 mPos = modelMatrix * vec4(position, 1.0);
     vMPos = mPos.xyz / mPos.w;
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
 }
 `;
 

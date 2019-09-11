@@ -18,7 +18,7 @@ export default class World{
 
         this.controls = new Orbit(this.camera, {minDistance: 2, maxDistance: 30, enablePan: false});
 
-        window.addEventListener('resize', this.resize, false);
+        window.addEventListener('resize', () => {this.resize()}, false);
         this.resize();
 
         this.scene = new Transform();
@@ -77,10 +77,13 @@ export default class World{
     async loadComet() {
         const data = await (await fetch(`assets/cometPBR/mesh.json`)).json();
 
-        console.log(this.fftData);
+        for(var i=0;i<5982;i++){
+            this.fftData[i] = 0;
+        }
 
-        const geometry = new Geometry(this.gl, {
+        this.geometry = new Geometry(this.gl, {
             position: {size: 3, data: new Float32Array(data.verts)},
+            index: {data: new Int16Array(data.indices)},
             uv: {size: 2, data: new Float32Array(data.texcoords)},
             normal: {size: 3, data: new Float32Array(data.normals)},
             fft: {size: 1, data:new Float32Array(this.fftData)}
@@ -130,8 +133,11 @@ export default class World{
             },
             transparent: true,
         });
-        const mesh = new Mesh(this.gl, {geometry, program});
-        mesh.setParent(this.scene);
+
+        this.cometMesh = new Mesh(this.gl, {geometry:this.geometry, program:program});
+        console.log(this.geometry);
+
+        this.cometMesh.setParent(this.scene);
     }
 
     updateLoop() {
@@ -143,7 +149,11 @@ export default class World{
     }
 
     setFFT(fft){
-        this.fftData = fft;
+        for(var i=0;i<this.fftData.length;i++){
+            this.fftData[i] = fft[i%fft.length];
+        }
         //console.log(this.fftData);
+        this.geometry.attributes.fft.data = new Float32Array(this.fftData);
+        this.geometry.attributes.fft.needsUpdate = true;
     }
 }
