@@ -7,6 +7,7 @@ export default class CometSynth{
 
     setHummGain(gain){
         this.fmGain.gain.value = Math.max(0, Math.min(4, gain));
+        this.noiseGain.gain.value = Math.max(0, Math.min(1, gain));
     }
 
     getFFT(){
@@ -30,10 +31,10 @@ export default class CometSynth{
         var pingPong = new Tone.Chorus(0.001, 2.5, 0.7);
         filter.connect(pingPong);
 
-        var gain = new Tone.Gain(0.3).toMaster();
-        pingPong.connect(gain);
+        this.noiseGain = new Tone.Gain(0.3).toMaster();
+        pingPong.connect(this.noiseGain);
 
-        gain.fan(this.fft);
+        this.noiseGain.fan(this.fft);
 
 
         //FM hummmm synth
