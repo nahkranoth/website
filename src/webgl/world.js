@@ -1,5 +1,5 @@
 import {Renderer, Transform, Camera, Geometry, Texture, Program, Mesh, Vec3, Color} from 'ogl/src/Core.js';
-import {Orbit, Sphere} from 'ogl/src/Extras.js';
+import {Orbit, Sphere, Cube} from 'ogl/src/Extras.js';
 import PBRShader300 from '../shaders/PBRShader300.js';
 import SkydomeShader from '../shaders/SkyDomeShader.js';
 
@@ -75,18 +75,19 @@ export default class World{
     }
 
     async loadComet() {
-        const data = await (await fetch(`assets/cometPBR/result.json`)).json();
+        const data = await (await fetch(`assets/cometPBR/mesh.json`)).json();
+        const cubeGeometry = new Cube(this.gl);
 
         for(var i=0;i<5982;i++){
             this.fftData[i] = 0;
         }
 
-        this.geometry = new Geometry(this.gl, {
-            position: {size: 3, data: new Float32Array(data.verts)},
-            index: {size:3, data: new Int16Array(data.indices)},
-            uv: {size: 2, data: new Float32Array(data.texcoords)},
-            normal: {size: 3, data: new Float32Array(data.normals)}
-        });
+       this.geometry = new Geometry(this.gl, {
+           position: {size: 3, data: new Float32Array(data.verts)},
+           uv: {size: 2, data: new Float32Array(data.texcoords)},
+           normal: {size: 3, data: new Float32Array(data.normals)},
+           fft: {size:1, data:new Float32Array(this.fftData)}
+       });
 
         //NOTES:
         /*
@@ -132,7 +133,6 @@ export default class World{
         });
 
         this.cometMesh = new Mesh(this.gl, {geometry:this.geometry, program:program});
-        console.log(this.geometry);
 
         this.cometMesh.setParent(this.scene);
     }
@@ -149,7 +149,6 @@ export default class World{
         for(var i=0;i<this.fftData.length;i++){
             this.fftData[i] = fft[i%fft.length];
         }
-        //console.log(this.fftData);
         this.geometry.attributes.fft.data = new Float32Array(this.fftData);
         this.geometry.attributes.fft.needsUpdate = true;
     }

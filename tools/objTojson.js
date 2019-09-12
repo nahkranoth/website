@@ -13,13 +13,13 @@ function splitOnSpace(input){
     return values;
 }
 
-function spiltOnTilde(input){
+function splitOnTilde(input){
     var values = [];
     var spaceSplit = splitOnSpace(input);
     for(var k=0;k<spaceSplit.length;k++) {
         var attributes = spaceSplit[k].split('/');
         for(var j=0;j<attributes.length;j++){
-            var val = attributes[j];
+            var val = attributes[0];
             values.push(val);
         }
     }
@@ -31,7 +31,7 @@ function isTypeChar(line){
 }
 
 function make(){
-    readFile("./comet.obj", onFileContent , (error) => {console.log(error);})
+    readFile("./cube.obj", onFileContent , (error) => {console.log(error);})
 }
 
 function onFileContent(file, content) {
@@ -53,7 +53,7 @@ function onFileContent(file, content) {
 
         switch(line.charAt(0)){
             case "f"://size 1
-                indices = indices.concat(spiltOnTilde(line));
+                indices = indices.concat(splitOnTilde(line));
                 break;
             case "v"://size 3
                 switch(line.charAt(1)){
