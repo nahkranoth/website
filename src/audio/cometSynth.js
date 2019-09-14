@@ -6,8 +6,8 @@ export default class CometSynth{
     }
 
     setHummGain(gain){
-        this.fmGain.gain.value = Math.max(0, Math.min(4, gain));
-        this.noiseGain.gain.value = Math.max(0, Math.min(1, gain));
+        this.fmGain.gain.rampTo(Math.max(0, Math.min(1, gain))) ;
+        this.noiseGain.gain.rampTo(Math.max(0, Math.min(1, gain)));
     }
 
     getFFT(){
