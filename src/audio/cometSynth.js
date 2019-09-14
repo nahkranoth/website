@@ -36,7 +36,6 @@ export default class CometSynth{
 
         this.noiseGain.fan(this.fft);
 
-
         //FM hummmm synth
 
         var settings = {
