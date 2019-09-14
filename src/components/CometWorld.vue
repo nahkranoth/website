@@ -1,6 +1,6 @@
 <template>
     <div>
-        <AudioHost v-on:onFFT="onFFT"></AudioHost>
+        <AudioHost v-on:onFFT="onFFT" ref="audioHost"></AudioHost>
         <canvas v-bind:class="{ active }" ref="webglContext" id="webglContext"></canvas>
     </div>
 </template>
@@ -33,6 +33,12 @@
             //fft is an array with the size of 4096
             onFFT(fft){
                 this.world.setFFT(fft);
+            },
+
+            destroy(){
+                console.log(this.$refs);
+                this.$refs.audioHost.destroy();
+                //this.$refs.world.destroy();
             }
         }
     }

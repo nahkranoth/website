@@ -22,17 +22,29 @@ export default class CometSynth{
         return result;
     }
 
-    startAudioContext(){
-        var noise = new Tone.Noise("pink").start();
-        noise.volume.value = 0.1;
-        var filter = new Tone.Filter(300, "lowpass");
-        noise.connect(filter);
+    destroy(){
+        this.noise.dispose();
+        this.filter.dispose();
+        this.pingPong.dispose();
+        this.noiseGain.dispose();
+        this.fft.dispose();
+        this.fmSynth.dispose();
+        this.fmFilter.dispose();
+        this.fmGain.dispose();
+    }
 
-        var pingPong = new Tone.Chorus(0.001, 2.5, 0.7);
-        filter.connect(pingPong);
+    startAudioContext(){
+        this.noise = new Tone.Noise("pink").start();
+        this.noise.volume.value = 0.1;
+
+        this.filter = new Tone.Filter(300, "lowpass");
+        this.noise.connect(this.filter);
+
+        this.pingPong = new Tone.Chorus(0.001, 2.5, 0.7);
+        this.filter.connect(this.pingPong);
 
         this.noiseGain = new Tone.Gain(0.3).toMaster();
-        pingPong.connect(this.noiseGain);
+        this.pingPong.connect(this.noiseGain);
 
         this.noiseGain.fan(this.fft);
 
@@ -63,15 +75,15 @@ export default class CometSynth{
             }
         };
 
-        var fmSynth = new Tone.FMSynth(settings);
+        this.fmSynth = new Tone.FMSynth(settings);
         this.fmGain = new Tone.Gain(0.7);
 
-        fmSynth.connect(this.fmGain);
-        fmSynth.triggerAttack("C2");
+        this.fmSynth.connect(this.fmGain);
+        this.fmSynth.triggerAttack("C2");
 
-        var filter = new Tone.Filter(80, "lowpass").toMaster();
-        this.fmGain.connect(filter);
+        this.fmFilter = new Tone.Filter(80, "lowpass").toMaster();
+        this.fmGain.connect(this.fmFilter);
 
-        filter.fan(this.fft);
+        this.fmFilter.fan(this.fft);
     }
 }

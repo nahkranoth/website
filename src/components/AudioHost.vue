@@ -24,7 +24,6 @@
                 this.prevScrollDist = 0.7;
                 this.frameStepSize = 1;
                 this.elapsedFrames = 0;
-
                 this.cometSynth = new CometSynth(this.fftSize);
             },
             onScroll(event){
@@ -48,12 +47,16 @@
                     this.elapsedFrames = 0 ;
                 }
 
-                window.requestAnimationFrame(() => {this.updateLoop()})
+                this.animFrame = window.requestAnimationFrame(() => {this.updateLoop()})
+            },
+            destroy(){
+                this.cometSynth.destroy();
+                window.cancelAnimationFrame(this.animFrame);
             }
         },
 
         mounted(){
-            window.requestAnimationFrame(() => {this.updateLoop()})
+            this.animFrame = window.requestAnimationFrame(() => {this.updateLoop()})
         }
 
     }

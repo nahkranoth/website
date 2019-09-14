@@ -38,6 +38,12 @@ export default class World{
         requestAnimationFrame(() => {this.updateLoop()});
     }
 
+    destroy(){
+
+        console.log(this.renderer);
+        console.log(this.gl);
+    }
+
     resize() {
         this.renderer.setSize(document.body.clientWidth, document.body.clientHeight);
         this.camera.perspective({aspect: this.gl.canvas.width / this.gl.canvas.height});
