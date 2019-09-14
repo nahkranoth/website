@@ -7,12 +7,11 @@
 
 <script>
     import World from '../webgl/world.js'
-    import LinkWidget from './LinkWidget.vue'
     import AudioHost from './AudioHost.vue'
 
     export default {
         name: 'CometWorld',
-        components: {LinkWidget, AudioHost},
+        components: {AudioHost},
         data() {
             return {
                 active : false
@@ -34,7 +33,6 @@
             //fft is an array with the size of 4096
             onFFT(fft){
                 this.world.setFFT(fft);
-                //console.log(fft);
             }
         }
     }

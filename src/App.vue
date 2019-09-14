@@ -1,18 +1,16 @@
 <template>
     <div id="app">
         <LinkWidget></LinkWidget>
-        <BackgroundCanvas></BackgroundCanvas>
+        <CometWorld></CometWorld>
     </div>
 </template>
 
 <script>
-    import Vue from "vue" // you can nest components by registering them here and adding to the parent components in the component object
-    import BackgroundCanvas from './components/CometWorld.vue'
+    import CometWorld from './components/CometWorld.vue'
     import LinkWidget from './components/LinkWidget.vue'
-    import AudioHost from './components/AudioHost.vue'
 
     export default {
         name: 'App',
-        components: {LinkWidget, BackgroundCanvas, AudioHost}
+        components: {LinkWidget, CometWorld}
     }
 </script>
