@@ -1,6 +1,7 @@
 import {Renderer, Transform, Camera, Geometry, Texture, Program, Mesh, Vec3, Color} from 'ogl/src/Core.js';
 import {Orbit, Sphere, Cube} from 'ogl/src/Extras.js';
 import PBRShader300 from '../shaders/PBRShader300.js';
+import InnerShader from '../shaders/innerShader.js';
 import SkydomeShader from '../shaders/SkyDomeShader.js';
 
 export default class World{
@@ -30,6 +31,7 @@ export default class World{
         this.fftData = [];
 
         this.Shader = PBRShader300;
+        this.InnerShader = InnerShader;
         
         this.loadComet();
         this.loadSkydome();
@@ -89,6 +91,13 @@ export default class World{
            fft: {size:1, data:new Float32Array(this.fftData)}
        });
 
+        this.innerGeometry = new Geometry(this.gl, {
+            position: {size: 3, data: new Float32Array(data.verts)},
+            uv: {size: 2, data: new Float32Array(data.texcoords)},
+            normal: {size: 3, data: new Float32Array(data.normals)}
+        });
+
+
         console.log(data.verts.length/3);
 
         //NOTES:
@@ -137,6 +146,19 @@ export default class World{
         this.cometMesh = new Mesh(this.gl, {geometry:this.geometry, program:program});
 
         this.cometMesh.setParent(this.scene);
+
+        const innerProgram = new Program(this.gl, {
+            vertex: this.InnerShader.vertex,
+            fragment: this.InnerShader.fragment,
+            transparent: true,
+        });
+
+        this.innerCometMesh = new Mesh(this.gl, {geometry:this.innerGeometry, program:innerProgram});
+
+        console.log(this.innerCometMesh);
+        this.innerCometMesh.scale = new Vec3(0.5, 0.5, 0.5);
+
+        this.innerCometMesh.setParent(this.scene);
     }
 
     updateLoop() {
