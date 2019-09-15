@@ -32,13 +32,15 @@
 
             //fft is an array with the size of 4096
             onFFT(fft){
-                this.world.setFFT(fft);
+                if(this.active){
+                    this.world.setFFT(fft);
+                }
             },
 
-            destroy(){
-                console.log(this.$refs);
-                this.$refs.audioHost.destroy();
-                //this.$refs.world.destroy();
+            toggle(){
+                this.active = !this.active;
+                this.$refs.audioHost.toggle(this.active);
+                this.world.toggle(this.active);
             }
         }
     }

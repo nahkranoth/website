@@ -22,15 +22,15 @@ export default class CometSynth{
         return result;
     }
 
-    destroy(){
-        this.noise.dispose();
-        this.filter.dispose();
-        this.pingPong.dispose();
-        this.noiseGain.dispose();
-        this.fft.dispose();
-        this.fmSynth.dispose();
-        this.fmFilter.dispose();
-        this.fmGain.dispose();
+    resume(){
+        this.noise.mute = false;
+        this.fmSynth.mute = false;
+        this.fmSynth.triggerAttack("C2");
+    }
+
+    pause(){
+        this.noise.mute = true;
+        this.fmSynth.triggerRelease();
     }
 
     startAudioContext(){
@@ -77,8 +77,8 @@ export default class CometSynth{
 
         this.fmSynth = new Tone.FMSynth(settings);
         this.fmGain = new Tone.Gain(0.7);
-
         this.fmSynth.connect(this.fmGain);
+
         this.fmSynth.triggerAttack("C2");
 
         this.fmFilter = new Tone.Filter(80, "lowpass").toMaster();

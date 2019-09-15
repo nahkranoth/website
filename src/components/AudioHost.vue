@@ -49,8 +49,13 @@
 
                 this.animFrame = window.requestAnimationFrame(() => {this.updateLoop()})
             },
-            destroy(){
-                this.cometSynth.destroy();
+            toggle(active){
+                if(active){
+                    this.cometSynth.resume();
+                    this.animFrame = window.requestAnimationFrame(() => {this.updateLoop()});
+                    return;
+                }
+                this.cometSynth.pause();
                 window.cancelAnimationFrame(this.animFrame);
             }
         },

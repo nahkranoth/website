@@ -7,11 +7,10 @@ import SkydomeShader from '../shaders/SkyDomeShader.js';
 export default class World{
 
     constructor(context, loadedCallback) {
-        this.loadedCallback = loadedCallback
+        this.loadedCallback = loadedCallback;
 
         this.renderer = new Renderer({dpr: 2, canvas: context});
         this.gl = this.renderer.gl;
-        document.body.appendChild(this.gl.canvas);
         this.gl.clearColor(0., 0., 0., 1);
 
         this.camera = new Camera(this.gl, {fov: 35});
@@ -35,13 +34,20 @@ export default class World{
         
         this.loadComet();
         this.loadSkydome();
-        requestAnimationFrame(() => {this.updateLoop()});
+        this.update = requestAnimationFrame(() => {this.updateLoop()});
     }
-
-    destroy(){
-
-        console.log(this.renderer);
-        console.log(this.gl);
+    toggle(active){
+        if(active){
+            this.resume();
+            return;
+        }
+        this.pause();
+    }
+    resume(){
+        this.update = requestAnimationFrame(() => {this.updateLoop()});
+    }
+    pause(){
+        window.cancelAnimationFrame(this.update);
     }
 
     resize() {
@@ -84,7 +90,6 @@ export default class World{
 
     async loadComet() {
         const data = await (await fetch(`assets/cometPBR/mesh.json`)).json();
-        const cubeGeometry = new Cube(this.gl);
 
         for(var i=0;i<5982;i++){
             this.fftData[i] = 0;
@@ -112,7 +117,7 @@ export default class World{
          */
 
         // This whole effect lives in the fairly epic shader.
-        const program = new Program(this.gl, {
+        this.program = new Program(this.gl, {
             vertex: this.Shader.vertex,
             fragment: this.Shader.fragment,
             uniforms: {
@@ -149,26 +154,23 @@ export default class World{
             transparent: true,
         });
 
-        this.cometMesh = new Mesh(this.gl, {geometry:this.geometry, program:program});
+        this.cometMesh = new Mesh(this.gl, {geometry:this.geometry, program:this.program});
 
         this.cometMesh.setParent(this.scene);
 
-        const innerProgram = new Program(this.gl, {
+        this.innerProgram = new Program(this.gl, {
             vertex: this.InnerShader.vertex,
             fragment: this.InnerShader.fragment,
             transparent: true,
         });
 
-        this.innerCometMesh = new Mesh(this.gl, {geometry:this.innerGeometry, program:innerProgram});
-
-        console.log(this.innerCometMesh);
+        this.innerCometMesh = new Mesh(this.gl, {geometry:this.innerGeometry, program:this.innerProgram});
         this.innerCometMesh.scale = new Vec3(0.5, 0.5, 0.5);
-
         this.innerCometMesh.setParent(this.scene);
     }
 
     updateLoop() {
-        requestAnimationFrame(() => {this.updateLoop()});
+        this.update = requestAnimationFrame(() => {this.updateLoop()});
         this.scene.rotation.z += 0.0005;
         this.scene.rotation.y += 0.0003;
         this.controls.update();

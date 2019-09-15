@@ -17,8 +17,7 @@
         components: {LinkWidget, CometWorld, GhostWorld},
         methods:{
             next:function(){
-                this.$refs.cometWorld.destroy();
-                console.log(this.$refs);
+                this.$refs.cometWorld.toggle();
             }
         }
     }
