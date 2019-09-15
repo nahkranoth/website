@@ -1,8 +1,8 @@
 <template>
     <div id="app">
         <LinkWidget></LinkWidget>
-        <CometWorld ref="cometWorld"></CometWorld>
-        <GhostWorld ref="ghostWorld"></GhostWorld>
+        <CometWorld v-if="cometWorldActive" ref="cometWorld"></CometWorld>
+        <GhostWorld v-if="ghostWorldActive" ref="ghostWorld"></GhostWorld>
         <div v-on:click="next"> >> </div>
     </div>
 </template>
@@ -15,8 +15,16 @@
     export default {
         name: 'App',
         components: {LinkWidget, CometWorld, GhostWorld},
+        data() {
+            return {
+                ghostWorldActive : false,
+                cometWorldActive : true
+            }
+        },
         methods:{
             next:function(){
+                this.ghostWorldActive = true;
+                this.cometWorldActive = false;
                 this.$refs.cometWorld.toggle();
             }
         }

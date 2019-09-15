@@ -11,9 +11,12 @@
           this.onStart();
         },
         methods:{
+            toggle(){
+                console.log("Ghostworld toggle");
+            },
             onStart(){
+                console.log("Ghostworld start");
                 var ghostSynth = new GhostSynth();
-
             }
         }
     }
