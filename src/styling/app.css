@@ -20,3 +20,8 @@ a {
     color: #fff;
     background-color: #000;
 }
+
+#next-btn{
+    position:absolute;
+    top:0;
+}

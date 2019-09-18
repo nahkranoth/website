@@ -3,7 +3,7 @@
         <LinkWidget></LinkWidget>
         <CometWorld v-if="cometWorldActive" ref="cometWorld"></CometWorld>
         <GhostWorld v-if="ghostWorldActive" ref="ghostWorld"></GhostWorld>
-        <div v-on:click="next"> >> </div>
+        <div id="next-btn" v-on:click="next"> >> </div>
     </div>
 </template>
 
@@ -17,15 +17,15 @@
         components: {LinkWidget, CometWorld, GhostWorld},
         data() {
             return {
-                ghostWorldActive : false,
-                cometWorldActive : true
+                ghostWorldActive : true,
+                cometWorldActive : false
             }
         },
         methods:{
             next:function(){
-                this.ghostWorldActive = true;
-                this.cometWorldActive = false;
-                this.$refs.cometWorld.toggle();
+                this.ghostWorldActive = false;
+                this.cometWorldActive = true;
+                //this.$refs.cometWorld.toggle();
             }
         }
     }
