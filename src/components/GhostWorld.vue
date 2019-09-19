@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Dial></Dial>
+        <Dial v-on:onValue="onVolumeChange"></Dial>
     </div>
 </template>
 
@@ -16,11 +16,12 @@
         components: {Dial},
         methods:{
             toggle(){
-                console.log("Ghostworld toggle");
             },
             onStart(){
-                console.log("Ghostworld start");
                 var ghostSynth = new GhostSynth();
+            },
+            onVolumeChange(val){
+                console.log(val);
             }
         }
     }

@@ -1,12 +1,14 @@
 <template>
   <div class="dial-wrapper">
-    <div class="filler-outline"></div>
+    <div class="dial-label disable-select" :style="label_style">{{label}}</div>
+
+    <div class="filler-outline" :style="outline_style"></div>
 
     <svg class="filler-graphic" width="62" height="62" ref="fillerValue">
 
       <defs>
         <filter id="white-glow" x="-5000%" y="-5000%" width="10000%" height="10000%">
-          <feFlood result="flood" flood-color="#a2e5e7" flood-opacity="0.5"></feFlood>
+          <feFlood result="flood" :flood-color="color" flood-opacity="0.5"></feFlood>
           <feComposite in="flood" result="mask" in2="SourceGraphic" operator="in"></feComposite>
           <feMorphology in="mask" result="dilated" operator="dilate" radius="2"></feMorphology>
           <feGaussianBlur in="dilated" result="blurred" stdDeviation="2"></feGaussianBlur>
@@ -19,18 +21,19 @@
 
       <circle
               class="filler-value"
-              stroke="#a2e5e7"
+              :stroke="color"
               stroke-width="2"
               fill="transparent"
               filter="url(#white-glow)"
-              r="19"
-              cx="38"
-              cy="24" ref="fillerVal"/>
+              r="18"
+              cx="40"
+              cy="30" ref="fillerVal"/>
     </svg>
 
     <div v-on:mousedown="onMouseDown" :style="dial_style" v-on:mouseup="onMouseUp" class="rotpot" ref="body">
-      <div class="dot-indicator"></div>
+      <div class="dot-indicator" :style="dot_style"></div>
     </div>
+
   </div>
 </template>
 
@@ -39,6 +42,8 @@
         name: "interfaceDial",
         data:function(){
             return{
+                label:"Volume",
+                color:"#a2e5e7",
                 startY: 0,
                 dialRotation: 0,
                 stopRotation: 0
@@ -46,7 +51,27 @@
         },
         computed: {
             dial_style () {
-                return { transform: 'rotate(' + this.dialRotation + 'deg)'}
+                return {
+                    transform: 'rotate(' + this.dialRotation + 'deg)',
+                    border: "1px solid "+this.color,
+                    boxShadow: "0 0 1px 0 "+this.color+" inset, 0 0 1px 0 "+this.color
+                }
+            },
+            outline_style(){
+                return{
+                    border: "1px solid "+this.color,
+                    boxShadow: "0 0 1px 0 "+this.color+" inset, 0 0 1px 0 "+this.color
+                }
+            },
+            dot_style(){
+                return{
+                    backgroundColor: this.color
+              }
+            },
+            label_style(){
+                return{
+                    color: this.color
+                }
             }
         },
         mounted:function(){
@@ -72,6 +97,7 @@
             setNValue(delta){
                 this._value = this._valuestore + (delta / 100);
                 this._value = Math.min(1, Math.max(0, this._value));
+                this.$emit('onValue', this._value);
                 return this._value;
             },
             setDialRotation(val){
@@ -100,27 +126,36 @@
 </script>
 
 <style scoped>
+
+  .dial-label{
+    width: 100%;
+    position:absolute;
+    font-size:12px;
+  }
+
   .dial-wrapper{
     position:absolute;
+    display:inline-block;
+    width:64px;
+    height:64px;
     top:50%;
     left:50%;
   }
 
   .filler-outline{
+    position:absolute;
     transform: rotate(180deg);
-    top:0;
-    left:0;
+    top: calc(50% - 14px);
+    left: calc(50% - 22px);
     width:42px;
     height:42px;
     border-radius:50%;
-    border: 1px solid #a2e5e7;
     z-index:-1;
   }
 
   .filler-graphic{
     position:absolute;
-    left: -16px;
-    top: -16px;
+    left: 0;
     transform: rotate(90deg);
     transform-origin: 50% 50%;
   }
@@ -128,11 +163,10 @@
   .rotpot{
     position:absolute;
     left:calc(50% - 17px);
-    top:calc(50% - 17px);
+    top:calc(50% - 9px);
     width:32px;
     height:32px;
     border-radius:50%;
-    border: 1px solid #a2e5e7;
     background-color:#000000;
     z-index:2;
   }
@@ -144,9 +178,6 @@
     width:3px;
     height:3px;
     border-radius:50%;
-    background-color: #a2e5e7;
   }
-
-
 
 </style>
