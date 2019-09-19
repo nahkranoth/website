@@ -2,9 +2,9 @@
   <div class="dial-wrapper">
     <div class="dial-label disable-select" :style="label_style">{{label}}</div>
 
-    <div class="filler-outline" :style="outline_style"></div>
+    <div class="filler-outline disable-select" :style="outline_style"></div>
 
-    <svg class="filler-graphic" width="62" height="62" ref="fillerValue">
+    <svg class="filler-graphic disable-select" width="62" height="62" ref="fillerValue">
 
       <defs>
         <filter id="white-glow" x="-5000%" y="-5000%" width="10000%" height="10000%">
@@ -30,7 +30,7 @@
               cy="30" ref="fillerVal"/>
     </svg>
 
-    <div v-on:mousedown="onMouseDown" :style="dial_style" v-on:mouseup="onMouseUp" class="rotpot" ref="body">
+    <div v-on:mousedown="onMouseDown" :style="dial_style" v-on:mouseup="onMouseUp" class="rotpot disable-select" ref="body">
       <div class="dot-indicator" :style="dot_style"></div>
     </div>
 
@@ -40,10 +40,13 @@
 <script>
     export default {
         name: "interfaceDial",
+        props:{
+            label:{ type:String, default:'Value' },
+            color:{ type:String, default:'#a2e5e7' },
+            },
         data:function(){
             return{
-                label:"Volume",
-                color:"#a2e5e7",
+                _value:0,
                 startY: 0,
                 dialRotation: 0,
                 stopRotation: 0
@@ -79,7 +82,6 @@
         },
         methods:{
             onStart(){
-                this._value = 0;
                 this._valuestore = 0;
                 this.sensitivity = 4;
                 this.startOffset = 45; //start offset of pot rotation in degrees
@@ -94,8 +96,11 @@
                 const offset = circumference - val * circumference;
                 this.$refs.fillerValue.style.strokeDashoffset = offset;
             },
-            setNValue(delta){
-                this._value = this._valuestore + (delta / 100);
+            getNValue(){
+                return this._value;
+            },
+            setNValue(val){
+                this._value = this._valuestore + (val / 100);
                 this._value = Math.min(1, Math.max(0, this._value));
                 this.$emit('onValue', this._value);
                 return this._value;
@@ -104,12 +109,19 @@
                 var rotationDelta = 360 - this.startOffset - this.endOffset;
                 this.dialRotation = (rotationDelta * val)-this.startOffset;
             },
+            setDialDelta(val){
+                var nVal = this.setNValue(val);
+                this.setDialRotation(nVal);
+                this.updateFiller(nVal);
+            },
+            setDial(val){
+                this.setDialDelta(val*100);
+                this._valuestore = val;
+            },
             onMove(evt){
                 const current = evt.screenY;
                 const delta = -(current - this.startY);
-                var nVal = this.setNValue(delta);
-                this.setDialRotation(nVal);
-                this.updateFiller(nVal);
+                this.setDialDelta(delta);
             },
             onMouseUp(){
                 document.removeEventListener('mouseup', this.onMouseUp);
@@ -134,12 +146,10 @@
   }
 
   .dial-wrapper{
-    position:absolute;
+    position:relative;
     display:inline-block;
     width:64px;
     height:64px;
-    top:50%;
-    left:50%;
   }
 
   .filler-outline{
@@ -150,7 +160,6 @@
     width:42px;
     height:42px;
     border-radius:50%;
-    z-index:-1;
   }
 
   .filler-graphic{
@@ -161,7 +170,7 @@
   }
 
   .rotpot{
-    position:absolute;
+    position:relative;
     left:calc(50% - 17px);
     top:calc(50% - 9px);
     width:32px;
