@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="dial-container"><Dial ref="volDial" v-on:onValue="onVolumeChange" v-bind:label="'Volume'"></Dial></div>
-        <div class="dial-container"><Dial ref="panDial" v-on:onValue="onVolumeChange" v-bind:label="'Pan'" v-bind:color="'#fff'"></Dial></div>
+        <!--<div class="dial-container"><Dial ref="panDial" v-on:onValue="onVolumeChange" v-bind:label="'Pan'" v-bind:color="'#fff'"></Dial></div>-->
     </div>
 </template>
 
@@ -23,8 +23,8 @@
             toggle(){
             },
             onStart(){
-                this.$refs.volDial.setDial(0.8);
-                this.$refs.panDial.setDial(0.5);
+                this.$refs.volDial.setDial(0.2);
+                //this.$refs.panDial.setDial(0.5);
                 var ghostSynth = new GhostSynth();
             },
             onVolumeChange(val){

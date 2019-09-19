@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ee28f8fe-7afd-4be5-b483-3f5856931f34" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/GhostWorld.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GhostWorld.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/LinkWidget.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LinkWidget.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/interface/Dial.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/interface/Dial.vue" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -69,7 +67,7 @@
           <entry key="html" value="43" />
           <entry key="js" value="7331" />
           <entry key="json" value="94" />
-          <entry key="vue" value="5765" />
+          <entry key="vue" value="6036" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -79,7 +77,7 @@
           <entry key="HTML" value="43" />
           <entry key="JSON" value="94" />
           <entry key="JavaScript" value="7331" />
-          <entry key="Vue.js" value="5765" />
+          <entry key="Vue.js" value="6036" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
@@ -100,11 +98,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/GhostWorld.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="46" selection-start-line="26" selection-start-column="46" selection-end-line="26" selection-end-column="46" />
+            <state relative-caret-position="375">
+              <caret line="25" column="46" selection-start-line="25" selection-start-column="46" selection-end-line="25" selection-end-column="46" />
               <folding>
                 <element signature="e#124#171#0" expanded="true" />
               </folding>
@@ -112,11 +110,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/interface/Dial.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="116" column="25" lean-forward="true" selection-start-line="116" selection-start-column="25" selection-end-line="116" selection-end-column="25" />
+            <state relative-caret-position="210">
+              <caret line="95" column="63" lean-forward="true" selection-start-line="95" selection-start-column="63" selection-end-line="95" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -230,8 +228,8 @@
         <option value="$PROJECT_DIR$/src/audio/cometSynth.js" />
         <option value="$PROJECT_DIR$/src/App.vue" />
         <option value="$PROJECT_DIR$/src/components/LinkWidget.vue" />
-        <option value="$PROJECT_DIR$/src/components/interface/Dial.vue" />
         <option value="$PROJECT_DIR$/src/components/GhostWorld.vue" />
+        <option value="$PROJECT_DIR$/src/components/interface/Dial.vue" />
       </list>
     </option>
   </component>
@@ -393,12 +391,12 @@
       <workItem from="1568063504436" duration="2471000" />
       <workItem from="1568217904337" duration="23665000" />
       <workItem from="1568575926264" duration="3207000" />
-      <workItem from="1568926327969" duration="2887000" />
+      <workItem from="1568926327969" duration="4097000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="68843000" />
+    <option name="totallyTimeSpent" value="70053000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -709,20 +707,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/interface/Dial.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="116" column="25" lean-forward="true" selection-start-line="116" selection-start-column="25" selection-end-line="116" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/GhostWorld.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="46" selection-start-line="26" selection-start-column="46" selection-end-line="26" selection-end-column="46" />
+        <state relative-caret-position="375">
+          <caret line="25" column="46" selection-start-line="25" selection-start-column="46" selection-end-line="25" selection-end-column="46" />
           <folding>
             <element signature="e#124#171#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/interface/Dial.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="95" column="63" lean-forward="true" selection-start-line="95" selection-start-column="63" selection-end-line="95" selection-end-column="63" />
         </state>
       </provider>
     </entry>

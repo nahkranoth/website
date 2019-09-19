@@ -26,8 +26,8 @@
               fill="transparent"
               filter="url(#white-glow)"
               r="18"
-              cx="40"
-              cy="30" ref="fillerVal"/>
+              cx="37"
+              cy="24" ref="fillerVal"/>
     </svg>
 
     <div v-on:mousedown="onMouseDown" :style="dial_style" v-on:mouseup="onMouseUp" class="rotpot disable-select" ref="body">
@@ -83,18 +83,17 @@
         methods:{
             onStart(){
                 this._valuestore = 0;
-                this.sensitivity = 4;
                 this.startOffset = 45; //start offset of pot rotation in degrees
                 this.endOffset = 45;
                 this.setDialRotation(0);
                 this.updateFiller(0);
             },
             updateFiller(val){
+                var offsetRad = this.startOffset + this.endOffset * Math.PI / 180 * 2;
                 var circumference = 19 * 2 * Math.PI;
                 this.$refs.fillerValue.style.strokeDasharray = circumference + " " + circumference;
                 this.$refs.fillerValue.style.strokeDashoffset = circumference;
-                const offset = circumference - val * circumference;
-                this.$refs.fillerValue.style.strokeDashoffset = offset;
+                this.$refs.fillerValue.style.strokeDashoffset = circumference - val * (circumference - offsetRad) * 1.12;
             },
             getNValue(){
                 return this._value;
@@ -107,7 +106,7 @@
             },
             setDialRotation(val){
                 var rotationDelta = 360 - this.startOffset - this.endOffset;
-                this.dialRotation = (rotationDelta * val)-this.startOffset;
+                this.dialRotation = (rotationDelta * val) - this.startOffset;
             },
             setDialDelta(val){
                 var nVal = this.setNValue(val);
@@ -165,7 +164,7 @@
   .filler-graphic{
     position:absolute;
     left: 0;
-    transform: rotate(90deg);
+    transform: rotate(135deg);
     transform-origin: 50% 50%;
   }
 
