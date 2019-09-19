@@ -1,16 +1,31 @@
 <template>
   <div class="dial-wrapper">
-    <div class="filler-base"></div>
+    <div class="filler-outline"></div>
 
-    <svg class="filler-progress" width="42" height="42">
+    <svg class="filler-graphic" width="62" height="62" ref="fillerValue">
+
+      <defs>
+        <filter id="white-glow" x="-5000%" y="-5000%" width="10000%" height="10000%">
+          <feFlood result="flood" flood-color="#a2e5e7" flood-opacity="0.5"></feFlood>
+          <feComposite in="flood" result="mask" in2="SourceGraphic" operator="in"></feComposite>
+          <feMorphology in="mask" result="dilated" operator="dilate" radius="2"></feMorphology>
+          <feGaussianBlur in="dilated" result="blurred" stdDeviation="2"></feGaussianBlur>
+          <feMerge>
+            <feMergeNode in="blurred"></feMergeNode>
+            <feMergeNode in="SourceGraphic"></feMergeNode>
+          </feMerge>
+        </filter>
+      </defs>
+
       <circle
-              class="progress-ring_circle"
-              stroke="white"
-              stroke-width="1"
+              class="filler-value"
+              stroke="#a2e5e7"
+              stroke-width="2"
               fill="transparent"
+              filter="url(#white-glow)"
               r="19"
-              cx="21"
-              cy="20"/>
+              cx="38"
+              cy="24" ref="fillerVal"/>
     </svg>
 
     <div v-on:mousedown="onMouseDown" :style="dial_style" v-on:mouseup="onMouseUp" class="rotpot" ref="body">
@@ -39,31 +54,41 @@
         },
         methods:{
             onStart(){
-                this.startOffset = -45; //start offset of pot rotation in degrees
-                this.minRot = 0;
-                this.maxRot = 180;
+                this._value = 0;
+                this._valuestore = 0;
+                this.sensitivity = 4;
+                this.startOffset = 45; //start offset of pot rotation in degrees
+                this.endOffset = 45;
                 this.setDialRotation(0);
+                this.updateFiller(0);
             },
-            updateFiller(percent){
-                const offset = circumference - percent / 100 * circumference;
-                circle.style.strokeDashoffset = offset;
+            updateFiller(val){
+                var circumference = 19 * 2 * Math.PI;
+                this.$refs.fillerValue.style.strokeDasharray = circumference + " " + circumference;
+                this.$refs.fillerValue.style.strokeDashoffset = circumference;
+                const offset = circumference - val * circumference;
+                this.$refs.fillerValue.style.strokeDashoffset = offset;
             },
-            getValue(){
-                return Math.min(this.maxRot, this.dialRotation - this.startOffset);
+            setNValue(delta){
+                this._value = this._valuestore + (delta / 100);
+                this._value = Math.min(1, Math.max(0, this._value));
+                return this._value;
             },
             setDialRotation(val){
-                const rotation = this.startOffset + this.stopRotation + val;
-                this.dialRotation = Math.max(this.minRot + this.startOffset, Math.min(this.maxRot - this.startOffset, rotation));
+                var rotationDelta = 360 - this.startOffset - this.endOffset;
+                this.dialRotation = (rotationDelta * val)-this.startOffset;
             },
             onMove(evt){
                 const current = evt.screenY;
                 const delta = -(current - this.startY);
-                this.setDialRotation(delta);
+                var nVal = this.setNValue(delta);
+                this.setDialRotation(nVal);
+                this.updateFiller(nVal);
             },
             onMouseUp(){
                 document.removeEventListener('mouseup', this.onMouseUp);
                 document.removeEventListener('mousemove', this.onMove);
-                this.stopRotation = this.dialRotation;
+                this._valuestore = this._value;
             },
             onMouseDown(evt){
                 document.addEventListener('mouseup', this.onMouseUp);
@@ -81,7 +106,8 @@
     left:50%;
   }
 
-  .filler-base{
+  .filler-outline{
+    transform: rotate(180deg);
     top:0;
     left:0;
     width:42px;
@@ -91,12 +117,11 @@
     z-index:-1;
   }
 
-  .filler-progress{
+  .filler-graphic{
     position:absolute;
-    top:1px;
-    left:2px;
-    transition: 0.35s stroke-dashoffset;
-    transform: rotate(-90deg);
+    left: -16px;
+    top: -16px;
+    transform: rotate(90deg);
     transform-origin: 50% 50%;
   }
 
