@@ -93,7 +93,7 @@
                 var circumference = 19 * 2 * Math.PI;
                 this.$refs.fillerValue.style.strokeDasharray = circumference + " " + circumference;
                 this.$refs.fillerValue.style.strokeDashoffset = circumference;
-                this.$refs.fillerValue.style.strokeDashoffset = circumference - val * (circumference - offsetRad) * 1.12;
+                this.$refs.fillerValue.style.strokeDashoffset = circumference - val * (circumference - offsetRad) * 1.14;
             },
             getNValue(){
                 return this._value;
@@ -146,7 +146,7 @@
 
   .dial-wrapper{
     position:relative;
-    display:inline-block;
+    display:inline-flex;
     width:64px;
     height:64px;
   }

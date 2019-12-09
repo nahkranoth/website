@@ -1,13 +1,14 @@
 <template>
     <div>
-        <div class="dial-container"><Dial ref="volDial" v-on:onValue="onVolumeChange" v-bind:label="'Volume'"></Dial></div>
-        <!--<div class="dial-container"><Dial ref="panDial" v-on:onValue="onVolumeChange" v-bind:label="'Pan'" v-bind:color="'#fff'"></Dial></div>-->
+        <GhostNode ref="nodeOne" class="ghost-node" ></GhostNode>
     </div>
 </template>
 
 <script>
-    import GhostSynth from "../audio/ghostSynth.js"
-    import Dial from "./interface/Dial.vue"
+    import Tone from 'tone'
+    import GhostNode from "./GhostNode.vue"
+
+    //Todo: Make a Dial wrapper that can switch it's function making every GhostSynthNote just one Dial
 
     export default {
         name: "GhostWorld",
@@ -18,17 +19,17 @@
           return {
           }
         },
-        components: {Dial},
+        components: {GhostNode},
         methods:{
             toggle(){
             },
             onStart(){
-                this.$refs.volDial.setDial(0.2);
-                //this.$refs.panDial.setDial(0.5);
-                var ghostSynth = new GhostSynth();
-            },
-            onVolumeChange(val){
-                console.log(val);
+                var seq = new Tone.Sequence((time, note) => {
+                    this.$refs.nodeOne.playNote(note);
+                }, [220, 220, 120, 120, 120], "8n");
+
+                seq.start(0);
+                Tone.Transport.start();
             }
         }
     }
