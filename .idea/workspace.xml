@@ -4,10 +4,9 @@
     <list default="true" id="ee28f8fe-7afd-4be5-b483-3f5856931f34" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ChainItem.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ChainItem.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/GhostChainController.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GhostChainController.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/GhostChainController.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GhostChainSequencer.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/GhostNode.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GhostControlPanel.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/GhostWorld.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GhostWorld.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/interface/Circlet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/interface/Circlet.vue" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -41,7 +40,7 @@
           <entry key="glsl" value="1" />
           <entry key="html" value="4" />
           <entry key="jpg" value="4" />
-          <entry key="js" value="99" />
+          <entry key="js" value="102" />
           <entry key="json" value="12" />
           <entry key="obj" value="7" />
           <entry key="png" value="1" />
@@ -58,7 +57,7 @@
           <entry key="HTML" value="4" />
           <entry key="Image" value="5" />
           <entry key="JSON" value="12" />
-          <entry key="JavaScript" value="99" />
+          <entry key="JavaScript" value="102" />
           <entry key="PLAIN_TEXT" value="9" />
           <entry key="TypeScript" value="4" />
           <entry key="Vue.js" value="36" />
@@ -69,9 +68,9 @@
           <entry key="css" value="203" />
           <entry key="glsl" value="5" />
           <entry key="html" value="43" />
-          <entry key="js" value="8605" />
+          <entry key="js" value="8636" />
           <entry key="json" value="94" />
-          <entry key="vue" value="10019" />
+          <entry key="vue" value="10289" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -80,8 +79,8 @@
           <entry key="GLSL shader file" value="5" />
           <entry key="HTML" value="43" />
           <entry key="JSON" value="94" />
-          <entry key="JavaScript" value="8605" />
-          <entry key="Vue.js" value="10019" />
+          <entry key="JavaScript" value="8636" />
+          <entry key="Vue.js" value="10289" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
@@ -96,20 +95,32 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/GhostWorld.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="29" column="23" selection-start-line="29" selection-start-column="23" selection-end-line="29" selection-end-column="23" />
+            <state relative-caret-position="375">
+              <caret line="25" column="17" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
               <folding>
-                <element signature="e#124#147#0" expanded="true" />
+                <element signature="e#228#251#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/GhostChainController.vue">
+        <entry file="file://$PROJECT_DIR$/src/components/GhostControlPanel.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="9" lean-forward="true" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+            <state relative-caret-position="439">
+              <caret line="46" selection-start-line="46" selection-end-line="46" />
+              <folding>
+                <element signature="e#1071#1110#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/GhostChainSequencer.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="495">
+              <caret line="33" column="56" selection-start-line="33" selection-start-column="56" selection-end-line="33" selection-end-column="56" />
               <folding>
                 <element signature="e#203#242#0" expanded="true" />
               </folding>
@@ -120,8 +131,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/ChainItem.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="42" lean-forward="true" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
+            <state relative-caret-position="15">
+              <caret line="1" column="52" lean-forward="true" selection-start-line="1" selection-start-column="36" selection-end-line="1" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -144,15 +155,6 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/GhostNode.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="85" selection-start-line="3" selection-start-column="57" selection-end-line="3" selection-end-column="85" />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -161,15 +163,13 @@
         <option value="HTML File" />
         <option value="CSS File" />
         <option value="GLSL Shader" />
-        <option value="JavaScript File" />
         <option value="Vue Single File Component" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>gl</find>
-      <find>controls</find>
       <find>uniforms</find>
       <find>array</find>
       <find>5126</find>
@@ -198,6 +198,8 @@
       <find>sine2</find>
       <find>osc.type =</find>
       <find>font</find>
+      <find>GhostChainController</find>
+      <find>GhostNode</find>
     </findStrings>
     <replaceStrings>
       <replace>this.getTexture</replace>
@@ -207,6 +209,8 @@
       <replace>this.gl</replace>
       <replace>this.controls</replace>
       <replace>cometGeom</replace>
+      <replace>GhostChainSequencer</replace>
+      <replace>GhostControlPanel</replace>
     </replaceStrings>
     <dirStrings>
       <dir>D:\PROJECTS\2019\web\node_modules\tone</dir>
@@ -263,6 +267,9 @@
         <option value="$PROJECT_DIR$/src/components/interface/Circlet.vue" />
         <option value="$PROJECT_DIR$/src/components/ChainItem.vue" />
         <option value="$PROJECT_DIR$/src/components/GhostChainController.vue" />
+        <option value="$PROJECT_DIR$/src/components/GhostChainSequencer.vue" />
+        <option value="$PROJECT_DIR$/src/components/GhostSynthNode.js" />
+        <option value="$PROJECT_DIR$/src/components/GhostControlPanel.vue" />
         <option value="$PROJECT_DIR$/src/components/GhostWorld.vue" />
       </list>
     </option>
@@ -311,13 +318,6 @@
               <item name="web" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="web" type="b2602c69:ProjectViewProjectNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="interface" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="web" type="b2602c69:ProjectViewProjectNode" />
@@ -417,12 +417,12 @@
       <workItem from="1568993190001" duration="3312000" />
       <workItem from="1574979522472" duration="53000" />
       <workItem from="1575930785787" duration="4945000" />
-      <workItem from="1576272110942" duration="4671000" />
+      <workItem from="1576272110942" duration="5768000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="84580000" />
+    <option name="totallyTimeSpent" value="85677000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -456,13 +456,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../Website/comet_final_Converted.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret column="78482" selection-start-column="78482" selection-end-column="78482" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dist/assets/pbr/car-ext.json" />
     <entry file="file://$USER_HOME$/Documents/Substance Painter 2/plugins/photoshop-export/photoshop.js">
       <provider selected="true" editor-type-id="text-editor" />
@@ -722,27 +715,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/audio/ghostSynthNode.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="36" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/interface/StepDial.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
           <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/ChainItem.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="42" lean-forward="true" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
         </state>
       </provider>
     </entry>
@@ -760,29 +736,56 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/GhostNode.vue">
+    <entry file="file://$PROJECT_DIR$/src/components/ChainItem.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="85" selection-start-line="3" selection-start-column="57" selection-end-line="3" selection-end-column="85" />
+        <state relative-caret-position="15">
+          <caret line="1" column="52" lean-forward="true" selection-start-line="1" selection-start-column="36" selection-end-line="1" selection-end-column="52" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/GhostChainController.vue">
+    <entry file="file://$PROJECT_DIR$/src/components/GhostSynthNode.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="9" lean-forward="true" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+        <state relative-caret-position="30">
+          <caret line="2" column="42" selection-start-line="2" selection-start-column="42" selection-end-line="2" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/audio/ghostSynthNode.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/GhostChainSequencer.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="33" column="56" selection-start-line="33" selection-start-column="56" selection-end-line="33" selection-end-column="56" />
           <folding>
             <element signature="e#203#242#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/GhostControlPanel.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="439">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
+          <folding>
+            <element signature="e#1071#1110#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/GhostWorld.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="23" selection-start-line="29" selection-start-column="23" selection-end-line="29" selection-end-column="23" />
+        <state relative-caret-position="375">
+          <caret line="25" column="17" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
           <folding>
-            <element signature="e#124#147#0" expanded="true" />
+            <element signature="e#228#251#0" expanded="true" />
           </folding>
         </state>
       </provider>

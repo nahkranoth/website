@@ -11,12 +11,14 @@
     import Tone from 'tone'
 
     export default {
-        name: "GhostChainController",
+        name: "GhostChainSequencer",
         components:{ChainItem},
+        props:{
+            amount:{ type:Number, default:0 },
+        },
         data:function(){
           return{
-              chainItems:[],
-              amount:8
+              chainItems:[]
           }
         },
         mounted(){
@@ -29,6 +31,7 @@
             },
             runSequencer(){
                 var active = 0;
+                if(this.chainItems.length === 0) return;
                 var seq = new Tone.Sequence(() => {
 
                     let item = this.chainItems[active];

@@ -29,28 +29,22 @@
 <script>
     import Dial from "./interface/Dial.vue"
     import StepDial from "./interface/StepDial.vue"
-    import GhostSynthNode from '../audio/ghostSynthNode.js'
 
     export default {
-        name: "GhostNode",
+        name: "GhostControlPanel",
         components:{Dial,StepDial},
-        mounted(){
-            this.onStart();
-        },
         data: function () {
             return {
             }
         },
         methods:{
-            onStart(){
-                this.synth = new GhostSynthNode();
+            Init(synth){
+                this.synth = synth;
                 this.$refs.volDial.setDial(0.2);
                 this.onOscillatorChange(this.$refs.oscStepDial.state);
                 this.onModulatorChange(this.$refs.oscModulatorDial.state);
             },
-            playNote(note){
-                this.synth.note(note);
-            },
+
             onVolumeChange(vol){
                 this.synth.setVolume(vol);
             },
