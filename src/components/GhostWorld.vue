@@ -1,13 +1,14 @@
 <template>
     <div>
         <GhostNode ref="nodeOne" class="ghost-node" ></GhostNode>
+        <GhostChainController></GhostChainController>
     </div>
 </template>
 
 <script>
     import Tone from 'tone'
     import GhostNode from "./GhostNode.vue"
-
+    import GhostChainController from './GhostChainController.vue'
     //Todo: Make a Dial wrapper that can switch it's function making every GhostSynthNote just one Dial
 
     export default {
@@ -19,14 +20,14 @@
           return {
           }
         },
-        components: {GhostNode},
+        components: {GhostNode, GhostChainController},
         methods:{
             toggle(){
             },
             onStart(){
                 var seq = new Tone.Sequence((time, note) => {
                     this.$refs.nodeOne.playNote(note);
-                }, [220, 220, 120, 120, 120], "8n");
+                }, [220, 220, 440, 440], "8n");
 
                 seq.start(0);
                 Tone.Transport.start();
