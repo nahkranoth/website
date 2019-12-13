@@ -1,7 +1,7 @@
 <template>
     <ul>
         <li v-for="item in chainItems">
-            <ChainItem ref="chainItem" v-bind:left="item.x" v-bind:top="item.y"></ChainItem>
+            <ChainItem :ref="item.ref" v-bind:left="item.x" v-bind:top="item.y"></ChainItem>
         </li>
     </ul>
 </template>
@@ -21,13 +21,11 @@
               chainItems:[]
           }
         },
-        mounted(){
-            this.onStart();
-        },
         methods:{
-            onStart(){
-               this.createItems();
-               this.runSequencer();
+            Init(synths){
+                this.amount = synths.length;
+                this.createItems(synths);
+                this.runSequencer();
             },
             runSequencer(){
                 var active = 0;
@@ -35,13 +33,14 @@
                 var seq = new Tone.Sequence(() => {
 
                     let item = this.chainItems[active];
-                    this.$emit('onNote', item.freq);
+                    item.synth.note(item.freq);
+                    this.$refs[item.ref][0].pulse();
 
                     active = (active + 1) % this.amount;//increase and restrain
                 }, [0], "8n");//I do not use the note value that comes with the sequencer
                 seq.start(0);
             },
-            createItems(){
+            createItems(synths){
                 let cX = window.innerWidth / 2;
                 let cY = window.innerHeight / 2;
                 let radians = 120;
@@ -52,11 +51,11 @@
                     let localY = radians*Math.sin( (anglePart*i) * Math.PI/180);
                     let worldX = cX + localX;
                     let worldY = cY + localY;
-                    this.createItem(worldX, worldY);
+                    this.createItem(i, worldX, worldY, synths[i]);
                 }
             },
-            createItem(x, y){
-                this.chainItems.push({x:x,y:y, freq:220});
+            createItem(index, x, y, synth){
+                this.chainItems.push({x:x,y:y, freq:220, synth:synth, ref:"item_"+index});
             }
         }
     }

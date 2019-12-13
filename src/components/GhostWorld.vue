@@ -1,7 +1,7 @@
 <template>
     <div>
         <GhostControlPanel ref="controlPanel" class="ghost-node"></GhostControlPanel>
-        <GhostChainSequencer v-on:onNote="onNote" v-bind:amount=8></GhostChainSequencer>
+        <GhostChainSequencer ref="sequencer" v-bind:amount="amount"></GhostChainSequencer>
     </div>
 </template>
 
@@ -20,17 +20,22 @@
         },
         data:function(){
           return {
+              amount: 8,
+              synths:[]
           }
         },
         components: {GhostControlPanel, GhostChainSequencer},
         methods:{
             onStart(){
-                this.synth = new GhostSynthNode();
-                this.$refs.controlPanel.Init(this.synth);
+                this.createSynths();
+                this.$refs.sequencer.Init(this.synths);
+                this.$refs.controlPanel.Init(this.synths[0]);
                 Tone.Transport.start();
             },
-            onNote(note){
-                this.synth.note(note);
+            createSynths(){
+                for(var i=0;i<this.amount;i++){
+                    this.synths.push(new GhostSynthNode());
+                }
             }
         }
     }

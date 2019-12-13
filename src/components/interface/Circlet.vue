@@ -3,9 +3,9 @@
         <svg class="circlet-item disable-select" width="18" height="18" ref="circle" @click="clickedButton">
             <circle
                     class="circle"
-                    stroke="#FFF"
+                    :stroke="color"
                     stroke-width="2"
-                    fill="solid"
+                    :fill="colorStyle"
                     r="8"
                     cx="9"
                     cy="9" ref="circle"/>
@@ -17,12 +17,14 @@
     export default {
         name: "Circlet",
         props:{
+            color:{type:String, default:'#a2e5e7'},
+            innerColor:{type:String, default:'#000'},
             left:{ type:Number, default:0 },
             top:{ type:Number, default:0 },
         },
         data:function(){
             return {
-                color:0xFFFFFF
+                iClr: "#000"
             }
         },
         computed: {
@@ -31,9 +33,15 @@
                     left:this.left+'px',
                     top:this.top+'px'
                 }
+            },
+            colorStyle(){
+                return this.iClr
             }
         },
         methods:{
+            setColor(clr){
+              this.iClr = clr;
+            },
             clickedButton(){
                 console.log("clicked me");
             }

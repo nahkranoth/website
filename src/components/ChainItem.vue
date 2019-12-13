@@ -1,5 +1,5 @@
 <template>
-        <Circlet v-bind:left="left" v-bind:top="top"></Circlet>
+        <Circlet ref="circlet" v-bind:left="left" v-bind:top="top"></Circlet>
 </template>
 
 <script>
@@ -11,6 +11,12 @@
             left:{ type:Number, default:0 },
             top:{ type:Number, default:0 }
         },
+        methods:{
+            pulse(){
+                this.$refs.circlet.setColor("#fff");
+                setTimeout(() => { this.$refs.circlet.setColor("#000"); }, 60);
+            }
+        }
     }
 </script>
 
