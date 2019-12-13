@@ -8,13 +8,15 @@
 
 <script>
     import ChainItem from "./ChainItem.vue"
+    import Tone from 'tone'
 
     export default {
         name: "GhostChainController",
         components:{ChainItem},
         data:function(){
           return{
-              chainItems:[]
+              chainItems:[],
+              amount:8
           }
         },
         mounted(){
@@ -23,20 +25,26 @@
         methods:{
             onStart(){
                this.createItems();
+               this.runSequencer();
             },
             runSequencer(){
-                var seq = new Tone.Sequence((time, note) => {
-                    // this.$refs.nodeOne.playNote(note);
-                }, [220, 220, 440, 440], "8n");
+                var active = 0;
+                var seq = new Tone.Sequence(() => {
+
+                    let item = this.chainItems[active];
+                    this.$emit('onNote', item.freq);
+
+                    active = (active + 1) % this.amount;//increase and restrain
+                }, [0], "8n");//I do not use the note value that comes with the sequencer
+                seq.start(0);
             },
             createItems(){
                 let cX = window.innerWidth / 2;
                 let cY = window.innerHeight / 2;
-                let amount = 8;
                 let radians = 120;
-                let anglePart = 360/amount;
+                let anglePart = 360/this.amount;
 
-                for(var i=0;i<amount;i++){
+                for(var i=0;i<this.amount;i++){
                     let localX = radians*Math.cos( (anglePart*i) * Math.PI/180);
                     let localY = radians*Math.sin( (anglePart*i) * Math.PI/180);
                     let worldX = cX + localX;
@@ -45,7 +53,7 @@
                 }
             },
             createItem(x, y){
-                this.chainItems.push({x:x,y:y});
+                this.chainItems.push({x:x,y:y, freq:220});
             }
         }
     }

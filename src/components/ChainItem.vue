@@ -1,7 +1,5 @@
 <template>
-    <div class="chain-item-wrapper" :style="itemStyle">
-        <Circlet></Circlet>
-    </div>
+        <Circlet v-bind:left="left" v-bind:top="top"></Circlet>
 </template>
 
 <script>
@@ -11,22 +9,11 @@
         components:{Circlet},
         props:{
             left:{ type:Number, default:0 },
-            top:{ type:Number, default:0 },
-        },
-        computed: {
-            itemStyle(){
-                return{
-                    left:this.left+'px',
-                    top:this.top+'px'
-                }
-            }
+            top:{ type:Number, default:0 }
         },
     }
 </script>
 
 <style scoped>
-    .chain-item-wrapper{
-        display:inline-block;
-        position:absolute;
-    }
+
 </style>

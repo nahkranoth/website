@@ -1,7 +1,7 @@
 <template>
     <div>
         <GhostNode ref="nodeOne" class="ghost-node" ></GhostNode>
-        <GhostChainController></GhostChainController>
+        <GhostChainController  v-on:onNote="onNote"></GhostChainController>
     </div>
 </template>
 
@@ -25,12 +25,10 @@
             toggle(){
             },
             onStart(){
-                var seq = new Tone.Sequence((time, note) => {
-                    this.$refs.nodeOne.playNote(note);
-                }, [220, 220, 440, 440], "8n");
-
-                seq.start(0);
                 Tone.Transport.start();
+            },
+            onNote(note){
+                this.$refs.nodeOne.playNote(note);
             }
         }
     }
