@@ -1,6 +1,6 @@
 <template>
     <div class="circlet-wrapper" :style="itemStyle">
-        <svg class="circlet-item disable-select" width="18" height="18" ref="circle" @click="clickedButton">
+        <svg class="circlet-item disable-select" width="18" height="18" ref="circle" @click="onClick">
             <circle
                     class="circle"
                     :stroke="color"
@@ -42,8 +42,8 @@
             setColor(clr){
               this.iClr = clr;
             },
-            clickedButton(){
-                console.log("clicked me");
+            onClick(){
+                this.$emit('onClick');
             }
         }
     }

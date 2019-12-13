@@ -11,8 +11,6 @@
     import GhostChainSequencer from './GhostChainSequencer.vue'
     import GhostSynthNode from '../audio/ghostSynthNode.js'
 
-    //Todo: Make a Dial wrapper that can switch it's function making every GhostSynthNote just one Dial
-
     export default {
         name: "GhostWorld",
         mounted(){

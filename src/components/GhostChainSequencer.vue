@@ -1,7 +1,7 @@
 <template>
     <ul>
         <li v-for="item in chainItems">
-            <ChainItem :ref="item.ref" v-bind:left="item.x" v-bind:top="item.y"></ChainItem>
+            <ChainItem :ref="item.ref" v-bind:left="item.x" v-bind:top="item.y" v-on:SelectMe = "selectItem"></ChainItem>
         </li>
     </ul>
 </template>
@@ -56,6 +56,15 @@
             },
             createItem(index, x, y, synth){
                 this.chainItems.push({x:x,y:y, freq:220, synth:synth, ref:"item_"+index});
+            },
+            selectItem(){
+                this.deselectAllItems();
+            },
+            deselectAllItems(){
+                for(var i=0;i<this.chainItems.length;i++){
+                    let ref = this.chainItems[i].ref;
+                    this.$refs[ref][0].deselect();
+                }
             }
         }
     }
