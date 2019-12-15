@@ -1,15 +1,15 @@
 <template>
-        <Circlet ref="circlet" v-bind:left="left" v-bind:top="top" v-on:onClick="onSelect"></Circlet>
+        <Circlet ref="circlet" v-bind:left="model.x" v-bind:top="model.y" v-on:onClick="onSelect"></Circlet>
 </template>
 
 <script>
     import Circlet from './interface/Circlet.vue'
+    import ChainItemModel from "./ChainItemModel";
     export default {
         name: "ChainItem",
         components:{Circlet},
         props:{
-            left:{ type:Number, default:0 },
-            top:{ type:Number, default:0 }
+            model:{ type:ChainItemModel}
         },
         mounted:function(){
             this.onStart();
@@ -27,7 +27,7 @@
                 this.$refs.circlet.setColor("#000");
             },
             onSelect(){
-                this.$emit("SelectMe");
+                this.$emit("SelectMe", this.model);
                 this.selected = true;
                 this.$refs.circlet.setColor("#00ff00");
             },

@@ -1,13 +1,14 @@
 <template>
     <ul>
-        <li v-for="item in chainItems">
-            <ChainItem :ref="item.ref" v-bind:left="item.x" v-bind:top="item.y" v-on:SelectMe = "selectItem"></ChainItem>
+        <li v-for="model in chainItems">
+            <ChainItem :ref="model.ref" :model="model" v-on:SelectMe = "selectItem"></ChainItem>
         </li>
     </ul>
 </template>
 
 <script>
     import ChainItem from "./ChainItem.vue"
+    import ChainItemModel from "./ChainItemModel.js"
     import Tone from 'tone'
 
     export default {
@@ -31,6 +32,8 @@
                 var active = 0;
                 var previous = 0;
                 if(this.chainItems.length === 0) return;
+
+                //TODO: Make my own -> this sequencer sucks or I'm using it incorrectly (probably the last)
                 var seq = new Tone.Sequence(() => {
                     let previousItem = this.chainItems[previous];
                     let item = this.chainItems[active];
@@ -60,10 +63,20 @@
                 }
             },
             createItem(index, x, y, synth){
-                this.chainItems.push({x:x,y:y, freq:220, synth:synth, ref:"item_"+index});
+                this.chainItems.push(new ChainItemModel({
+                    x:x,
+                    y:y,
+                    freq:220,
+                    vol:0.2,
+                    oscillator:"square",
+                    modulator:"triangle",
+                    synth:synth,
+                    ref:"item_"+index
+                }));
             },
-            selectItem(){
+            selectItem(model){
                 this.deselectAllItems();
+                this.$emit("OnSelectedNode", model);
             },
             deselectAllItems(){
                 for(var i=0;i<this.chainItems.length;i++){

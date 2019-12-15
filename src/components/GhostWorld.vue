@@ -1,7 +1,7 @@
 <template>
     <div>
         <GhostControlPanel ref="controlPanel" class="ghost-node"></GhostControlPanel>
-        <GhostChainSequencer ref="sequencer" v-bind:amount="amount"></GhostChainSequencer>
+        <GhostChainSequencer ref="sequencer" v-bind:amount="amount" v-on:OnSelectedNode="setControlPanel"></GhostChainSequencer>
     </div>
 </template>
 
@@ -34,6 +34,10 @@
                 for(var i=0;i<this.amount;i++){
                     this.synths.push(new GhostSynthNode());
                 }
+            },
+            setControlPanel(model){
+                console.log("set control panel");
+                this.$refs.controlPanel.Set(model);
             }
         }
     }

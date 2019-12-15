@@ -45,6 +45,21 @@
                 this.onModulatorChange(this.$refs.oscModulatorDial.state);
             },
 
+            Set(model){
+                console.log(model);
+                this.synth = model.synth;
+
+                this.$refs.volDial.setDial(model.volume);
+                this.$refs.pitchDial.setDial(model.freq);
+                this.$refs.oscStepDial.setDial(model.oscillator);
+                this.$refs.oscModulatorDial.setDial(model.modulator);
+
+                this.onVolumeChange(model.volume);
+                this.onFreqChange(model.freq);
+                this.onOscillatorChange(model.oscillator);
+                this.onModulatorChange(model.modulator);
+            },
+
             onVolumeChange(vol){
                 this.synth.setVolume(vol);
             },

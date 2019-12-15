@@ -35,6 +35,13 @@
                 let part = this.settings[partIndex];
                 this.state = part;
                 this.$emit('onValue', part);
+            },
+            setDial(state){
+                let stateIndex = this.settings.indexOf(state);
+                let position = (stateIndex)/(this.settings.length-1);
+                console.log(position);
+                this.$refs.dial.setDial(position);
+                this.state = state;
             }
         }
     }
