@@ -21,10 +21,10 @@
             pulse(){
                 if(this.selected) return;
                 this.$refs.circlet.setColor("#fff");
-                setTimeout(() => {
-                    if(this.selected) return;
-                    this.$refs.circlet.setColor("#000");
-                    }, 60);
+            },
+            dePulse(){
+                if(this.selected) return;
+                this.$refs.circlet.setColor("#000");
             },
             onSelect(){
                 this.$emit("SelectMe");

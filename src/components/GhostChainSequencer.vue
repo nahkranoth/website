@@ -29,15 +29,20 @@
             },
             runSequencer(){
                 var active = 0;
+                var previous = 0;
                 if(this.chainItems.length === 0) return;
                 var seq = new Tone.Sequence(() => {
-
+                    let previousItem = this.chainItems[previous];
                     let item = this.chainItems[active];
-                    item.synth.note(item.freq);
+
+                    if(item !== previousItem) this.$refs[previousItem.ref][0].dePulse();
                     this.$refs[item.ref][0].pulse();
 
+                    item.synth.note(item.freq);
+
+                    previous = active;
                     active = (active + 1) % this.amount;//increase and restrain
-                }, [0], "8n");//I do not use the note value that comes with the sequencer
+                }, [0, 0, 0, 0], "8n");//I do not use the note value that comes with the sequencer - I do had to choose more than 1 to avoid a bug
                 seq.start(0);
             },
             createItems(synths){
