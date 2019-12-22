@@ -39,7 +39,6 @@
             setDial(state){
                 let stateIndex = this.settings.indexOf(state);
                 let position = (stateIndex)/(this.settings.length-1);
-                console.log(position);
                 this.$refs.dial.setDial(position);
                 this.state = state;
             }

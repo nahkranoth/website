@@ -35,6 +35,7 @@
         components:{Dial,StepDial},
         data: function () {
             return {
+                activeModel:undefined
             }
         },
         methods:{
@@ -47,7 +48,7 @@
             },
 
             Set(model){
-                console.log(model);
+                this.activeModel = model;
                 this.synth = model.synth;
 
                 this.$refs.volDial.setDial(model.volume);
@@ -63,15 +64,23 @@
 
             onVolumeChange(vol){
                 this.synth.setVolume(vol);
+                if(!this.activeModel) return;
+                this.activeModel.volume = vol;
             },
             onFreqChange(freq){
                 this.synth.setFrequency(freq);
+                if(!this.activeModel) return;
+                this.activeModel.freq = freq;
             },
             onOscillatorChange(osc){
                 this.synth.setOscillatorType(osc);
+                if(!this.activeModel) return;
+                this.activeModel.oscillator = osc;
             },
             onModulatorChange(osc){
                 this.synth.setModulatorType(osc);
+                if(!this.activeModel) return;
+                this.activeModel.modulator = osc;
             }
         }
     }
