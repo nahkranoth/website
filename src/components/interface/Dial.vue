@@ -114,7 +114,8 @@
                 this.updateFiller(nVal);
             },
             setDial(val){
-                this.setDialDelta(val*100);
+                this.setDialRotation(val);
+                this.updateFiller(val);
                 this._valuestore = val;
             },
             onMove(evt){

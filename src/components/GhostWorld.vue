@@ -36,7 +36,6 @@
                 }
             },
             setControlPanel(model){
-                console.log("set control panel");
                 this.$refs.controlPanel.Set(model);
             }
         }

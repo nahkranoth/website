@@ -66,7 +66,7 @@
                 this.chainItems.push(new ChainItemModel({
                     x:x,
                     y:y,
-                    freq:220,
+                    freq:0.3,
                     vol:0.2,
                     oscillator:"square",
                     modulator:"triangle",

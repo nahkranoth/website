@@ -4,7 +4,7 @@ export default class ChainItemModel{
         this.y = params.y;
         this.synth = params.synth;
         this.ref = params.ref;
-        this.freq = params.x;
+        this.freq = params.freq;
         this.volume = params.vol;
         this.oscillator = params.oscillator;
         this.modulator = params.modulator;
