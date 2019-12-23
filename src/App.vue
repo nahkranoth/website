@@ -23,6 +23,7 @@
         },
         methods:{
             next:function(){
+                // this.$refs.ghostWorld.stop();
                 this.ghostWorldActive = false;
                 this.cometWorldActive = true;
                 //this.$refs.cometWorld.toggle();

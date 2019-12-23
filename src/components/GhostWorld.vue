@@ -26,9 +26,12 @@
         methods:{
             onStart(){
                 this.createSynths();
-                this.$refs.sequencer.Init(this.synths);
-                this.$refs.controlPanel.Init(this.synths[0]);
+                let firstItem = this.$refs.sequencer.Init(this.synths);
+                this.$refs.controlPanel.Set(firstItem);
                 Tone.Transport.start();
+            },
+            stop(){
+                this.$refs.sequencer.stop();
             },
             createSynths(){
                 for(var i=0;i<this.amount;i++){

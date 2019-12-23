@@ -19,7 +19,8 @@
         },
         data:function(){
           return{
-              chainItems:[]
+              chainItems:[],
+              sequencer:undefined
           }
         },
         methods:{
@@ -27,6 +28,10 @@
                 this.amount = synths.length;
                 this.createItems(synths);
                 this.runSequencer();
+                this.$nextTick(()=>{
+                    this.$refs[this.chainItems[0].ref][0].onSelect();
+                });
+                return this.chainItems[0];
             },
             runSequencer(){
                 var active = 0;
@@ -34,19 +39,22 @@
                 if(this.chainItems.length === 0) return;
 
                 //TODO: Make my own -> this sequencer sucks or I'm using it incorrectly (probably the last)
-                var seq = new Tone.Sequence(() => {
+                this.sequencer = new Tone.Sequence(() => {
                     let previousItem = this.chainItems[previous];
                     let item = this.chainItems[active];
 
                     if(item !== previousItem) this.$refs[previousItem.ref][0].dePulse();
                     this.$refs[item.ref][0].pulse();
 
-                    item.synth.note(item.freq);
+                    item.synth.emit(item.freq);
 
                     previous = active;
                     active = (active + 1) % this.amount;//increase and restrain
                 }, [0, 0, 0, 0], "8n");//I do not use the note value that comes with the sequencer - I do had to choose more than 1 to avoid a bug
-                seq.start(0);
+                this.sequencer.start(0);
+            },
+            stop(){
+                this.sequencer.stop();
             },
             createItems(synths){
                 let cX = window.innerWidth / 2;
@@ -55,8 +63,8 @@
                 let anglePart = 360/this.amount;
 
                 for(var i=0;i<this.amount;i++){
-                    let localX = radians*Math.cos( (anglePart*i) * Math.PI/180);
-                    let localY = radians*Math.sin( (anglePart*i) * Math.PI/180);
+                    let localX = radians*Math.cos( (anglePart*i - 90) * Math.PI/180);//minus 90 to start at the 1 o clock position
+                    let localY = radians*Math.sin( (anglePart*i - 90) * Math.PI/180);
                     let worldX = cX + localX;
                     let worldY = cY + localY;
                     this.createItem(i, worldX, worldY, synths[i]);
@@ -66,8 +74,8 @@
                 this.chainItems.push(new ChainItemModel({
                     x:x,
                     y:y,
-                    freq:0.3,
-                    vol:0.2,
+                    freq:Math.random(),
+                    vol:Math.random(),
                     oscillator:"square",
                     modulator:"triangle",
                     synth:synth,

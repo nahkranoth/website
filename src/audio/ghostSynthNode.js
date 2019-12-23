@@ -54,7 +54,8 @@ export default class GhostSynthNode{
         this.fmSynth.modulation.type = type;
     }
 
-    note(note){
+    emit(freq){
+        let note = freq * Hz.A5;
         this.fmSynth.triggerAttackRelease(note, 0.2);
     }
 }

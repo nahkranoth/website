@@ -39,14 +39,6 @@
             }
         },
         methods:{
-            Init(synth){
-                this.synth = synth;
-                this.$refs.volDial.setDial(0.2);
-                this.$refs.pitchDial.setDial(0.2);
-                this.onOscillatorChange(this.$refs.oscStepDial.state);
-                this.onModulatorChange(this.$refs.oscModulatorDial.state);
-            },
-
             Set(model){
                 this.activeModel = model;
                 this.synth = model.synth;
