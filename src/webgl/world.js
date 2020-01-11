@@ -108,9 +108,6 @@ export default class World{
             normal: {size: 3, data: new Float32Array(data.normals)}
         });
 
-
-        console.log(data.verts.length/3);
-
         //NOTES:
         /*
             I needed to flip all the maps in photoshop to make them allign with the model in the end.

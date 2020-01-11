@@ -25,16 +25,34 @@
         components: {GhostControlPanel, GhostChainSequencer},
         methods:{
             onStart(){
-                this.fxChain = this.createFxChain();
-                this.createSynths();
-                let firstItem = this.$refs.sequencer.Init(this.synths);
+                this.fftSize = 4096; //TODO: Centralize it's also used in audiohost
+
+                this.fft = this.FFT();
+                let fxChain = this.fxChain(this.fft);
+                let synths = this.getSynths(fxChain);
+                let firstItem = this.$refs.sequencer.Init(synths);
                 this.$refs.controlPanel.Set(firstItem);
                 Tone.Transport.start();
+                this.updateLoop();
             },
             stop(){
                 this.$refs.sequencer.stop();
             },
-            createFxChain(){
+            FFT(){
+                return new Tone.Waveform(this.fftSize);
+            },
+            updateLoop(){
+                this.$emit('onFFT', this.fftNormalize(this.fft.getValue()));
+                this.animFrame = window.requestAnimationFrame(() => {this.updateLoop()})
+            },
+            fftNormalize(fft){
+                var result = [];
+                for(var i=0;i<fft.length;i++){
+                    result[i] = fft[i]/8;
+                }
+                return result;
+            },
+            fxChain(fft){
                 var feedbackDelay = new Tone.FeedbackDelay("8n", .2);
                 var chorus = new Tone.Chorus(4, 2.5, 0.5);
                 feedbackDelay.connect(chorus);
@@ -53,14 +71,17 @@
                 lpFilter.connect(hpFilter);
                 var limiter = new Tone.Limiter(-44).toMaster();
                 hpFilter.connect(limiter);
+                hpFilter.fan(fft);
 
                 return reverb;
             },
 
-            createSynths(){
+            getSynths(fxChain){
+                let result = [];
                 for(var i=0;i<this.amount;i++){
-                    this.synths.push(new GhostSynthNode(this.fxChain));
+                    result.push(new GhostSynthNode(fxChain));
                 }
+                return result;
             },
             setControlPanel(model){
                 this.$refs.controlPanel.Set(model);

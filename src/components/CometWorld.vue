@@ -1,7 +1,6 @@
 <template>
     <div>
-        <AudioHost v-on:onFFT="onFFT" ref="audioHost"></AudioHost>
-        <GhostWorld ref="ghostWorld" class="ghostWorld"></GhostWorld>
+        <GhostWorld v-on:onFFT="onFFT" ref="ghostWorld" class="ghostWorld"></GhostWorld>
         <canvas v-bind:class="{ active }" ref="webglContext" id="webglContext"></canvas>
     </div>
 </template>
@@ -9,11 +8,10 @@
 <script>
     import World from '../webgl/world.js'
     import GhostWorld from './GhostWorld.vue'
-    import AudioHost from './AudioHost.vue'
 
     export default {
         name: 'CometWorld',
-        components: {AudioHost, GhostWorld},
+        components: {GhostWorld},
         data() {
             return {
                 active : false
@@ -41,7 +39,6 @@
 
             toggle(){
                 this.active = !this.active;
-                this.$refs.audioHost.toggle(this.active);
                 this.world.toggle(this.active);
             }
         }

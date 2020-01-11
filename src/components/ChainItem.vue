@@ -1,5 +1,5 @@
 <template>
-        <Circlet ref="circlet" v-bind:left="model.x" v-bind:top="model.y" v-on:onClick="onSelect"></Circlet>
+        <Circlet ref="circlet" id="circlet" v-bind:left="model.x" v-bind:top="model.y" v-on:onClick="onSelect"></Circlet>
 </template>
 
 <script>
@@ -40,5 +40,7 @@
 </script>
 
 <style scoped>
-
+        #circlet{
+                z-index:2;
+        }
 </style>
