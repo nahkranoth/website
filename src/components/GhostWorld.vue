@@ -36,24 +36,23 @@
             },
             createFxChain(){
                 var feedbackDelay = new Tone.FeedbackDelay("8n", .2);
-                var lpFilter = new Tone.Filter(12000, "lowpass");
-                feedbackDelay.connect(lpFilter);
-                var hpFilter = new Tone.Filter(200, "highpass");
-                lpFilter.connect(hpFilter);
                 var chorus = new Tone.Chorus(4, 2.5, 0.5);
-                lpFilter.connect(chorus);
+                feedbackDelay.connect(chorus);
                 var pingPong = new Tone.PingPongDelay("4n", 0.1);
                 chorus.connect(pingPong);
                 var freeverb = new Tone.Freeverb({
                     roomSize : .8 ,
-                    dampening : 200000
+                    dampening : 200
                 });
                 pingPong.connect(freeverb);
-                var reverb = new Tone.JCReverb(0.89);
+                var reverb = new Tone.JCReverb(0.99);
                 freeverb.connect(reverb);
-
+                var lpFilter = new Tone.Filter(200, "lowpass");
+                reverb.connect(lpFilter);
+                var hpFilter = new Tone.Filter(200, "highpass");
+                lpFilter.connect(hpFilter);
                 var limiter = new Tone.Limiter(-44).toMaster();
-                reverb.connect(limiter);
+                hpFilter.connect(limiter);
 
                 return reverb;
             },
