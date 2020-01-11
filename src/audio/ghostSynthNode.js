@@ -2,7 +2,8 @@ import Tone from 'tone'
 import {Hz} from '../tools/utils.js'
 
 export default class GhostSynthNode{
-    constructor(){
+    constructor(fxChain){
+        this.fxChain = fxChain;
         this.startAudioContext();
     }
 
@@ -34,8 +35,9 @@ export default class GhostSynthNode{
         };
 
         this.fmSynth = new Tone.FMSynth(settings);
-        this.fmGain = new Tone.Gain(1).toMaster();
+        this.fmGain = new Tone.Gain(1);
         this.fmSynth.connect(this.fmGain);
+        this.fmGain.connect(this.fxChain);
     }
 
     setFrequency(freq){

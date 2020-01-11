@@ -38,7 +38,6 @@
                 var previous = 0;
                 if(this.chainItems.length === 0) return;
 
-                //TODO: Make my own -> this sequencer sucks or I'm using it incorrectly (probably the last)
                 this.sequencer = new Tone.Sequence(() => {
                     let previousItem = this.chainItems[previous];
                     let item = this.chainItems[active];
@@ -50,7 +49,7 @@
 
                     previous = active;
                     active = (active + 1) % this.amount;//increase and restrain
-                }, [0, 0, 0, 0], "8n");//I do not use the note value that comes with the sequencer - I do had to choose more than 1 to avoid a bug
+                }, [0, 0, 0, 0], 2.5);//I do not use the note value that comes with the sequencer - I do had to choose more than 1 to avoid a bug
                 this.sequencer.start(0);
             },
             stop(){

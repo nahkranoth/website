@@ -25,6 +25,7 @@
         components: {GhostControlPanel, GhostChainSequencer},
         methods:{
             onStart(){
+                this.fxChain = this.createFxChain();
                 this.createSynths();
                 let firstItem = this.$refs.sequencer.Init(this.synths);
                 this.$refs.controlPanel.Set(firstItem);
@@ -33,9 +34,33 @@
             stop(){
                 this.$refs.sequencer.stop();
             },
+            createFxChain(){
+                var feedbackDelay = new Tone.FeedbackDelay("8n", .2);
+                var lpFilter = new Tone.Filter(12000, "lowpass");
+                feedbackDelay.connect(lpFilter);
+                var hpFilter = new Tone.Filter(200, "highpass");
+                lpFilter.connect(hpFilter);
+                var chorus = new Tone.Chorus(4, 2.5, 0.5);
+                lpFilter.connect(chorus);
+                var pingPong = new Tone.PingPongDelay("4n", 0.1);
+                chorus.connect(pingPong);
+                var freeverb = new Tone.Freeverb({
+                    roomSize : .8 ,
+                    dampening : 200000
+                });
+                pingPong.connect(freeverb);
+                var reverb = new Tone.JCReverb(0.89);
+                freeverb.connect(reverb);
+
+                var limiter = new Tone.Limiter(-44).toMaster();
+                reverb.connect(limiter);
+
+                return reverb;
+            },
+
             createSynths(){
                 for(var i=0;i<this.amount;i++){
-                    this.synths.push(new GhostSynthNode());
+                    this.synths.push(new GhostSynthNode(this.fxChain));
                 }
             },
             setControlPanel(model){
