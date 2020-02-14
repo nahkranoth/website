@@ -14,26 +14,32 @@
     export default {
         name: "GhostWorld",
         mounted(){
-          this.onStart();
+            this.onStart();
+            document.addEventListener('click', this.onStartAudio);
         },
         data:function(){
           return {
               amount: 8,
-              synths:[]
+              synths:[],
+              active: false
           }
         },
         components: {GhostControlPanel, GhostChainSequencer},
         methods:{
+            onStartAudio(){
+                if(this.active) return;
+                Tone.Transport.start();
+                this.updateLoop();
+                this.active = true;
+
+            },
             onStart(){
                 this.fftSize = 4096; //TODO: Centralize it's also used in audiohost
-
                 this.fft = this.FFT();
                 let fxChain = this.fxChain(this.fft);
                 let synths = this.getSynths(fxChain);
                 let firstItem = this.$refs.sequencer.Init(synths);
                 this.$refs.controlPanel.Set(firstItem);
-                Tone.Transport.start();
-                this.updateLoop();
             },
             stop(){
                 this.$refs.sequencer.stop();
