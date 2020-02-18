@@ -1,15 +1,21 @@
 import {Renderer, Transform, Camera, Geometry, Texture, Program, Mesh, Vec3, Color, Orbit, Sphere} from 'ogl/src/index.mjs';
 import PBRShader300 from '../shaders/PBRShader300.js';
 import PBRShader100 from '../shaders/PBRShader100.js';
+import MSDFTextShader from '../shaders/msdf.js';
 import InnerShader from '../shaders/innerShader.js';
 import SkydomeShader from '../shaders/SkyDomeShader.js';
+import createLayout from 'layout-bmfont-text';
+
+import vertices from 'three-bmfont-text/lib/vertices';
+import createIndices from 'quad-indices';
+import buffer from 'three-buffer-vertex-data';
 
 export default class World{
 
     constructor(context, loadedCallback) {
         this.loadedCallback = loadedCallback;
 
-        this.renderer = new Renderer({dpr: 2, canvas: context});
+        this.renderer = new Renderer({dpr: 2, canvas: context, webgl:1});
         this.gl = this.renderer.gl;
         this.gl.clearColor(0., 0., 0., 1);
         this.gl.getExtension('OES_standard_derivatives');
@@ -34,8 +40,75 @@ export default class World{
         
         this.loadComet();
         // this.loadSkydome();
+        this.loadText();
         this.update = requestAnimationFrame(() => {this.updateLoop()});
     }
+
+    async loadText(){
+
+        var fontLoaded = await (await fetch(`assets/text/Krona.json`)).json();
+        var img = await (await fetch('assets/text/Krona.png'));
+
+        var opt = {
+            text: "testing 123",
+            font: fontLoaded,
+            align: 'left',
+            flipY: false
+        };
+
+        if (!opt.font) {
+            throw new TypeError('must specify a { font } in options')
+        }
+
+        // get vec2 texcoords
+        var flipY = opt.flipY !== false;
+
+        var layout = createLayout(opt);
+
+        // the desired BMFont data
+        var font = opt.font;
+
+        // determine texture size from font file
+        var texWidth = font.common.scaleW;
+        var texHeight = font.common.scaleH;
+
+        // get visible glyphs
+        var glyphs = layout.glyphs.filter(function (glyph) {
+            var bitmap = glyph.data;
+            return bitmap.width * bitmap.height > 0
+        });
+
+        console.log(glyphs);
+
+        var positions = vertices.positions(glyphs);
+        var uvs = vertices.uvs(glyphs, texWidth, texHeight, flipY);
+        var indices = createIndices({
+            clockwise: true,
+            type: 'uint16',
+            count: glyphs.length
+        });
+
+        var textGeometry = new Geometry(this.gl, {
+            position: {size: 3, data: new Float32Array(positions)},
+            uv: {size: 2, data: new Float32Array(uvs)}
+        });
+
+        console.log(uvs);
+        console.log(this.textGeometry);
+
+        var program = new Program(this.gl, {
+                vertex: MSDFTextShader.vertex,
+                fragment:MSDFTextShader.fragment,
+                uniforms: {
+
+                }
+            });
+
+        var textMesh = new Mesh(this.gl, {geometry:textGeometry, program:program});
+        textMesh.setParent(this.scene);
+        console.log("text Mesh made");
+    }
+
     toggle(active){
         if(active){
             this.resume();
@@ -107,8 +180,6 @@ export default class World{
             uv: {size: 2, data: new Float32Array(data.texcoords)},
             normal: {size: 3, data: new Float32Array(data.normals)}
         });
-
-
 
         this.program = this.renderer.isWebgl2 ? this.getProgram300() : this.getProgram100();
 
