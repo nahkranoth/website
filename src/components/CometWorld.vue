@@ -25,7 +25,7 @@
         methods:{
             onStart(){
                 this.scene = new Transform();
-                this.renderer = new Renderer({dpr: 2, canvas: this.$refs.webglContext});
+                this.renderer = new Renderer({dpr: 2, canvas: this.$refs.webglContext, webgl:2});
                 this.gl = this.renderer.gl;
                 this.gl.getExtension('OES_standard_derivatives');
 
