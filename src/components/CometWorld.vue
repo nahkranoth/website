@@ -7,7 +7,9 @@
 
 <script>
     import World from '../webgl/world.js'
+    import MSDFText from '../webgl/MSDFText.js'
     import GhostWorld from './GhostWorld.vue'
+    import {Renderer, Transform} from 'ogl/src/index.mjs';
 
     export default {
         name: 'CometWorld',
@@ -22,12 +24,22 @@
         },
         methods:{
             onStart(){
-                this.world = new World(this.$refs.webglContext,
+                this.scene = new Transform();
+                this.renderer = new Renderer({dpr: 2, canvas: this.$refs.webglContext, webgl:1});
+                this.gl = this.renderer.gl;
+                this.gl.getExtension('OES_standard_derivatives');
+
+                this.world = new World(
                     () => {
                         this.$refs.webglContext.opacity = 0;
                         this.active = true;
-                    }
+                    },
+                    this.renderer,
+                    this.scene
                 );
+
+                this.text = new MSDFText(this.renderer, this.scene)
+
             },
 
             //fft is an array with the size of 4096

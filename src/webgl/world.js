@@ -1,4 +1,4 @@
-import {Renderer, Transform, Camera, Geometry, Texture, Program, Mesh, Vec3, Color, Orbit, Sphere} from 'ogl/src/index.mjs';
+import {Transform, Camera, Geometry, Texture, Program, Mesh, Vec3, Color, Orbit, Sphere} from 'ogl/src/index.mjs';
 import PBRShader300 from '../shaders/PBRShader300.js';
 import PBRShader100 from '../shaders/PBRShader100.js';
 import InnerShader from '../shaders/innerShader.js';
@@ -6,14 +6,13 @@ import SkydomeShader from '../shaders/SkyDomeShader.js';
 
 export default class World{
 
-    constructor(context, loadedCallback) {
+    constructor(loadedCallback, renderer, scene) {
         this.loadedCallback = loadedCallback;
-
-        this.renderer = new Renderer({dpr: 2, canvas: context});
+        this.renderer = renderer;
         this.gl = this.renderer.gl;
         this.gl.clearColor(0., 0., 0., 1);
         this.gl.getExtension('OES_standard_derivatives');
-
+        this.scene = scene;
         this.camera = new Camera(this.gl, {fov: 35});
         this.camera.position.set(2, 0.5, 3);
 
@@ -22,11 +21,9 @@ export default class World{
         window.addEventListener('resize', () => {this.resize()}, false);
         this.resize();
 
-        this.scene = new Transform();
-        this.scene.position.y = -0;
         this.textureCache = {};
         this.texturesLoaded = 0;
-        this.textureAmount = 4; //bad bad decision TODO: move this
+        this.textureAmount = 0; //bad bad decision TODO: move this
 
         this.fftData = [];
 
@@ -144,6 +141,9 @@ export default class World{
     }
 
     getProgram100(){
+
+        this.textureAmount = 1; //bad bad decision TODO: move this
+
         return new Program(this.gl, {
             vertex: PBRShader100.vertex,
             fragment:PBRShader100.fragment,
@@ -151,32 +151,7 @@ export default class World{
                 // Base color / albedo. This is used to determine both the diffuse and specular colors.
                 tBaseColor: {value: this.getTexture('assets/cometPBR/comet2_DefaultMaterial_BaseColor2.png')},
                 // This works as a multiplier for each channel in the texture above.
-                uBaseColor: {value: new Color(1, 1, 1)},
-
-                // 'Roughness', 'Metalness' and 'Occlusion', each packed into their own channel (R, G, B)
-                tRMO: {value: this.getTexture('assets/cometPBR/comet2_DefaultMaterial_OcclusionRoughnessMetallic2.png')},
-                // The following are multipliers to the above values
-                uRoughness: {value: 0.3},
-                uMetallic: {value: 0.1},
-                uOcclusion: {value: 1},
-
-                // Just a regular normal map
-                tNormal: {value: this.getTexture('assets/cometPBR/comet2_DefaultMaterial_Normal2.png')},
-                uNormalScale: {value: 1},
-                uNormalUVScale: {value: 1},
-
-                // Emissive color is added at the very end to simulate light sources.
-                tEmissive: {value: this.getTexture('assets/cometPBR/comet2_DefaultMaterial_Emissive2.png')},
-                uEmissive: {value: 6},
-
-                // uAlpha is an overall alpha control. It is applied right at the end to hide the geometry.
-                // Specular reflections will not affect this value, unlike above.
-                uAlpha: {value: 1},
-
-                // One light is included, ideally to simulate the sun, and both specular and diffuse are calculated.
-                uLightDirection: {value: new Vec3(0, 1, 1)},
-                // Here I've pushed the white light beyond 1 to increase its effect.
-                uLightColor: {value: new Vec3(0.6)},
+                uBaseColor: {value: new Color(1, 1, 1)}
             },
             transparent: true,
         });
@@ -188,6 +163,7 @@ export default class World{
             I needed to flip all the maps in photoshop to make them allign with the model in the end.
             WebGL2 -> make sure both shaders work to test WebGL1 look at Renderer instantiation webgl version parameter
          */
+        this.textureAmount = 4; //bad bad decision TODO: move this
 
         return new Program(this.gl, {
             vertex: PBRShader300.vertex,
