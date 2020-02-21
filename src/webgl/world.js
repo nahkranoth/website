@@ -30,7 +30,7 @@ export default class World{
         this.InnerShader = InnerShader;
         
         this.loadComet();
-        // this.loadSkydome();
+        this.loadSkydome();
         this.update = requestAnimationFrame(() => {this.updateLoop()});
     }
     toggle(active){
