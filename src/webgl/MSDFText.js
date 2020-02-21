@@ -1,5 +1,6 @@
 import {Transform, Text, Camera, Geometry, Texture, Program, Mesh, Vec3, Color, Orbit, Sphere} from 'ogl/src/index.mjs';
-import MSFDShader from '../shaders/MSDFShader.js';
+import MSFDShader100 from '../shaders/MSDFShader100.js';
+import MSFDShader300 from '../shaders/MSDFShader300.js';
 
 export default class MSDFText {
 
@@ -48,10 +49,15 @@ export default class MSDFText {
         });
 
         texture.image = this.image;
+        let program = this.renderer.isWebgl2 ? this.getProgram300(texture) : this.getProgram100(texture);
 
-        let program = new Program(this.gl, {
-            vertex: MSFDShader.vertex,
-            fragment: MSFDShader.fragment,
+        this.loadText(program);
+    }
+
+    getProgram100(texture){
+        return new Program(this.gl, {
+            vertex: MSFDShader100.vertex,
+            fragment: MSFDShader100.fragment,
             uniforms: {
                 tMap: {value: texture},
             },
@@ -59,7 +65,18 @@ export default class MSDFText {
             cullFace: null,
             depthWrite: false,
         });
+    }
 
-        this.loadText(program);
+    getProgram300(texture){
+        return new Program(this.gl, {
+            vertex: MSFDShader300.vertex,
+            fragment: MSFDShader300.fragment,
+            uniforms: {
+                tMap: {value: texture},
+            },
+            transparent: true,
+            cullFace: null,
+            depthWrite: false,
+        });
     }
 }
