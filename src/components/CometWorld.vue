@@ -1,7 +1,7 @@
 <template>
     <div>
         <GhostWorld v-on:onFFT="onFFT" ref="ghostWorld" class="ghostWorld"></GhostWorld>
-        <canvas v-bind:class="{ active }" ref="webglContext" id="webglContext"></canvas>
+        <canvas v-bind:class="{ active }" ref="webglContext" id="webglContext" v-on:mousedown="onMouseDown"></canvas>
     </div>
 </template>
 
@@ -16,13 +16,37 @@
         components: {GhostWorld},
         data() {
             return {
-                active : false
+                active : false,
+                lastTextIdx:0,
+                words: [
+                    "miami meteor",
+                    "the suhnth",
+                    "cheeky thoughts",
+                    "v a p o r w a v e",
+                    "press point",
+                    "volume frequency",
+                    "this one is fried",
+                    "no cloth physics",
+                    "Don\'t panic"
+                ]
             }
         },
         mounted(){
             this.onStart();
         },
         methods:{
+            newRandom(){
+                let result = 0;
+                while(this.lastTextIdx === result){
+                    result = Math.floor(Math.random()*this.words.length);
+                }
+                this.lastTextIdx = result;
+                return result;
+            },
+            onMouseDown(){
+                let rn = this.newRandom();
+                this.text.setText(this.words[rn]);
+            },
             onStart(){
                 this.scene = new Transform();
                 this.renderer = new Renderer({dpr: 2, canvas: this.$refs.webglContext, webgl:2});
@@ -39,7 +63,6 @@
                 );
 
                 this.text = new MSDFText(this.renderer, this.scene)
-
             },
 
             //fft is an array with the size of 4096
