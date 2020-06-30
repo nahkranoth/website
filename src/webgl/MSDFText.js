@@ -20,7 +20,7 @@ export default class MSDFText {
     async loadText(program) {
         this.font = await (await fetch('assets/text/Fira.json')).json();
         this.program = program;
-        this.update("press point");
+        this.update("drag + scroll");
     }
     update(text){
         this.text = new Text({

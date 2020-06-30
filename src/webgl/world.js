@@ -14,9 +14,9 @@ export default class World{
         this.gl.getExtension('OES_standard_derivatives');
         this.scene = scene;
         this.camera = new Camera(this.gl, {fov: 35});
-        this.camera.position.set(2, 0.5, 3);
-
+        this.camera.position.set(0, 0.5, 5);
         this.controls = new Orbit(this.camera, {minDistance: 2, maxDistance: 30, enablePan: false});
+        //this.controls.enabled = false;
 
         window.addEventListener('resize', () => {this.resize()}, false);
         this.resize();
@@ -79,10 +79,10 @@ export default class World{
 
         });
         const sphereGeometry = new Sphere(this.gl, {radius: 1, widthSegments: 64});
-        const cube = new Mesh(this.gl, {geometry: sphereGeometry, program});
-        cube.position.set(0, 0, 0);
-        cube.scale.set(30, 30, 30);
-        cube.setParent(this.scene);
+        this.skybox = new Mesh(this.gl, {geometry: sphereGeometry, program});
+        this.skybox.position.set(0, 0, 0);
+        this.skybox.scale.set(30, 30, 30);
+        this.skybox.setParent(this.scene);
     }
 
     async loadComet() {
@@ -105,8 +105,6 @@ export default class World{
             normal: {size: 3, data: new Float32Array(data.normals)}
         });
 
-
-
         this.program = this.renderer.isWebgl2 ? this.getProgram300() : this.getProgram100();
 
         this.cometMesh = new Mesh(this.gl, {geometry:this.geometry, program:this.program});
@@ -126,10 +124,19 @@ export default class World{
 
     updateLoop() {
         this.update = requestAnimationFrame(() => {this.updateLoop()});
-        this.scene.rotation.z += 0.0005;
-        this.scene.rotation.y += 0.0003;
         this.controls.update();
         this.renderer.render({scene:this.scene, camera:this.camera});
+
+        if(this.cometMesh && this.innerCometMesh){
+            this.cometMesh.rotation.y += 0.0004;
+            this.cometMesh.rotation.z += 0.0004;
+            this.innerCometMesh.rotation.y += 0.0004;
+            this.innerCometMesh.rotation.z += 0.0004;
+        }
+        if(this.skybox){
+            this.skybox.rotation.x += 0.00004;
+            this.skybox.rotation.z += 0.00008;
+        }
     }
 
     setFFT(fft){

@@ -123,12 +123,14 @@
                 const delta = -(current - this.startY);
                 this.setDialDelta(delta);
             },
-            onMouseUp(){
+            onMouseUp(evt){
+                evt.stopPropagation();
                 document.removeEventListener('mouseup', this.onMouseUp);
                 document.removeEventListener('mousemove', this.onMove);
                 this._valuestore = this._value;
             },
             onMouseDown(evt){
+                evt.stopPropagation();
                 document.addEventListener('mouseup', this.onMouseUp);
                 document.addEventListener('mousemove', this.onMove);
                 this.startY = evt.screenY;

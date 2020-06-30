@@ -19,15 +19,8 @@
                 active : false,
                 lastTextIdx:0,
                 words: [
-                    "miami meteor",
-                    "the suhnth",
-                    "cheeky thoughts",
-                    "v a p o r w a v e",
-                    "press point",
-                    "volume frequency",
-                    "this one is fried",
-                    "no cloth physics",
-                    "Don\'t panic"
+                    "click around",
+                    "click some more",
                 ]
             }
         },
