@@ -1,5 +1,5 @@
 <template>
-    <div class="score">METEOR CASH<div class="number">{{score}}</div></div>
+    <div class="score">COMET CASH<div class="number">☄ {{score}}</div></div>
 </template>
 
 <script>
@@ -12,11 +12,14 @@
             }
         },
         mounted:function(){
+            let cash = window.localStorage.getItem('meteor_cash');
+            if(cash) this.score = cash;
             document.addEventListener('mouseup', this.onClick);
         },
         methods:{
             onClick: function(){
                 this.score++;
+                window.localStorage.setItem('meteor_cash', this.score);
             }
         }
     }
