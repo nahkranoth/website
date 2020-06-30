@@ -1,6 +1,6 @@
 <template>
     <ul>
-        <li v-for="model in chainItems">
+        <li class="list-item" v-for="model in chainItems">
             <ChainItem :ref="model.ref" :model="model" v-on:SelectMe = "selectItem"></ChainItem>
         </li>
     </ul>
@@ -96,5 +96,7 @@
 </script>
 
 <style scoped>
-
+    .list-item{
+        list-style-type: none;
+    }
 </style>

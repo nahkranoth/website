@@ -97,5 +97,9 @@
 </script>
 
 <style scoped>
-
+    .ghost-node{
+        position:relative;
+        left:30px;
+        top:30px;
+    }
 </style>
