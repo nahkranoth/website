@@ -14,6 +14,6 @@
 
     export default {
         name: 'App',
-        components: {Projects, LinkWidget, CometWorld, GhostWorld},
+        components: {Projects, LinkWidget, CometWorld, GhostWorld}
     }
 </script>

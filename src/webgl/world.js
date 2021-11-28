@@ -7,7 +7,7 @@ import PlanetShader from '../shaders/PlanetShader.js';
 
 export default class World{
 
-    constructor(loadedCallback, renderer, scene) {
+    constructor(loadedCallback, renderer, scene, clickCallback) {
         this.loadedCallback = loadedCallback;
         this.renderer = renderer;
         this.gl = this.renderer.gl;
@@ -17,6 +17,7 @@ export default class World{
         this.camera = new Camera(this.gl, {fov: 45, far: 600});
         this.camera.position.set(0, 0.5, 5);
         this.controls = new Orbit(this.camera, {minDistance: 2, maxDistance: 20, enablePan: false});
+        this.clickCallback = clickCallback;
 
         window.addEventListener('resize', () => {this.resize()}, false);
         this.resize();
@@ -181,7 +182,12 @@ export default class World{
         const hits = this.raycast.intersectBounds(this.clickMeshes);
         if(hits.length > 0){
             this.controls.target = hits[0].position;
+            this.clickCallback();
         }
+    }
+
+    viewComet(){
+        this.controls.target = this.cometMesh.position;
     }
 
     updateLoop() {

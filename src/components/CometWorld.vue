@@ -2,6 +2,7 @@
     <div>
         <GhostWorld v-on:onFFT="onFFT" ref="ghostWorld" class="ghostWorld"></GhostWorld>
         <canvas v-bind:class="{ active }" ref="webglContext" id="webglContext" v-on:mousedown="onMouseDown"></canvas>
+        <div v-if="deepView" v-on:click="onBack" class="back-button">BACK</div>
     </div>
 </template>
 
@@ -17,10 +18,11 @@
         data() {
             return {
                 active : false,
+                deepView : false,
                 lastTextIdx:0,
                 words: [
-                    "click around",
-                    "click some more",
+                    "the comet",
+                    "the planet",
                 ]
             }
         },
@@ -52,9 +54,11 @@
                         this.active = true;
                     },
                     this.renderer,
-                    this.scene
+                    this.scene,
+                    () => {
+                        this.onSwitchPage();
+                    },
                 );
-
                 this.text = new MSDFText(this.renderer, this.scene)
             },
 
@@ -68,6 +72,15 @@
             toggle(){
                 this.active = !this.active;
                 this.world.toggle(this.active);
+            },
+
+            onSwitchPage(){
+                console.log("switch page");
+                this.deepView = true;
+            },
+            onBack(){
+                this.deepView = false;
+                this.world.viewComet();
             }
         }
     }
@@ -85,5 +98,11 @@
         position:absolute;
         width:100%;
         height:100%;
+    }
+    .back-button{
+        position: absolute;
+        left:10px;
+        top:10px;
+        user-select: none;
     }
 </style>
