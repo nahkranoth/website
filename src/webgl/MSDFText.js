@@ -45,6 +45,7 @@ export default class MSDFText {
 
         // Use the height value to position text vertically. Here it is centered.
         this.mesh.position.y = this.text.height * 0.5;
+        this.mesh.position.z = -2;
         this.mesh.setParent(this.scene);
     }
 

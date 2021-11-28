@@ -2,7 +2,6 @@
     <div id="app">
         <LinkWidget></LinkWidget>
         <CometWorld ref="cometWorld"></CometWorld>
-        <!--<Projects></Projects>-->
     </div>
 </template>
 

@@ -1,8 +1,9 @@
 <template>
     <div>
-        <GhostWorld v-on:onFFT="onFFT" ref="ghostWorld" class="ghostWorld"></GhostWorld>
+        <GhostWorld v-if="!deepView" v-on:onFFT="onFFT" ref="ghostWorld" class="ghostWorld"></GhostWorld>
         <canvas v-bind:class="{ active }" ref="webglContext" id="webglContext" v-on:mousedown="onMouseDown"></canvas>
         <div v-if="deepView" v-on:click="onBack" class="back-button">BACK</div>
+        <Projects v-if="deepView"></Projects>
     </div>
 </template>
 
@@ -10,11 +11,12 @@
     import World from '../webgl/world.js'
     import MSDFText from '../webgl/MSDFText.js'
     import GhostWorld from './GhostWorld.vue'
+    import Projects from './Projects.vue'
     import {Renderer, Transform} from 'ogl/src/index.mjs';
 
     export default {
         name: 'CometWorld',
-        components: {GhostWorld},
+        components: {GhostWorld, Projects},
         data() {
             return {
                 active : false,
@@ -23,6 +25,7 @@
                 words: [
                     "the comet",
                     "the planet",
+                    "the universe"
                 ]
             }
         },
