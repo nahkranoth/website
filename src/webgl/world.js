@@ -1,4 +1,4 @@
-import {Transform, Camera, Geometry, Texture, Program, Mesh, Vec3, Color, Orbit, Sphere} from 'ogl/src/index.mjs';
+import {Transform, Camera, Geometry, Texture, Program, Mesh, Vec3, Color, Orbit, Sphere, Box} from 'ogl/src/index.mjs';
 import PBRShader300 from '../shaders/PBRShader300.js';
 import PBRShader100 from '../shaders/PBRShader100.js';
 import InnerShader from '../shaders/innerShader.js';
@@ -13,9 +13,9 @@ export default class World{
         this.gl.clearColor(0., 0., 0., 1);
         this.gl.getExtension('OES_standard_derivatives');
         this.scene = scene;
-        this.camera = new Camera(this.gl, {fov: 35});
+        this.camera = new Camera(this.gl, {fov: 45});
         this.camera.position.set(0, 0.5, 5);
-        this.controls = new Orbit(this.camera, {minDistance: 2, maxDistance: 30, enablePan: false});
+        this.controls = new Orbit(this.camera, {minDistance: 2, maxDistance: 20, enablePan: false});
         //this.controls.enabled = false;
 
         window.addEventListener('resize', () => {this.resize()}, false);
@@ -31,6 +31,7 @@ export default class World{
         
         this.loadComet();
         this.loadSkydome();
+        this.loadMoon();
         this.update = requestAnimationFrame(() => {this.updateLoop()});
     }
     toggle(active){
@@ -79,10 +80,10 @@ export default class World{
 
         });
         const sphereGeometry = new Sphere(this.gl, {radius: 1, widthSegments: 64});
-        this.skybox = new Mesh(this.gl, {geometry: sphereGeometry, program});
-        this.skybox.position.set(0, 0, 0);
-        this.skybox.scale.set(30, 30, 30);
-        this.skybox.setParent(this.scene);
+        this.planet = new Mesh(this.gl, {geometry: sphereGeometry, program});
+        this.planet.position.set(0, 0, 0);
+        this.planet.scale.set(80, 80, 80);
+        this.planet.setParent(this.scene);
     }
 
     async loadComet() {
@@ -122,6 +123,23 @@ export default class World{
         this.innerCometMesh.setParent(this.scene);
     }
 
+    async loadMoon() {
+        const program = new Program(this.gl, {
+            vertex: SkydomeShader.vertex,
+            fragment: SkydomeShader.fragment,
+            cullFace: null,
+            uniforms: {
+                tMap: {value: this.getTexture('assets/text/2k_mercury.jpg')},
+            },
+
+        });
+        const planetGeometry = new Sphere(this.gl, {radius: 1, widthSegments: 64});
+        this.planet = new Mesh(this.gl, {geometry: planetGeometry, program});
+        this.planet.position.set(5, 5, -40);
+        this.planet.scale.set(7, 7, 7);
+        this.planet.setParent(this.scene);
+    }
+
     updateLoop() {
         this.update = requestAnimationFrame(() => {this.updateLoop()});
         this.controls.update();
@@ -133,9 +151,9 @@ export default class World{
             this.innerCometMesh.rotation.y += 0.0004;
             this.innerCometMesh.rotation.z += 0.0004;
         }
-        if(this.skybox){
-            this.skybox.rotation.x += 0.00004;
-            this.skybox.rotation.z += 0.00008;
+        if(this.planet){
+            this.planet.rotation.x += 0.00004;
+            this.planet.rotation.z += 0.00008;
         }
     }
 

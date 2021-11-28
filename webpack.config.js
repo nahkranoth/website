@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyPlugin = require("copy-webpack-plugin");
 const { VueLoaderPlugin } = require('vue-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -24,6 +25,11 @@ module.exports = {
         ]
     },
     plugins: [
+        new CopyPlugin({
+            patterns: [
+              { from: path.join(__dirname, 'src/assets'), to: path.join(__dirname, 'dist/assets') }
+            ],
+          }),
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
             filename: 'index.html',
