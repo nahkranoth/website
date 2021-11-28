@@ -1,8 +1,9 @@
-import {Transform, Camera, Geometry, Texture, Program, Mesh, Vec3, Color, Orbit, Sphere, Box} from 'ogl/src/index.mjs';
+import {Transform, Camera, Raycast, Geometry, Texture, Program, Mesh, Vec3, Color, Orbit, Sphere, Box} from 'ogl/src/index.mjs';
 import PBRShader300 from '../shaders/PBRShader300.js';
 import PBRShader100 from '../shaders/PBRShader100.js';
 import InnerShader from '../shaders/innerShader.js';
 import SkydomeShader from '../shaders/SkyDomeShader.js';
+import PlanetShader from '../shaders/PlanetShader.js';
 
 export default class World{
 
@@ -13,13 +14,21 @@ export default class World{
         this.gl.clearColor(0., 0., 0., 1);
         this.gl.getExtension('OES_standard_derivatives');
         this.scene = scene;
-        this.camera = new Camera(this.gl, {fov: 45});
+        this.camera = new Camera(this.gl, {fov: 45, far: 600});
         this.camera.position.set(0, 0.5, 5);
         this.controls = new Orbit(this.camera, {minDistance: 2, maxDistance: 20, enablePan: false});
-        //this.controls.enabled = false;
 
         window.addEventListener('resize', () => {this.resize()}, false);
         this.resize();
+
+        window.addEventListener(
+            'load',
+            () => {
+                document.addEventListener('mousedown',  (e) => {this.mouseDown(e)}, false);
+                document.addEventListener('mousemove',  (e) => {this.mouseMove(e)}, false);
+            },
+            false
+        );
 
         this.textureCache = {};
         this.texturesLoaded = 0;
@@ -29,9 +38,13 @@ export default class World{
 
         this.InnerShader = InnerShader;
         
+        this.mouse = new Vec3();
+       
+        this.raycast = new Raycast(this.gl);
         this.loadComet();
         this.loadSkydome();
-        this.loadMoon();
+        this.loadPlanet();
+        this.clickMeshes = [this.planet];
         this.update = requestAnimationFrame(() => {this.updateLoop()});
     }
     toggle(active){
@@ -80,10 +93,10 @@ export default class World{
 
         });
         const sphereGeometry = new Sphere(this.gl, {radius: 1, widthSegments: 64});
-        this.planet = new Mesh(this.gl, {geometry: sphereGeometry, program});
-        this.planet.position.set(0, 0, 0);
-        this.planet.scale.set(80, 80, 80);
-        this.planet.setParent(this.scene);
+        this.skydome = new Mesh(this.gl, {geometry: sphereGeometry, program});
+        this.skydome.position.set(0, 0, 0);
+        this.skydome.scale.set(80, 80, 80);
+        this.skydome.setParent(this.scene);
     }
 
     async loadComet() {
@@ -123,21 +136,52 @@ export default class World{
         this.innerCometMesh.setParent(this.scene);
     }
 
-    async loadMoon() {
+    async loadPlanet() {
+
         const program = new Program(this.gl, {
-            vertex: SkydomeShader.vertex,
-            fragment: SkydomeShader.fragment,
+            vertex: PlanetShader.vertex,
+            fragment: PlanetShader.fragment,
             cullFace: null,
             uniforms: {
                 tMap: {value: this.getTexture('assets/text/2k_mercury.jpg')},
+                uHit: { value: 1. },
             },
 
         });
-        const planetGeometry = new Sphere(this.gl, {radius: 1, widthSegments: 64});
+
+        const planetGeometry = new Sphere(this.gl, {
+            radius: 1, 
+            widthSegments: 64
+        });
+
+        function updateHitUniform({ mesh }) {
+            program.uniforms.uHit.value = mesh.isHit ? 1 : 0;
+        }
+
         this.planet = new Mesh(this.gl, {geometry: planetGeometry, program});
+        this.planet.isHit = true;
         this.planet.position.set(5, 5, -40);
-        this.planet.scale.set(7, 7, 7);
+        this.planet.scale.set(2, 2, 2);
         this.planet.setParent(this.scene);
+        this.planet.onBeforeRender(updateHitUniform);
+    }
+
+    mouseMove(e) {
+        let x = 2.0 * (e.x / this.renderer.width) - 1.0;
+        let y = 2.0 * (1.0 - e.y / this.renderer.height) - 1.0;
+        this.mouse.set(x, y, 0);
+        this.clickMeshes.forEach((mesh) => (mesh.isHit = false));
+        this.raycast.castMouse(this.camera, this.mouse);
+        const hits = this.raycast.intersectBounds(this.clickMeshes);
+        hits.forEach((mesh) => (mesh.isHit = true));
+    }
+
+    mouseDown(e) {
+        this.raycast.castMouse(this.camera, this.mouse);
+        const hits = this.raycast.intersectBounds(this.clickMeshes);
+        if(hits.length > 0){
+            this.controls.target = hits[0].position;
+        }
     }
 
     updateLoop() {
@@ -152,8 +196,7 @@ export default class World{
             this.innerCometMesh.rotation.z += 0.0004;
         }
         if(this.planet){
-            this.planet.rotation.x += 0.00004;
-            this.planet.rotation.z += 0.00008;
+            this.planet.rotation.y += 0.003;
         }
     }
 
