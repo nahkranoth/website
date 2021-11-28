@@ -56,17 +56,14 @@
                 this.sequencer.stop();
             },
             createItems(synths){
-                let cX = window.innerWidth / 2;
-                let cY = window.innerHeight / 2;
+               
                 let radians = 120;
                 let anglePart = 360/this.amount;
 
                 for(var i=0;i<this.amount;i++){
                     let localX = radians*Math.cos( (anglePart*i - 90) * Math.PI/180);//minus 90 to start at the 1 o clock position
                     let localY = radians*Math.sin( (anglePart*i - 90) * Math.PI/180);
-                    let worldX = cX + localX;
-                    let worldY = cY + localY;
-                    this.createItem(i, worldX, worldY, synths[i]);
+                    this.createItem(i, localX, localY, synths[i]);
                 }
             },
             createItem(index, x, y, synth){

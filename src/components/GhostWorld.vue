@@ -1,7 +1,7 @@
 <template>
     <div>
         <GhostControlPanel ref="controlPanel" class="ghost-node"></GhostControlPanel>
-        <GhostChainSequencer ref="sequencer" v-bind:amount="amount" v-on:OnSelectedNode="setControlPanel"></GhostChainSequencer>
+        <GhostChainSequencer ref="sequencer" class="ghost-chain-sequencer" v-bind:amount="amount" v-on:OnSelectedNode="setControlPanel"></GhostChainSequencer>
     </div>
 </template>
 
@@ -99,7 +99,11 @@
 <style scoped>
     .ghost-node{
         position:relative;
-        left:30px;
         top:30px;
+    }
+    .ghost-chain-sequencer{
+        left: 50%;
+        top: 50%;
+        position: absolute;
     }
 </style>
