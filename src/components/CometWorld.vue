@@ -3,7 +3,6 @@
         <GhostWorld v-if="!deepView" v-on:onFFT="onFFT" ref="ghostWorld" class="ghostWorld"></GhostWorld>
         <canvas v-bind:class="{ active }" ref="webglContext" id="webglContext" v-on:mousedown="onMouseDown"></canvas>
         <div v-if="deepView" v-on:click="onBack" class="back-button">BACK</div>
-        <Projects v-if="deepView"></Projects>
     </div>
 </template>
 
@@ -83,7 +82,7 @@
             },
             onBack(){
                 this.deepView = false;
-                this.world.viewComet();
+                this.world.onBackToRoot();
             }
         }
     }

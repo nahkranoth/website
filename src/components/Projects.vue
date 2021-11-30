@@ -1,6 +1,6 @@
 <template>
     <div class="project-panel">
-        <a href='http://joeyvanderkaaij.com/sharing/Imker/' class="item click disable-select"><div class="imker-logo"></div></a>
+        <!-- <a href='http://joeyvanderkaaij.com/sharing/Imker/' class="item click disable-select"><div class="imker-logo"></div></a> -->
     </div>
 </template>
 

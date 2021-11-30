@@ -17,14 +17,14 @@ const fragment = `
 precision highp float;
 precision highp int;
 uniform sampler2D tMap;
-varying vec2 vUv;
 uniform float uHit;
 
+varying vec2 vUv;
+
 void main() {
-    vec3 tex = texture2D(tMap, vUv).rgb;
-    vec3 clr = mix(vec3(1., 1., 1.0), vec3(1.0, 0.2, 0.8), uHit);
-    gl_FragColor.rgb = tex * clr;
-    gl_FragColor.a = 1.0;
+    vec4 tex = texture2D(tMap, vUv);
+    vec4 clr = mix(vec4(.42, .42, .42, .52), vec4(1.0, 1.0, 1.0, 1.0), uHit);
+    gl_FragColor.rgba = tex * clr;
 }
 `;
 
