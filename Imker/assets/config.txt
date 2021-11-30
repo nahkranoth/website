@@ -1,0 +1,26 @@
+#Keys for keycodes see QT library keycodes:
+#Action             Modifier    KeyCode         Description
+>KEYS
+Save:               Control,  Key_S,            Save File
+Undo:               Control,  Key_Z,            Undo Action
+Quit:               Control,  Key_Q,            Quit Application
+Copy:               Control,  Key_C,            Copy Selection
+Paste:              Control,  Key_V,            Paste Clipboard Selection
+Help:               Control,  Key_I,            Info/Help
+Fullscreen:         Control,  Key_F,            Fullscreen
+Increase_MIDI_Port: Control,  Key_Period,       Increase Midi Port
+Decrease_MIDI_Port: Control,  Key_Comma,        Decrease Midi Port
+Increase_BPM:       Control,  Key_BracketRight, Increase BPM
+Decrease_BPM:       Control,  Key_BracketLeft,  Decrease BPM
+Zoom_Out:           Shift,    Key_O,            Zoom Out
+Zoom_In:            Shift,    Key_I,            Zoom In
+Scroll_Up:          Shift,    Key_W,            Scroll Up
+Scroll_Down:        Shift,    Key_S,            Scroll Down
+Scroll_Left:        Shift,    Key_A,            Scroll Left
+Scroll_Right:       Shift,    Key_D,            Scroll Right
+>GRID
+Radius: 42
+MinZoom: 0.4
+MaxZoom: 3
+GridBackgroundColor: [0, 0, 0]
+GridBorderColor: [0.35, 0.2, 0.03]

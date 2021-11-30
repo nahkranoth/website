@@ -27,7 +27,9 @@ module.exports = {
     plugins: [
         new CopyPlugin({
             patterns: [
-              { from: path.join(__dirname, 'src/assets'), to: path.join(__dirname, 'dist/assets') }
+              { from: path.join(__dirname, 'src/assets'), to: path.join(__dirname, 'dist/assets') },
+              { from: path.join(__dirname, 'Imker'), to: path.join(__dirname, 'dist/sharing/Imker') }
+
             ],
           }),
         new VueLoaderPlugin(),

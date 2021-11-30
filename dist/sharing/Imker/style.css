@@ -1,0 +1,27 @@
+body{
+    font-family: Arial, sans-serif;
+    background-color: #141230;
+    color:floralwhite;
+}
+
+a{
+    color: hotpink;
+}
+
+.logo{
+    padding-bottom: 64px;
+}
+
+.info{
+    background-color: #372f56;
+    max-width: 70%;
+    margin: 5% auto 0 auto;
+    padding: 90px;
+    text-align: left;
+}
+
+ul{
+    background-color: #4b3b7a;
+    color: #ded6d2;
+    padding:20px 40px;
+}

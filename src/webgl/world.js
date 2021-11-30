@@ -30,6 +30,7 @@ export default class World{
             'load',
             () => {
                 document.addEventListener('mousedown',  (e) => {this.mouseDown(e)}, false);
+                document.addEventListener('touchstart',  (e) => {this.touchDown(e)}, false);
                 document.addEventListener('mousemove',  (e) => {this.mouseMove(e)}, false);
             },
             false
@@ -198,17 +199,33 @@ export default class World{
         this.img.onBeforeRender(updateHitUniform);
     }
 
+    mouseToView(_x, _y){
+        let x = 2.0 * (_x / this.renderer.width) - 1.0;
+        let y = 2.0 * (1.0 - _y / this.renderer.height) - 1.0;
+        return new Vec3(x,y, 0);
+    }
+
     mouseMove(e) {
-        let x = 2.0 * (e.x / this.renderer.width) - 1.0;
-        let y = 2.0 * (1.0 - e.y / this.renderer.height) - 1.0;
-        this.mouse.set(x, y, 0);
+        let mPos = this.mouseToView(e.x, e.y);
+        this.mouse.set(mPos.x, mPos.y, 0);
         this.clickMeshes.forEach((mesh) => (mesh.isHit = false));
         this.raycast.castMouse(this.camera, this.mouse);
         const hits = this.raycast.intersectBounds(this.clickMeshes);
         hits.forEach((mesh) => (mesh.isHit = true));
     }
 
+    touchDown(e){
+        let mPos = this.mouseToView(e.touches[0].clientX, e.touches[0].clientY);
+        this.doClickEvent(mPos.x, mPos.y, 0);
+    }
+
     mouseDown(e) {
+        let mPos = this.mouseToView(e.x, e.y);
+        this.doClickEvent(mPos.x, mPos.y, 0);
+    }
+
+    doClickEvent(x, y){
+        this.mouse.set(x, y, 0);
         this.raycast.castMouse(this.camera, this.mouse);
         const hits = this.raycast.intersectBounds(this.clickMeshes);
         if(hits[0] == this.planet){
