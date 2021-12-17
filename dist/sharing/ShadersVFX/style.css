@@ -1,0 +1,27 @@
+body{
+    font-family: Arial, sans-serif;
+    background-color: #041627;
+    color:floralwhite;
+}
+
+a{
+    color: rgb(255, 217, 236);
+}
+
+.logo{
+    padding-bottom: 64px;
+}
+
+.info{
+    background-color: #07010e;
+    max-width: 70%;
+    margin: 5% auto 0 auto;
+    padding: 90px;
+    text-align: center;
+}
+
+ul{
+    background-color: #4b3b7a;
+    color: #ded6d2;
+    padding:20px 40px;
+}

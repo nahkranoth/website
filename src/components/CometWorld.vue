@@ -2,7 +2,7 @@
     <div>
         <GhostWorld v-if="!deepView" v-on:onFFT="onFFT" ref="ghostWorld" class="ghostWorld"></GhostWorld>
         <canvas v-bind:class="{ active }" ref="webglContext" id="webglContext" v-on:mousedown="onMouseDown"></canvas>
-        <div v-if="deepView" @touchstart="onBack" v-on:click="onBack" class="back-button">BACK</div>
+        <div v-if="deepView" v-on:click="onBack" class="back-button">BACK</div>
     </div>
 </template>
 
