@@ -5,6 +5,7 @@ import InnerShader from '../shaders/innerShader.js';
 import SkydomeShader from '../shaders/SkyDomeShader.js';
 import PlanetShader from '../shaders/PlanetShader.js';
 import TransparentShader from '../shaders/TransparentShader.js';
+import InputControls from './InputControls';
 
 export default class World{
 
@@ -17,24 +18,14 @@ export default class World{
         this.scene = scene;
         this.camera = new Camera(this.gl, {fov: 45, far: 600});
         this.camera.position.set(0, 0.5, 5);
-        this.controls = new Orbit(this.camera, {minDistance: 2, maxDistance: 20, enablePan: false});
 
-        this.cameraTarget = new Vec3();
-
+        this.input = new InputControls(this.camera, this.renderer);
+        document.addEventListener('inputMouseMoved', (e) => { this.onMouseMoved(e); });
+        document.addEventListener('inputMouseClicked', (e) => { this.onMouseClicked(e); });
         this.clickCallback = clickCallback;
 
         window.addEventListener('resize', () => {this.resize()}, false);
         this.resize();
-
-        window.addEventListener(
-            'load',
-            () => {
-                document.addEventListener('mousedown',  (e) => {this.mouseDown(e)}, false);
-                document.addEventListener('touchstart',  (e) => {this.touchDown(e)}, false);
-                document.addEventListener('mousemove',  (e) => {this.mouseMove(e)}, false);
-            },
-            false
-        );
 
         this.textureCache = {};
         this.texturesLoaded = 0;
@@ -43,8 +34,6 @@ export default class World{
         this.fftData = [];
 
         this.InnerShader = InnerShader;
-        
-        this.mouse = new Vec3();
        
         this.raycast = new Raycast(this.gl);
         this.loadComet();
@@ -54,6 +43,28 @@ export default class World{
         this.clickMeshes = [this.planet];
         this.update = requestAnimationFrame(() => {this.updateLoop()});
     }
+
+    onMouseMoved(e){
+        this.clickMeshes.forEach((mesh) => (mesh.isHit = false));
+        this.raycast.castMouse(this.camera, e.detail.mouse);
+        const hits = this.raycast.intersectBounds(this.clickMeshes);
+        hits.forEach((mesh) => (mesh.isHit = true));
+    }
+
+    onMouseClicked(e){
+        this.raycast.castMouse(this.camera, e.detail.mouse);
+        const hits = this.raycast.intersectBounds(this.clickMeshes);
+        if(hits[0] == this.planet){
+            this.input.setTarget(hits[0].position);
+            this.planet.isHit = false;
+            this.clickMeshes = [this.img];
+            this.clickCallback();
+        }
+        if(hits[0] == this.img){
+            window.open('http://joeyvanderkaaij.com/sharing/Imker/', "_self");
+        }
+    }
+
     toggle(active){
         if(active){
             this.resume();
@@ -199,62 +210,14 @@ export default class World{
         this.img.onBeforeRender(updateHitUniform);
     }
 
-    mouseToView(_x, _y){
-        let x = 2.0 * (_x / this.renderer.width) - 1.0;
-        let y = 2.0 * (1.0 - _y / this.renderer.height) - 1.0;
-        return new Vec3(x,y, 0);
-    }
-
-    mouseMove(e) {
-        let mPos = this.mouseToView(e.x, e.y);
-        this.mouse.set(mPos.x, mPos.y, 0);
-        this.clickMeshes.forEach((mesh) => (mesh.isHit = false));
-        this.raycast.castMouse(this.camera, this.mouse);
-        const hits = this.raycast.intersectBounds(this.clickMeshes);
-        hits.forEach((mesh) => (mesh.isHit = true));
-    }
-
-    touchDown(e){
-        let mPos = this.mouseToView(e.touches[0].clientX, e.touches[0].clientY);
-        this.doClickEvent(mPos.x, mPos.y, 0);
-    }
-
-    mouseDown(e) {
-        let mPos = this.mouseToView(e.x, e.y);
-        this.doClickEvent(mPos.x, mPos.y, 0);
-    }
-
-    doClickEvent(x, y){
-        this.mouse.set(x, y, 0);
-        this.raycast.castMouse(this.camera, this.mouse);
-        const hits = this.raycast.intersectBounds(this.clickMeshes);
-        if(hits[0] == this.planet){
-            this.cameraTarget = hits[0].position;
-            this.planet.isHit = false;
-            this.clickMeshes = [this.img];
-            this.clickCallback();
-        }
-        if(hits[0] == this.img){
-            window.open('http://joeyvanderkaaij.com/sharing/Imker/', "_self");
-        }
-    }
-
     onBackToRoot(){
         this.clickMeshes = [this.planet];
-        this.cameraTarget = this.cometMesh.position;
-    }
-
-    lerp(start, end, t) {
-        const splitX = start.x * (1 - t) + end.x * t;
-        const splitY = start.y * (1 - t) + end.y * t;
-        const splitZ = start.z * (1 - t) + end.z * t;
-        return new Vec3(splitX, splitY, splitZ);
+        this.input.setTarget(this.cometMesh.position);
     }
 
     updateLoop() {
         this.update = requestAnimationFrame(() => {this.updateLoop()});
-        this.controls.target = this.lerp(this.controls.target, this.cameraTarget, 0.06)
-        this.controls.update();
+        this.input.update();
         this.renderer.render({scene:this.scene, camera:this.camera});
         if(this.cometMesh && this.innerCometMesh){
             this.cometMesh.rotation.y += 0.0004;

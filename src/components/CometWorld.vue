@@ -42,7 +42,7 @@
             },
             onMouseDown(){
                 let rn = this.newRandom();
-                this.text.setText(this.words[rn]);
+                //this.text.setText(this.words[rn]);
             },
             onStart(){
                 this.scene = new Transform();
@@ -61,7 +61,7 @@
                         this.onSwitchPage();
                     },
                 );
-                this.text = new MSDFText(this.renderer, this.scene)
+                //this.text = new MSDFText(this.renderer, this.scene)
             },
 
             //fft is an array with the size of 4096
