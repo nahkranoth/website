@@ -18,7 +18,6 @@ export default class SkyboxObject{
             uniforms: {
                 tMap: {value: TextureLoader.getTexture(this.gl, 'assets/skybox/skybox.png')},
             },
-
         });
         const sphereGeometry = new Sphere(this.gl, {radius: 1, widthSegments: 64});
         this.mesh = new Mesh(this.gl, {geometry: sphereGeometry, program});

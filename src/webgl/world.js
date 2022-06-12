@@ -2,18 +2,24 @@ import {Transform, Camera, Raycast, Geometry, Texture, Program, Mesh, Vec3, Colo
 import InnerShader from '../shaders/innerShader.js';
 import InputControls from './InputControls';
 import CometObject from './objects/comet';
+import EarthObject from './objects/earth.js';
 import PlanetObject from './objects/planet.js';
 import SkyboxObject from './objects/skybox.js';
 
 export default class World{
 
     constructor(loadedCallback, renderer, scene, clickCallback) {
+
+        this.perfectFrameTime = 1000 / 60;
+        this.lastTimestamp = Date.now();
+
         this.loadedCallback = loadedCallback;
         this.renderer = renderer;
         this.gl = this.renderer.gl;
         this.gl.clearColor(0., 0., 0., 1);
         this.gl.getExtension('OES_standard_derivatives');
         this.scene = scene;
+
         this.camera = new Camera(this.gl, {fov: 45, far: 600});
         this.camera.position.set(0, 0.5, 5);
 
@@ -26,8 +32,6 @@ export default class World{
         this.resize();
 
         this.fftData = [];
-
-        this.InnerShader = InnerShader;
        
         this.raycast = new Raycast(this.gl);
 
@@ -39,6 +43,9 @@ export default class World{
 
         this.skydome = new SkyboxObject(this.scene, this.gl, this.renderer);
         this.skydome.load();
+
+        this.earth = new EarthObject(this.scene, this.gl, this.renderer);
+        this.earth.load();
 
         this.loadedCallback();
         
@@ -95,10 +102,15 @@ export default class World{
 
     updateLoop() {
         this.update = requestAnimationFrame(() => {this.updateLoop()});
+
+        this.deltaTime = (Date.now() - this.lastTimestamp)/1000;
+        this.lastTimestamp = Date.now();
+
         this.input.update();
         this.renderer.render({scene:this.scene, camera:this.camera});
-        this.comet.update();
+        this.comet.update(); 
         this.planet.update();
+        this.earth.update(this.deltaTime);
     }
 
     setFFT(fft){

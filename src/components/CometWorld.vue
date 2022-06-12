@@ -77,7 +77,6 @@
             },
 
             onSwitchPage(){
-                console.log("switch page");
                 this.deepView = true;
             },
             onBack(){
