@@ -56,6 +56,7 @@ export default class Comet{
             this.cometMesh.rotation.z += 0.0004;
             this.innerCometMesh.rotation.y += 0.0004;
             this.innerCometMesh.rotation.z += 0.0004;
+
         }
     }
 

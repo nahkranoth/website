@@ -1,6 +1,9 @@
 <template>
     <div>
-        <GhostWorld v-if="!deepView" v-on:onFFT="onFFT" ref="ghostWorld" class="ghostWorld"></GhostWorld>
+        <GhostWorld v-if="!deepView" v-on:onFFT="onFFT" ref="ghostWorld" class="ghostWorld float"></GhostWorld>
+
+        <MainInterface class="float"></MainInterface>
+
         <canvas v-bind:class="{ active }" ref="webglContext" id="webglContext" v-on:mousedown="onMouseDown"></canvas>
         <div v-if="deepView" v-on:click="onBack" class="back-button">BACK</div>
     </div>
@@ -10,12 +13,13 @@
     import World from '../webgl/world.js'
     import MSDFText from '../webgl/MSDFText.js'
     import GhostWorld from './GhostWorld.vue'
+    import MainInterface from './MainInterface.vue'
     import Projects from './Projects.vue'
     import {Renderer, Transform} from 'ogl/src/index.mjs';
 
     export default {
         name: 'CometWorld',
-        components: {GhostWorld, Projects},
+        components: {Projects, MainInterface, GhostWorld},
         data() {
             return {
                 active : false,
@@ -95,7 +99,7 @@
     #webglContext.active{
         opacity:0.6;
     }
-    .ghostWorld{
+    .float{
         position:absolute;
         width:100%;
         height:100%;
@@ -106,4 +110,5 @@
         top:10px;
         user-select: none;
     }
+    
 </style>
