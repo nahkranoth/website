@@ -1,0 +1,14 @@
+Roll: A & D
+Elevator: W & S
+Rudder: Q & E
+Throttle: Z & X
+FreeLook: C
+Fire: L-Mouse
+Boost: R-Mouse
+Scoreboard: Tab
+Brake: B
+
+On Mac there are a lot of restrictions - when downloaded run:
+chmod a+x mac.app/Contents/MacOS/*
+
+After you might need to allow the app the security settings.
