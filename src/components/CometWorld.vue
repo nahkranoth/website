@@ -67,7 +67,7 @@
             //fft is an array with the size of 4096
             onFFT(fft){
                 if(this.active){
-                    this.world.setFFT(fft);
+                    //this.world.setFFT(fft);
                 }
             },
 
