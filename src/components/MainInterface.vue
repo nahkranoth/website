@@ -12,8 +12,6 @@
     export default {
         name: "MainInterface",
         mounted(){
-            this.onStart();
-            
         },
         data:function(){
           return {
@@ -33,7 +31,7 @@
     .main-container{
         display: flex;
         flex-wrap: wrap;
-        align-content: flex-start;
+        align-content: flex-end;
     }
     .console{
         margin-left:20px;
@@ -56,6 +54,15 @@
         0% {
             opacity: 0;
         }
+    }
+
+    .music{
+        margin-left:20px;
+        margin-top:20px;
+        padding: 10px;
+        align-self: flex-end;
+        font: 1.3rem Inconsolata, monospace;
+        display:inline-block;
     }
     
 </style>

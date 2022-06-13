@@ -3,9 +3,9 @@ import SkydomeShader from '../../shaders/SkyDomeShader.js';
 import TextureLoader from '../TextureLoader.js'
 
 export default class SkyboxObject{
-    constructor(parent, gl, renderer){
+    constructor(parent, renderer){
         this.parent = parent;
-        this.gl = gl;
+        this.gl = renderer.gl;
         this.renderer = renderer;
         this.mesh;
     }

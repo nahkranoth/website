@@ -8,7 +8,6 @@ const vertex = `#version 300 es
             out vec2 vUv;
             void main() {
                 vUv = uv;
-                
                 gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
             }
         `;
@@ -17,6 +16,7 @@ const fragment = `#version 300 es
             precision highp float;
             precision highp int;
             uniform sampler2D tMap;
+            uniform float uHit;
             in vec2 vUv;
             out vec4 color;
             void main() {
@@ -25,7 +25,10 @@ const fragment = `#version 300 es
                 float d = fwidth(signedDist);
                 float alpha = smoothstep(-d, d, signedDist);
                 if (alpha < 0.01) discard;
-                color.rgb = vec3(1.0);
+
+                vec3 clr = mix(vec3(1., 1., 1.0), vec3(1.0, 0.2, 0.8), uHit);
+
+                color.rgb = clr;
                 color.a = alpha;
             }
         `;

@@ -17,6 +17,7 @@ const fragment = /* glsl */ `
             precision highp float;
             precision highp int;
             uniform sampler2D tMap;
+            uniform float uHit;
             varying vec2 vUv;
             void main() {
                 vec3 tex = texture2D(tMap, vUv).rgb;
@@ -24,7 +25,8 @@ const fragment = /* glsl */ `
                 float d = fwidth(signedDist);
                 float alpha = smoothstep(-d, d, signedDist);
                 if (alpha < 0.01) discard;
-                gl_FragColor.rgb = vec3(1.0);
+                vec3 clr = mix(vec3(1., 1., 1.0), vec3(1.0, 0.2, 0.8), uHit);
+                gl_FragColor.rgb = clr;
                 gl_FragColor.a = alpha;
             }
         `;

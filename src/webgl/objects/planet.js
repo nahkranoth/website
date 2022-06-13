@@ -4,9 +4,9 @@ import PlanetShader from '../../shaders/PlanetShader.js';
 import TransparentShader from '../../shaders/TransparentShader.js';
 
 export default class PlanetObject{
-    constructor(parent, gl, renderer){
+    constructor(parent, renderer){
         this.parent = parent;
-        this.gl = gl;
+        this.gl = renderer.gl;
         this.renderer = renderer;
         this.mesh;
     }
@@ -39,6 +39,7 @@ export default class PlanetObject{
         }
 
         this.mesh = new Mesh(this.gl, {geometry: planetGeometry, program});
+
         this.mesh.isHit = false;
         this.mesh.position.set(5, 5, -40);
         this.mesh.scale.set(2, 2, 2);

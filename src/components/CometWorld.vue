@@ -11,11 +11,10 @@
 
 <script>
     import World from '../webgl/world.js'
-    import MSDFText from '../webgl/MSDFText.js'
     import GhostWorld from './GhostWorld.vue'
     import MainInterface from './MainInterface.vue'
     import Projects from './Projects.vue'
-    import {Renderer, Transform} from 'ogl/src/index.mjs';
+    import {Renderer, Transform, Vec3} from 'ogl/src/index.mjs';
 
     export default {
         name: 'CometWorld',
@@ -24,29 +23,14 @@
             return {
                 active : false,
                 deepView : false,
-                lastTextIdx:0,
-                words: [
-                    "the comet",
-                    "the planet",
-                    "the universe"
-                ]
+                lastTextIdx:0
             }
         },
         mounted(){
             this.onStart();
         },
         methods:{
-            newRandom(){
-                let result = 0;
-                while(this.lastTextIdx === result){
-                    result = Math.floor(Math.random()*this.words.length);
-                }
-                this.lastTextIdx = result;
-                return result;
-            },
             onMouseDown(){
-                let rn = this.newRandom();
-                //this.text.setText(this.words[rn]);
             },
             onStart(){
                 this.scene = new Transform();
@@ -65,7 +49,6 @@
                         this.onSwitchPage();
                     },
                 );
-                //this.text = new MSDFText(this.renderer, this.scene)
             },
 
             //fft is an array with the size of 4096
@@ -110,5 +93,4 @@
         top:10px;
         user-select: none;
     }
-    
 </style>

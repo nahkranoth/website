@@ -4,9 +4,9 @@ import PlanetShader from '../../shaders/PlanetShader.js';
 import CloudShader from '../../shaders/CloudShader.js';
 
 export default class EarthObject{
-    constructor(parent, gl, renderer){
+    constructor(parent, renderer){
         this.parent = parent;
-        this.gl = gl;
+        this.gl = renderer.gl;
         this.renderer = renderer;
         this.mesh;
     }

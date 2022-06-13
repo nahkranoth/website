@@ -4,14 +4,22 @@ import MSFDShader300 from '../shaders/MSDFShader300.js';
 
 export default class MSDFText {
 
-    constructor(renderer, scene) {
+    constructor(renderer, scene, text, position, clickable) {
         this.renderer = renderer;
         this.gl = this.renderer.gl;
         this.scene = scene;
+        this.text = text;
+        this.position = position;
+        this.clickable = clickable;
 
         this.image = new Image();
         this.image.onload = () =>{ this.onTextureLoaded() };
         this.image.src = 'assets/text/Fira.png';
+        this.mesh;
+        this.hit = false;
+    }
+    setHit(hit){
+        this.hit = hit;
     }
     setText(text){
         this.scene.removeChild(this.mesh);
@@ -20,7 +28,7 @@ export default class MSDFText {
     async loadText(program) {
         this.font = await (await fetch('assets/text/Fira.json')).json();
         this.program = program;
-        this.update("drag + scroll");
+        this.update(this.text);
     }
     update(text){
         this.text = new Text({
@@ -41,12 +49,26 @@ export default class MSDFText {
             index: {data: this.text.buffers.index},
         });
 
-        this.mesh = new Mesh(this.gl, {geometry, program:this.program});
-
+        this.mesh = new Mesh(this.gl, {geometry:geometry, program:this.program});
         // Use the height value to position text vertically. Here it is centered.
-        this.mesh.position.y = this.text.height * 0.5;
-        this.mesh.position.z = -2;
+        this.mesh.position = this.position;
         this.mesh.setParent(this.scene);
+        this.mesh.container = this;
+        this.mesh.onBeforeRender(() => {
+            this.updateHitUniform();
+        });
+        
+        if(this.clickable){
+            document.dispatchEvent(new CustomEvent("registerButton", {
+                detail: {
+                target: this
+                }
+            }));
+        }
+    }
+
+    updateHitUniform() {
+        this.program.uniforms.uHit.value = this.hit ? 1 : 0;
     }
 
     onTextureLoaded(){
@@ -55,9 +77,9 @@ export default class MSDFText {
         });
 
         texture.image = this.image;
-        let program = this.renderer.isWebgl2 ? this.getProgram300(texture) : this.getProgram100(texture);
+        this.program = this.renderer.isWebgl2 ? this.getProgram300(texture) : this.getProgram100(texture);
 
-        this.loadText(program);
+        this.loadText(this.program);
     }
 
     getProgram100(texture){
@@ -66,6 +88,7 @@ export default class MSDFText {
             fragment: MSFDShader100.fragment,
             uniforms: {
                 tMap: {value: texture},
+                uHit: { value: 1. }
             },
             transparent: true,
             cullFace: null,
@@ -79,6 +102,7 @@ export default class MSDFText {
             fragment: MSFDShader300.fragment,
             uniforms: {
                 tMap: {value: texture},
+                uHit: { value: 1. }
             },
             transparent: true,
             cullFace: null,

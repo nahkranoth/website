@@ -1,10 +1,10 @@
 import {Transform, Camera, Raycast, Geometry, Texture, Program, Mesh, Vec3, Color, Orbit, Sphere, Box, Plane} from 'ogl/src/index.mjs';
-import InnerShader from '../shaders/innerShader.js';
 import InputControls from './InputControls';
 import CometObject from './objects/comet';
 import EarthObject from './objects/earth.js';
 import PlanetObject from './objects/planet.js';
 import SkyboxObject from './objects/skybox.js';
+import MSDFText from '../webgl/MSDFText.js'
 
 export default class World{
 
@@ -26,6 +26,8 @@ export default class World{
         this.input = new InputControls(this.camera, this.renderer);
         document.addEventListener('inputMouseMoved', (e) => { this.onMouseMoved(e); });
         document.addEventListener('inputMouseClicked', (e) => { this.onMouseClicked(e); });
+        document.addEventListener('registerButton', (e) => { this.onRegisterButton(e); });
+
         this.clickCallback = clickCallback;
 
         window.addEventListener('resize', () => {this.resize()}, false);
@@ -35,42 +37,54 @@ export default class World{
        
         this.raycast = new Raycast(this.gl);
 
-        this.comet = new CometObject(this.scene, this.gl, this.renderer);
+        this.comet = new CometObject(this.scene, this.renderer);
         this.comet.load();
         
-        this.planet = new PlanetObject(this.scene, this.gl, this.renderer);
+        this.planet = new PlanetObject(this.scene, this.renderer);
         this.planet.load();
 
-        this.skydome = new SkyboxObject(this.scene, this.gl, this.renderer);
+        this.skydome = new SkyboxObject(this.scene, this.renderer);
         this.skydome.load();
 
-        this.earth = new EarthObject(this.scene, this.gl, this.renderer);
+        this.earth = new EarthObject(this.scene, this.renderer);
         this.earth.load();
+
+        this.textTwo = new MSDFText(
+            this.renderer, 
+            this.scene,
+            "Imker",
+            new Vec3(-8,-2,-10),
+            true
+        );
 
         this.loadedCallback();
         
-        this.clickMeshes = [this.planet.mesh];
+        this.clickMeshes = [];
         this.update = requestAnimationFrame(() => {this.updateLoop()});
     }
 
+    onRegisterButton(e){
+        this.clickMeshes.push(e.detail.target.mesh);
+    }
+
     onMouseMoved(e){
-        this.clickMeshes.forEach((mesh) => (mesh.isHit = false));
+        this.clickMeshes.forEach((mesh) => {
+            mesh.container.setHit(false)
+        });
+
         this.raycast.castMouse(this.camera, e.detail.mouse);
         const hits = this.raycast.intersectBounds(this.clickMeshes);
-        hits.forEach((mesh) => (mesh.isHit = true));
+        hits.forEach((mesh) => (mesh.container.setHit(true)));
     }
 
     onMouseClicked(e){
         this.raycast.castMouse(this.camera, e.detail.mouse);
         const hits = this.raycast.intersectBounds(this.clickMeshes);
-        if(hits[0] == this.planet.mesh){
-            this.input.setTarget(hits[0].position);
-            this.planet.mesh.isHit = false;
-            this.clickMeshes = [this.planet.img];
-            this.clickCallback();
-        }
-        if(hits[0] == this.planet.img){
-            window.open('http://joeyvanderkaaij.com/sharing/Imker/', "_self");
+
+        if(hits.length == 0 ) return;
+
+        if(hits.length > 0 && hits[0].container == this.textTwo){
+           console.log("Text Two");
         }
     }
 
@@ -96,7 +110,6 @@ export default class World{
     }
 
     onBackToRoot(){
-        this.clickMeshes = [this.planet.mesh];
         this.input.setTarget(this.comet.cometMesh.position);
     }
 
