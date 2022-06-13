@@ -1,0 +1,119 @@
+<template>
+<div class="info">
+    <div class="info"><h1>Games</h1></div>
+    <div class="info">
+        <h2>Immelman</h2>
+        <video loop muted controls autoplay>
+            <source src="assets/immelman.mp4" type="video/mp4">
+        </video>
+        <p>Online Multiplayer dogfight game.</p>
+
+        <p><a href="https://github.com/nahkranoth/Immelman">Github Repository</a></p>
+        <p><a href="assets/Immelman_win.zip">Windows Download</a></p>
+        <p><a href="assets/Immelman_mac.zip">Mac Download</a></p>
+        <div><h2>Controls</h2>
+        <ul>
+            <li>Roll: A & D</li>
+            <li>Elevator: W & S</li>
+            <li>Rudder: Q & E</li>
+            <li>Throttle: Z & X</li>
+            <li>FreeLook: C</li>
+            <li>Fire: L-Mouse</li>
+            <li>Boost: R-Mouse</li>
+            <li>Brake: B</li>
+        </ul>
+        </div>
+
+    </div>
+
+    <div class="info">
+        <h2>Finger Flip Skateboarding</h2>
+        <video loop muted controls autoplay>
+            <source src="assets/Fingerflip.mp4" type="video/mp4">
+        </video>
+        <p>Mobile Skateboarding game</p>
+        <p><a href="https://github.com/nahkranoth/Skateboard">Github Repository</a></p>
+        <p><a href="assets/FingerFlipSkateboarding.zip">Windows Download</a></p>
+        <div><h2>Controls</h2>
+        <ul>
+            <li>Swipe for tricks</li>
+        </ul>
+        </div>
+    </div>
+
+    <div class="info">
+        <h2>Dark Tourism</h2>
+        <p>The enemy knows where you are! Better make that bunker sturdy.</p>
+        <div>
+            <video width="640" height="360" loop controls muted autoplay>
+                <source src="assets/DarkTourism.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div>
+            <video width="640" height="360" loop controls muted autoplay>
+                <source src="assets/DarkTourism2.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+    <div class="info">
+        <h2>Modeling/Lighting</h2>
+        <div>
+            <video width="640" height="360" loop controls muted autoplay>
+                <source src="assets/Submarine_Game.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div><br></div>
+        <div>
+            <video width="640" height="360" loop controls muted autoplay>
+                <source src="assets/Jungle.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</div>
+</template>
+
+<script>
+    export default {
+        name: "Games",
+        mounted(){
+        },
+        data:function(){
+          return {
+             
+          }
+        },
+        components: {},
+        methods:{
+          
+        }
+    }
+</script>
+
+<style scoped>
+ ul{
+        background-color: #4b3b7a;
+        color: #ded6d2;
+        padding:20px 40px;
+        list-style-type: none;
+        
+    }
+
+    a{
+        color: hotpink;
+    }
+
+    .logo{
+        padding-bottom: 64px;
+    }
+
+    .info{
+        background-color: #372f56;
+    }
+
+    h2{
+        padding-top:30px;
+        padding-bottom:10px;
+    }
+
+</style>

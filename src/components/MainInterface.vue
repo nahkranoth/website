@@ -1,12 +1,38 @@
 <template>
-    <div class="main-container" v-if="imkerView">
-        <div class="content-wrapper">
-            <div class="top-wrapper">
-                <div v-on:mousedown="onClose" class="close-btn">X</div>
-                <span class="title">Imker</span>
+    <div>
+        <div class="main-container" v-if="imkerView">
+            <div class="content-wrapper">
+                <div class="top-wrapper">
+                    <div v-on:mousedown="onClose" class="close-btn">X</div>
+                    <span class="title">Imker</span>
+                </div>
+                <div class="scroll-wrapper">
+                    <Imker  class="content"></Imker>
+                </div>
             </div>
-            <div class="scroll-wrapper">
-                <Imker  class="content"></Imker>
+        </div>
+
+        <div class="main-container" v-if="gameView">
+            <div class="content-wrapper">
+                <div class="top-wrapper">
+                    <div v-on:mousedown="onClose" class="close-btn">X</div>
+                    <span class="title">Games</span>
+                </div>
+                <div class="scroll-wrapper">
+                    <Games  class="content"></Games>
+                </div>
+            </div>
+        </div>
+
+         <div class="main-container" v-if="vfxView">
+            <div class="content-wrapper">
+                <div class="top-wrapper">
+                    <div v-on:mousedown="onClose" class="close-btn">X</div>
+                    <span class="title">Shaders</span>
+                </div>
+                <div class="scroll-wrapper">
+                    <VFX  class="content"></VFX>
+                </div>
             </div>
         </div>
     </div>
@@ -14,28 +40,38 @@
 
 <script>
     import Imker from "./subPages/Imker.vue";
+    import Games from "./subPages/Games.vue";
+    import VFX from "./subPages/VFX.vue";
 
     export default {
         name: "MainInterface",
-        components: {Imker},
+        components: {Imker, Games, VFX},
         mounted(){
             this.onStart();
         },
         data:function(){
           return {
-             imkerView:false
+             imkerView:false,
+             gameView:false,
+             vfxView:false
           }
         },
         methods:{
             onClose(){
                 this.imkerView=false;
+                this.gameView=false;
+                this.vfxView=false;
             },
             onStart(){
                 document.addEventListener('OnImkerClicked', (e) => { 
                     this.imkerView = true; 
                     });
-                document.addEventListener('OnGamesClicked', (e) => { console.log("heyo"); });
-                document.addEventListener('OnVFXClicked', (e) => { console.log("heyo"); });
+                document.addEventListener('OnGamesClicked', (e) => { 
+                    this.gameView = true;
+                 });
+                document.addEventListener('OnVFXClicked', (e) => { 
+                    this.vfxView = true;
+                });
                 document.addEventListener('OnMusicClicked', (e) => { console.log("heyo"); });
             }
         }

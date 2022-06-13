@@ -120,7 +120,6 @@
     export default {
         name: "Imker",
         mounted(){
-            this.onStart();
         },
         data:function(){
           return {
@@ -129,12 +128,7 @@
         },
         components: {},
         methods:{
-            onStart(){
-                document.addEventListener('OnImkerClicked', (e) => { console.log("heyo"); });
-                document.addEventListener('OnGamesClicked', (e) => { console.log("heyo"); });
-                document.addEventListener('OnVFXClicked', (e) => { console.log("heyo"); });
-                document.addEventListener('OnMusicClicked', (e) => { console.log("heyo"); });
-            }
+            
         }
     }
 </script>
