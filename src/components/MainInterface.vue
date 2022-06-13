@@ -51,6 +51,7 @@
         right: 0; 
         margin-left: auto; 
         margin-right: auto;
+        width:80%;
     }
 
     .content-wrapper{
@@ -86,27 +87,7 @@
     }
 
     .content{
-        width:20%;
         padding:20px;
     }
-
-    a{
-        color: hotpink;
-    }
-
-    .logo{
-        padding-bottom: 64px;
-    }
-
-    .info{
-        background-color: #372f56;
-    }
-
-    ul{
-        background-color: #4b3b7a;
-        color: #ded6d2;
-        padding:20px 40px;
-    }
-
     
 </style>

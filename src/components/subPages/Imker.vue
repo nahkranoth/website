@@ -36,7 +36,7 @@
             A hexagon in a grid has neighbours. These neighbours are friendly towards each other.<br>
             Neighbours know each other by these names:<br>
             <br>
-            <img src="Imker/assets/info_neighbours.png"><br><br>
+            <img src="assets/info_neighbours.png"><br><br>
             Note that OPERATORS usually have input and output neighbours. One of those input neighbours or PORTS is [T] - or Top.  [T] can be either a clock or a value input depending on the OPERATOR. A clock bangs {ON} on 1 and {OFF} on 0.
             Banging means that the OPERATOR executes it's function. Not all OPERATORS need a bang to execute their functionality. OPERATORS without a clock input PORT update every tick of the BPM clock.<br>
             Also Note that in some instances [TR] functions as an extra input port.
@@ -138,3 +138,31 @@
         }
     }
 </script>
+
+<style scoped>
+ ul{
+        background-color: #4b3b7a;
+        color: #ded6d2;
+        padding:20px 40px;
+        list-style-type: none;
+        
+    }
+
+    a{
+        color: hotpink;
+    }
+
+    .logo{
+        padding-bottom: 64px;
+    }
+
+    .info{
+        background-color: #372f56;
+    }
+
+    h2{
+        padding-top:30px;
+        padding-bottom:10px;
+    }
+
+</style>
