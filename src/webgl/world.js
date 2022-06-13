@@ -1,4 +1,4 @@
-import {Transform, Camera, Raycast, Geometry, Texture, Program, Mesh, Vec3, Color, Orbit, Sphere, Box, Plane} from 'ogl/src/index.mjs';
+import {Camera, Raycast, Vec3} from 'ogl/src/index.mjs';
 import InputControls from './InputControls';
 import CometObject from './objects/comet';
 import EarthObject from './objects/earth.js';
@@ -8,7 +8,7 @@ import MSDFText from '../webgl/MSDFText.js'
 
 export default class World{
 
-    constructor(loadedCallback, renderer, scene, clickCallback) {
+    constructor(loadedCallback, renderer, scene) {
 
         this.perfectFrameTime = 1000 / 60;
         this.lastTimestamp = Date.now();
@@ -27,8 +27,6 @@ export default class World{
         document.addEventListener('inputMouseMoved', (e) => { this.onMouseMoved(e); });
         document.addEventListener('inputMouseClicked', (e) => { this.onMouseClicked(e); });
         document.addEventListener('registerButton', (e) => { this.onRegisterButton(e); });
-
-        this.clickCallback = clickCallback;
 
         window.addEventListener('resize', () => {this.resize()}, false);
         this.resize();
@@ -49,13 +47,42 @@ export default class World{
         this.earth = new EarthObject(this.scene, this.renderer);
         this.earth.load();
 
-        this.textTwo = new MSDFText(
+        this.imkerBtn = new MSDFText(
             this.renderer, 
             this.scene,
             "Imker",
-            new Vec3(-8,-2,-10),
-            true
+            new Vec3(-8,-2,-14),
+            true,
+            "OnImkerClicked"
         );
+
+        this.gamesBtn = new MSDFText(
+            this.renderer, 
+            this.scene,
+            "Games",
+            new Vec3(-3,-4,-15),
+            true,
+            "OnGamesClicked"
+        );
+
+        this.vfxBtn = new MSDFText(
+            this.renderer, 
+            this.scene,
+            "VFX",
+            new Vec3(6,-4,-25),
+            true,
+            "OnVFXClicked"
+        );
+
+        this.musicBtn = new MSDFText(
+            this.renderer, 
+            this.scene,
+            "Music",
+            new Vec3(12,-2,-21),
+            true,
+            "OnMusicClicked"
+        );
+
 
         this.loadedCallback();
         
@@ -82,10 +109,7 @@ export default class World{
         const hits = this.raycast.intersectBounds(this.clickMeshes);
 
         if(hits.length == 0 ) return;
-
-        if(hits.length > 0 && hits[0].container == this.textTwo){
-           console.log("Text Two");
-        }
+        hits[0].container.onClick();
     }
 
     toggle(active){
@@ -127,10 +151,6 @@ export default class World{
     }
 
     setFFT(fft){
-        for(var i=0;i<this.fftData.length;i++){
-            this.fftData[i] = fft[i%fft.length];
-        }
-        this.geometry.attributes.fft.data = new Float32Array(this.fftData);
-        this.geometry.attributes.fft.needsUpdate = true;
+        this.comet.setFFT(fft);
     }
 }

@@ -44,17 +44,14 @@
                         this.active = true;
                     },
                     this.renderer,
-                    this.scene,
-                    () => {
-                        this.onSwitchPage();
-                    },
+                    this.scene
                 );
             },
 
             //fft is an array with the size of 4096
             onFFT(fft){
                 if(this.active){
-                    //this.world.setFFT(fft);
+                    this.world.setFFT(fft);
                 }
             },
 
@@ -62,10 +59,7 @@
                 this.active = !this.active;
                 this.world.toggle(this.active);
             },
-
-            onSwitchPage(){
-                this.deepView = true;
-            },
+            
             onBack(){
                 this.deepView = false;
                 this.world.onBackToRoot();

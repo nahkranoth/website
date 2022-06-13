@@ -1,10 +1,10 @@
-import {Transform, Text, Camera, Geometry, Texture, Program, Mesh, Vec3, Color, Orbit, Sphere} from 'ogl/src/index.mjs';
+import {Text, Geometry, Texture, Program, Mesh} from 'ogl/src/index.mjs';
 import MSFDShader100 from '../shaders/MSDFShader100.js';
 import MSFDShader300 from '../shaders/MSDFShader300.js';
 
 export default class MSDFText {
 
-    constructor(renderer, scene, text, position, clickable) {
+    constructor(renderer, scene, text, position, clickable, clickEvent) {
         this.renderer = renderer;
         this.gl = this.renderer.gl;
         this.scene = scene;
@@ -17,6 +17,14 @@ export default class MSDFText {
         this.image.src = 'assets/text/Fira.png';
         this.mesh;
         this.hit = false;
+        this.clickEvent = clickEvent;
+    }
+    onClick(){
+        document.dispatchEvent(new CustomEvent(this.clickEvent, {
+            detail: {
+            target: this
+            }
+        }));
     }
     setHit(hit){
         this.hit = hit;
@@ -57,7 +65,7 @@ export default class MSDFText {
         this.mesh.onBeforeRender(() => {
             this.updateHitUniform();
         });
-        
+
         if(this.clickable){
             document.dispatchEvent(new CustomEvent("registerButton", {
                 detail: {

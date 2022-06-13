@@ -1,7 +1,6 @@
-import {Geometry, Program, Mesh, Sphere, Plane, Color} from 'ogl/src/index.mjs';
+import {Program, Mesh, Sphere} from 'ogl/src/index.mjs';
 import TextureLoader from '../TextureLoader.js'
 import PlanetShader from '../../shaders/PlanetShader.js';
-import TransparentShader from '../../shaders/TransparentShader.js';
 
 export default class PlanetObject{
     constructor(parent, renderer){
@@ -46,32 +45,6 @@ export default class PlanetObject{
         this.mesh.setParent(this.parent);
         this.mesh.onBeforeRender(updateHitUniform);
 
-        this.loadImage();
     }
 
-    async loadImage() {
-        const program = new Program(this.gl, {
-            vertex: TransparentShader.vertex,
-            fragment: TransparentShader.fragment,
-            cullFace: null,
-            uniforms: {
-                tMap: {value: TextureLoader.getTexture(this.gl, 'assets/images/logo.png')},
-                uHit: { value: 1. },
-            },
-            transparent: true,
-
-        });
-
-        function updateHitUniform({ mesh }) {
-            program.uniforms.uHit.value = mesh.isHit ? 1 : 0;
-        }
-
-        const quadGeometry = new Plane(this.gl, {});
-        this.img = new Mesh(this.gl, {geometry: quadGeometry, program});
-        this.img.position.set(0, 0, 1);
-        this.img.isHit = false;
-        this.img.scale.set(.4, .4, .4);
-        this.img.setParent(this.mesh);
-        this.img.onBeforeRender(updateHitUniform);
-    }
 }

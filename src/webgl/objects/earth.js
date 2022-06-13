@@ -1,4 +1,4 @@
-import {Geometry, Program, Mesh, Sphere, Plane, Color} from 'ogl/src/index.mjs';
+import {Program, Mesh, Sphere} from 'ogl/src/index.mjs';
 import TextureLoader from '../TextureLoader.js'
 import PlanetShader from '../../shaders/PlanetShader.js';
 import CloudShader from '../../shaders/CloudShader.js';

@@ -1,4 +1,4 @@
-import {Geometry, Program, Mesh, Texture, Vec3, Color} from 'ogl/src/index.mjs';
+import {Geometry, Program, Mesh, Vec3, Color} from 'ogl/src/index.mjs';
 import PBRShader300 from '../../shaders/PBRShader300.js';
 import PBRShader100 from '../../shaders/PBRShader100.js';
 import InnerShader from '../../shaders/innerShader.js';
@@ -48,6 +48,14 @@ export default class Comet{
         this.innerCometMesh = new Mesh(this.gl, {geometry:this.innerGeometry, program:this.innerProgram});
         this.innerCometMesh.scale = new Vec3(0.5, 0.5, 0.5);
         this.innerCometMesh.setParent(this.scene);
+    }
+
+    setFFT(fft){
+        for(var i=0;i<this.fftData.length;i++){
+            this.fftData[i] = fft[i%fft.length] * 30;
+        }
+        this.geometry.attributes.fft.data = new Float32Array(this.fftData);
+        this.geometry.attributes.fft.needsUpdate = true;
     }
 
     update(){
