@@ -4,8 +4,8 @@
         <p>Imker is a programming language to procedurally generate and modify musical sequences in a live environment.</p>
         <h2>Download</h2>
         <div class="downloads">
-            <div class="windows">Windows Download: <a id="win-click-link" href='http://joeyvanderkaaij.com/sharing/Imker/Imker_alpha_07_win.zip'> Windows alpha_07 </a> </div>
-            <div class="mac">Mac Download: <a id="mac-click-link" href='http://joeyvanderkaaij.com/sharing/Imker/Imker_alpha_07_mac.zip'> Mac OSX alpha_07 </a> </div>
+            <div class="windows">Windows Download: <a id="win-click-link" href='assets/downloads/Imker_alpha_07_win.zip'> Windows alpha_07 </a> </div>
+            <div class="mac">Mac Download: <a id="mac-click-link" href='assets/downloads/Imker/Imker_alpha_07_mac.zip'> Mac OSX alpha_07 </a> </div>
         </div>
 
         <h2>Roadmap</h2>
