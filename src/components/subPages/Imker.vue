@@ -1,6 +1,6 @@
 <template>
    <div class="info">
-        <div class="logo"><img src="assets/logo.png" alt=""></div>
+        <div class="logo"><img src="assets/images/logo.png" alt=""></div>
         <p>Imker is a programming language to procedurally generate and modify musical sequences in a live environment.</p>
         <h2>Download</h2>
         <div class="downloads">
@@ -36,7 +36,7 @@
             A hexagon in a grid has neighbours. These neighbours are friendly towards each other.<br>
             Neighbours know each other by these names:<br>
             <br>
-            <img src="assets/info_neighbours.png"><br><br>
+            <img src="assets/images/info_neighbours.png"><br><br>
             Note that OPERATORS usually have input and output neighbours. One of those input neighbours or PORTS is [T] - or Top.  [T] can be either a clock or a value input depending on the OPERATOR. A clock bangs {ON} on 1 and {OFF} on 0.
             Banging means that the OPERATOR executes it's function. Not all OPERATORS need a bang to execute their functionality. OPERATORS without a clock input PORT update every tick of the BPM clock.<br>
             Also Note that in some instances [TR] functions as an extra input port.

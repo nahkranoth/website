@@ -35,6 +35,18 @@
                 </div>
             </div>
         </div>
+
+        <div class="main-container" v-if="musicView">
+            <div class="content-wrapper">
+                <div class="top-wrapper">
+                    <div v-on:mousedown="onClose" class="close-btn">X</div>
+                    <span class="title">Music</span>
+                </div>
+                <div class="scroll-wrapper">
+                    <Music  class="content"></Music>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -42,10 +54,11 @@
     import Imker from "./subPages/Imker.vue";
     import Games from "./subPages/Games.vue";
     import VFX from "./subPages/VFX.vue";
+    import Music from "./subPages/Music.vue";
 
     export default {
         name: "MainInterface",
-        components: {Imker, Games, VFX},
+        components: {Imker, Games, VFX, Music},
         mounted(){
             this.onStart();
         },
@@ -53,7 +66,8 @@
           return {
              imkerView:false,
              gameView:false,
-             vfxView:false
+             vfxView:false,
+             musicView:false
           }
         },
         methods:{
@@ -61,18 +75,25 @@
                 this.imkerView=false;
                 this.gameView=false;
                 this.vfxView=false;
+                this.musicView=false;
             },
             onStart(){
-                document.addEventListener('OnImkerClicked', (e) => { 
-                    this.imkerView = true; 
+                document.addEventListener('OnImkerClicked', (e) => {
+                    this.onClose();
+                    this.imkerView = true;
                     });
-                document.addEventListener('OnGamesClicked', (e) => { 
+                document.addEventListener('OnGamesClicked', (e) => {
+                    this.onClose();
                     this.gameView = true;
                  });
-                document.addEventListener('OnVFXClicked', (e) => { 
+                document.addEventListener('OnVFXClicked', (e) => {
+                    this.onClose();
                     this.vfxView = true;
                 });
-                document.addEventListener('OnMusicClicked', (e) => { console.log("heyo"); });
+                document.addEventListener('OnMusicClicked', (e) => {
+                    this.onClose();
+                    this.musicView = true;
+                 });
             }
         }
     }

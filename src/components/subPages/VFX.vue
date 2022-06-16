@@ -17,31 +17,31 @@
             <p><a href="https://github.com/nahkranoth/Unity-VFX">Github repository Link</a></p>
             <div><br></div>
             <video loop muted autoplay>
-                <source src="assets/rain.mp4" type="video/mp4">
+                <source src="assets/videos/rain.mp4" type="video/mp4">
             </video>
             <div><br></div>
             <video loop muted autoplay>
-                <source src="assets/SurfaceFollower.mp4" type="video/mp4">
+                <source src="assets/videos/SurfaceFollower.mp4" type="video/mp4">
             </video>
             <div><br></div>
             <video loop muted autoplay>
-                <source src="assets/ParticleCollision.mp4" type="video/mp4">
+                <source src="assets/videos/ParticleCollision.mp4" type="video/mp4">
             </video>
             <div><br></div>
             <video loop muted autoplay>
-                <source src="assets/vapor.mp4" type="video/mp4">
+                <source src="assets/videos/vapor.mp4" type="video/mp4">
             </video>
             <div><br></div>
             <video loop muted autoplay>
-                <source src="assets/fx_electricity.mov" type="video/mp4">
+                <source src="assets/videos/fx_electricity.mov" type="video/mp4">
             </video>
             <div><br></div>
             <video loop muted autoplay>
-                <source src="assets/point cache.mov" type="video/mp4">
+                <source src="assets/videos/point cache.mov" type="video/mp4">
             </video>
             <div><br></div>
             <video loop muted autoplay>
-                <source src="assets/spiderball.mp4" type="video/mp4">
+                <source src="assets/videos/spiderball.mp4" type="video/mp4">
             </video>
 
         </div>

@@ -4,13 +4,13 @@
     <div class="info">
         <h2>Immelman</h2>
         <video loop muted controls autoplay>
-            <source src="assets/immelman.mp4" type="video/mp4">
+            <source src="assets/videos/immelman.mp4" type="video/mp4">
         </video>
         <p>Online Multiplayer dogfight game.</p>
 
         <p><a href="https://github.com/nahkranoth/Immelman">Github Repository</a></p>
-        <p><a href="assets/Immelman_win.zip">Windows Download</a></p>
-        <p><a href="assets/Immelman_mac.zip">Mac Download</a></p>
+        <p><a href="assets/downloads/Immelman_win.zip">Windows Download</a></p>
+        <p><a href="assets/downloads/Immelman_mac.zip">Mac Download</a></p>
         <div><h2>Controls</h2>
         <ul>
             <li>Roll: A & D</li>
@@ -29,11 +29,11 @@
     <div class="info">
         <h2>Finger Flip Skateboarding</h2>
         <video loop muted controls autoplay>
-            <source src="assets/Fingerflip.mp4" type="video/mp4">
+            <source src="assets/videos/Fingerflip.mp4" type="video/mp4">
         </video>
         <p>Mobile Skateboarding game</p>
         <p><a href="https://github.com/nahkranoth/Skateboard">Github Repository</a></p>
-        <p><a href="assets/FingerFlipSkateboarding.zip">Windows Download</a></p>
+        <p><a href="assets/downloads/FingerFlipSkateboarding.zip">Windows Download</a></p>
         <div><h2>Controls</h2>
         <ul>
             <li>Swipe for tricks</li>
@@ -46,12 +46,12 @@
         <p>The enemy knows where you are! Better make that bunker sturdy.</p>
         <div>
             <video width="640" height="360" loop controls muted autoplay>
-                <source src="assets/DarkTourism.mp4" type="video/mp4">
+                <source src="assets/videos/DarkTourism.mp4" type="video/mp4">
             </video>
         </div>
         <div>
             <video width="640" height="360" loop controls muted autoplay>
-                <source src="assets/DarkTourism2.mp4" type="video/mp4">
+                <source src="assets/videos/DarkTourism2.mp4" type="video/mp4">
             </video>
         </div>
     </div>
@@ -60,13 +60,13 @@
         <h2>Modeling/Lighting</h2>
         <div>
             <video width="640" height="360" loop controls muted autoplay>
-                <source src="assets/Submarine_Game.mp4" type="video/mp4">
+                <source src="assets/videos/Submarine_Game.mp4" type="video/mp4">
             </video>
         </div>
         <div><br></div>
         <div>
             <video width="640" height="360" loop controls muted autoplay>
-                <source src="assets/Jungle.mp4" type="video/mp4">
+                <source src="assets/videos/Jungle.mp4" type="video/mp4">
             </video>
         </div>
     </div>
