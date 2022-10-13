@@ -47,6 +47,18 @@
                 </div>
             </div>
         </div>
+
+        <div class="main-container" v-if="roboticsROS2View">
+          <div class="content-wrapper">
+            <div class="top-wrapper">
+              <div v-on:mousedown="onClose" class="close-btn">X</div>
+              <span class="title">Robotics</span>
+            </div>
+            <div class="scroll-wrapper">
+              <RoboticsROS2 class="content"></RoboticsROS2>
+            </div>
+          </div>
+        </div>
     </div>
 </template>
 
@@ -55,11 +67,11 @@
     import Games from "./subPages/Games.vue";
     import VFX from "./subPages/VFX.vue";
     import Music from "./subPages/Music.vue";
-    import Robotics from "./subPages/Robotics.vue";
+    import RoboticsROS2 from "./subPages/Robotics_ROS2.vue";
 
     export default {
         name: "MainInterface",
-        components: {Imker, Games, VFX, Music, Robotics},
+        components: {Imker, Games, VFX, Music, RoboticsROS2},
         mounted(){
             this.onStart();
         },
@@ -69,7 +81,7 @@
              gameView:false,
              vfxView:false,
              musicView:false,
-             roboticsView:false
+             roboticsROS2View:false
           }
         },
         methods:{
@@ -78,7 +90,7 @@
                 this.gameView=false;
                 this.vfxView=false;
                 this.musicView=false;
-                this.roboticsView=false;
+                this.roboticsROS2View=false;
             },
             onStart(){
                 document.addEventListener('OnImkerClicked', (e) => {
@@ -97,9 +109,9 @@
                     this.onClose();
                     this.musicView = true;
                  });
-                document.addEventListener('OnRoboticsClicked', (e) => {
+                document.addEventListener('OnRoboticsROS2Clicked', (e) => {
                   this.onClose();
-                  this.roboticsView = true;
+                  this.roboticsROS2View = true;
                 });
             }
         }

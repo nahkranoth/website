@@ -86,10 +86,10 @@ export default class World{
         this.roboticsBtn = new MSDFText(
             this.renderer,
             this.scene,
-            "Robotics",
-            new Vec3(14,-4,-21),
+            "ROS2",
+            new Vec3(4,-8,-21),
             true,
-            "OnRoboticsClicked"
+            "OnRoboticsROS2Clicked"
         );
 
 
