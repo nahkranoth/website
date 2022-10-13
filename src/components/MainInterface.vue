@@ -55,10 +55,11 @@
     import Games from "./subPages/Games.vue";
     import VFX from "./subPages/VFX.vue";
     import Music from "./subPages/Music.vue";
+    import Robotics from "./subPages/Robotics.vue";
 
     export default {
         name: "MainInterface",
-        components: {Imker, Games, VFX, Music},
+        components: {Imker, Games, VFX, Music, Robotics},
         mounted(){
             this.onStart();
         },
@@ -67,7 +68,8 @@
              imkerView:false,
              gameView:false,
              vfxView:false,
-             musicView:false
+             musicView:false,
+             roboticsView:false
           }
         },
         methods:{
@@ -76,6 +78,7 @@
                 this.gameView=false;
                 this.vfxView=false;
                 this.musicView=false;
+                this.roboticsView=false;
             },
             onStart(){
                 document.addEventListener('OnImkerClicked', (e) => {
@@ -94,6 +97,10 @@
                     this.onClose();
                     this.musicView = true;
                  });
+                document.addEventListener('OnRoboticsClicked', (e) => {
+                  this.onClose();
+                  this.roboticsView = true;
+                });
             }
         }
     }
