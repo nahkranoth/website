@@ -83,6 +83,15 @@ export default class World{
             "OnMusicClicked"
         );
 
+        this.roboticsBtn = new MSDFText(
+            this.renderer,
+            this.scene,
+            "Robotics",
+            new Vec3(14,-4,-21),
+            true,
+            "OnRoboticsClicked"
+        );
+
 
         this.loadedCallback();
         
