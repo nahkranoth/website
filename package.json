@@ -4,7 +4,7 @@
   "description": "my website",
   "private": true,
   "dependencies": {
-    "gsap": "^2.1.3",
+    "gsap": "^3.6.0",
     "ogl": "0.0.40",
     "tone": "^13.8.25",
     "vue": "^2.6.11",
